@@ -20,10 +20,10 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final Remark remark;
 
     // Data fields
     private final Address address;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -54,6 +54,7 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
     public Remark getRemark() {
         return remark;
     }
@@ -116,6 +117,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("remark", remark)
                 .add("tags", tags)
                 .toString();
     }
