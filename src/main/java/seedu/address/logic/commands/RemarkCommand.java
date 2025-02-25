@@ -13,6 +13,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
+/**
+ * Edits the remark of an existing person in the address book.
+ */
 public class RemarkCommand extends Command {
     public static final String COMMAND_WORD = "remark";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the person identified "
@@ -32,6 +35,8 @@ public class RemarkCommand extends Command {
     private final Remark remark;
 
     /**
+     * Creates a RemarkCommand to update the remark of the specified person.
+     *
      * @param index of the person in the filtered person list to edit the remark
      * @param remark of the person to be updated to
      */
@@ -41,7 +46,6 @@ public class RemarkCommand extends Command {
         this.index = index;
         this.remark = remark;
     }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
