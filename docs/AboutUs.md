@@ -28,14 +28,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Integration
 
-### Johnny Doe
+### Desean
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/deseansoh.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/deseansoh)] [[portfolio](team/deseansoh.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Development of Features, Testing
 
 ### Jean Doe
 
