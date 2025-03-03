@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Kai Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cloudkai.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/CloudKai)]
+[[portfolio](team/cloudkai.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Scheduling and tracking
+* Responsibilities: In charge of defining, assigning, and tracking project tasks.
 
 ### James Doe
 
