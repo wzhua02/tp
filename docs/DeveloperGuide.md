@@ -402,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
     - 2a2. User re-enters the command.<br>
       Steps 2a1-2a2 repeat until the command is entered correctly.<br>
-      ~~~~Use case resumes at step 3.
+      Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
