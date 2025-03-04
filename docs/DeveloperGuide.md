@@ -301,22 +301,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  FitFlow shows the client’s details to be deleted and prompts the user to confirm the decision to delete.
 4.  User confirms. 
 5.  FitFlow shows the details of the client that has been deleted.
+
     Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
-  Use case ends.
+  
+    Use case ends.
 
 * 2a. The given client is invalid.
     * 2a1. FitFlow shows an error message and prompts the user the format of the command.
-    * 2a2. User re-enters the command
-      Steps 2a1-2a2 repeat until the command is entered correctly.
-      Use case resumes at step 3.
+    * 2a2. User re-enters the command.
+      
+  Steps 2a1-2a2 repeat until the command is entered correctly.
+
+  Use case resumes at step 3.
 
 * 4a. The user decides not to delete the client.
   * 4a1. FitFlow aborts the delete command.
-    Use case ends.
+    
+  Use case ends.
 
 ---
 
@@ -328,17 +333,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User requests to edit the client's details.
 3.  FitFlow stores the new details of the client and indicates success.
 4.  FitFlow will update the details of the client on the displayed client list.
+
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
-  Use case ends.
+* 1a. The list is empty. 
 
-* 2a. The given client is invalid or the client details are given in the wrong format.    * 2a1. FitFlow shows an error message and prompts the user the format of the command.
-    * 2a2. User re-enters the command
-      Steps 2a1-2a2 repeat until the command is entered correctly.
-      Use case resumes at step 3.
+    Use case ends.
+
+* 2a. The given client is invalid or the client details are given in the wrong format.    
+  * 2a1. FitFlow shows an error message and prompts the user the format of the command.
+  * 2a2. User re-enters the command.
+  
+    Steps 2a1-2a2 repeat until the command is entered correctly.
+  
+    Use case resumes at step 3.
 
 ---
 
@@ -350,17 +360,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User requests to <ins>edit client's details (Use Case 6)</ins> to add a session to the client.
 3.  FitFlow stores the new session details to the client details.
 4.  FitFlow updates the details on the displayed client list.
+
     Use case ends.
 
 **Extensions**
 
 * 1a. The schedule is empty.
+
   Use case ends.
 
 * 2a. The given client is invalid or the session details are given in the wrong format.
     * 2a1. FitFlow shows an error message and prompts the user the format of the command.
-    * 2a2. User re-enters the command
+    * 2a2. User re-enters the command.
+  
       Steps 2a1-2a2 repeat until the command is entered correctly.
+  
       Use case resumes at step 3.
 
 ---
@@ -372,18 +386,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2.  User requests to <ins>edit client's details (Use Case 6)</ins> to delete a session from the client.
 3.  FitFlow removes the session details from the client details.
-4.  FitFlow removes the session details from the displayed client list
+4.  FitFlow removes the session details from the displayed client list.
+
     Use case ends.
 
 **Extensions**
 
 * 1a. The schedule is empty.
+
   Use case ends.
 
 * 2a. The given client is invalid or the session given is invalid.
     * 2a1. FitFlow shows an error message and prompts the user the format of the command.
-    * 2a2. User re-enters the command
+    * 2a2. User re-enters the command.
+  
       Steps 2a1-2a2 repeat until the command is entered correctly.
+  
       Use case resumes at step 3.
 
 ---
@@ -395,18 +413,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2.  User requests to <ins>edit client's details (Use Case 6)</ins> to modify a session details for the client.
 3.  FitFlow stores the new session details for the client.
-4.  FitFlow modifies the session details on the displayed client list
+4.  FitFlow modifies the session details on the displayed client list.
+
     Use case ends.
 
 **Extensions**
 
 * 1a. The schedule is empty.
+
   Use case ends.
 
 * 2a. The given client is invalid or the session details are given in the wrong format.
     * 2a1. FitFlow shows an error message and prompts the user the format of the command.
-    * 2a2. User re-enters the command
+    * 2a2. User re-enters the command.
+  
       Steps 2a1-2a2 repeat until the command is entered correctly.
+  
       Use case resumes at step 3.
 
 ### Non-Functional Requirements
