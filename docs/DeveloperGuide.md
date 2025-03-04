@@ -326,7 +326,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Above Average Typing Seed**: Refers to a user capable of typing text (in natural language) at a faster rate than the typical user, enabling quick entry of commands or form data.
+* **Command Line Interface (CLI)**: A text-based interface that accepts typed commands. Users interact with the application by entering commands, rather than by clicking or tapping on-screen elements.
+* **Contact**: An individual entry in the system’s address book or database, typically including (at minimum) a **name** and **contact number**.
+* **Fast Typist (Fast Typing)**: A user who can input typed text swiftly, increasing overall efficiency when using a CLI-based or text-based system.
+* **Graphical User Interface (GUI)**: A visual, interactive interface that uses elements such as windows, buttons, and menus. Users interact by pointing, clicking, or tapping, rather than typing commands.
+* **Human-Editable Format**: A data storage format (e.g., CSV, JSON, YAML) that can be opened in any text editor and modified directly by a human without needing specialized software or database tools.
+* **Human-Readable Format**: A data storage format that is **easily understood** by users (e.g., structured text instead of proprietary binary formats). This makes it simpler for users to inspect or debug stored data.
+* **Input Lag**: The delay between the user performing an action (e.g., typing a command, clicking a button) and the system responding. A well-optimized application keeps this delay under 1 second to feel “instant” to the user.
+* **Local Data Storage**: Storing all user or application data on the same device that the application is running on. This setup does not require an internet connection or external servers.
+* **Performance Sluggishness**: A noticeable delay in the application’s responsiveness, typically when dealing with large datasets or intense processing tasks. The requirement states that managing up to 1000 contacts should not cause any discernible slowdown.
+* **Scale Factor**: The magnification or zoom level applied to on-screen elements (e.g., 100%, 125%, 150%). This is relevant for accessibility and ensuring proper display on high-resolution monitors.
+* **Screen Resolution**: The pixel dimensions of the display (e.g., 1920×1080, 1280×720). Higher resolutions typically allow more UI elements to appear clearly on screen. The application must remain usable and visually clear at both high and moderate resolutions.
+* **Single-File Application**: An application distributed as a single executable or JAR file, avoiding the need for extra installations or additional dependencies on the user’s system.
+* **Single-User Application**: Intended for use by one person at a time, with no requirement for multi-user logins or collaborative functionality.
 
 --------------------------------------------------------------------------------------------------------------------
 
