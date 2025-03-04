@@ -290,6 +290,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `FitFlow` and the **Actor** is the `User`, unless specified otherwise)
 
+---
+
 **Use case 5: Delete Client**
 
 **MSS**
@@ -316,6 +318,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 4a1. FitFlow aborts the delete command.
     Use case ends.
 
+---
+
 **Use case 6: Edit Client's Details**
 
 **MSS**
@@ -335,6 +339,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User re-enters the command
       Steps 2a1-2a2 repeat until the command is entered correctly.
       Use case resumes at step 3.
+
+---
 
 **Use case 7: Add session to client**
 
@@ -357,6 +363,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 2a1-2a2 repeat until the command is entered correctly.
       Use case resumes at step 3.
 
+---
+
 **Use case 8: Delete session to client**
 
 **MSS**
@@ -377,6 +385,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User re-enters the command
       Steps 2a1-2a2 repeat until the command is entered correctly.
       Use case resumes at step 3.
+
+---
 
 **Use case 9: Modify session details for client**
 
