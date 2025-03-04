@@ -317,11 +317,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### User Requirements:
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. The program should be able to work locally on someone’s device, without any connection to the Internet.
+3. Someone who is a fast typist but isn’t familiar with command line interfaces should be able to pick up the application quickly.
+4. The GUI should be designed for resolutions 1920x1080 or higher, with scales 100% and 125%, and work well on them.
+5. The GUI should still be usable for resolutions 1280x720 and higher, and scales 150%.
 
-*{More to be added}*
+
+#### Technical Requirements:
+1. Should work on any mainstream OS as long as it has Java 17 or above installed.
+2. The application should be contained within a single file, without the need for installation of extra dependencies.
+3. The system should work on both 32-bit and 64-bit environments.
+
+#### Data requirements:
+1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Data should be stored locally, in a human-readable and human-editable file.
+
+#### Performance requirements:
+1. The application should be responsive to user input, and there shouldn’t be any input lag exceeding 1s.
+
+#### Business/Domain rules:
+1. Each contact must have at least a name and contact number.
+
+#### Notes about project scope:
+1. The application is not required to provide suggestions on schedules to the user.
+2. The application is meant for a single-user.
 
 ### Glossary
 
