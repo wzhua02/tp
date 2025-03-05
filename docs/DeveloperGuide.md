@@ -262,29 +262,38 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* a professional personal trainer in Singapore helping clients achieve fitness goals
+* needs to track and manage individual client goals
+* creates and edits customised training plans based on client needs
+* keeps track of client details (name, phone number, training days, goals, medical history and location)
+* manages weekly schedule and multiple training locations across Singapore
+* organise group workout sessions with clients who have similar exercise profiles and live close together
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: streamlines client management, workout planning, and scheduling, maximizing productivity
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                          | I want to …​                                                                   | So that I can…​                                                                        |
+|----------|----------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `* * *`  | user                             | add my clients' contact details and address to the app                         | I can contact them easily if there are any changes in plans                            |
+| `* * *`  | user                             | add my clients' workout goals in the app                                       | I can easily plan workout routines for my clients                                      |
+| `* * *`  | user                             | add my clients' previous or existing injuries in the app                       | I can better plan exercises that avoid aggrevating their injury                        |
+| `* * *`  | user                             | add my clients' preferred location                                             | I can collate a list of clients in the same area to train                              |
+| `* * *`  | user                             | sort my clients' information to see if they match with my schedule             | I can better plan the timing to train while I am free                                  |
+| `* * *`  | new user                         | look at the onboarding/help section                                            | I know the features the app provides and how to use them                               |
+| `* * *`  | new user                         | go through a guided tutorial from the application                              | learn the basic features of the app and test it out                                    |
+| `* * *`  | user                             | view the schedule for each day                                                 | I can plan my day accordingly                                                          |
+| `* * *`  | user                             | update each clients' details                                                   | I can make changes and keep things up to date with what happens IRL                    |
+| `* * *`  | user                             | view client's preference on solo or group trainings                            | I can organise a joint training session to maximise productivity                       |
+| `* *`    | user                             | add recurring events for clients that have training on the same day every week | I don't need to manually add and manage my schedule every single week                  |
+| `* *`    | user                             | be notified of a conflicting timeslot when I update a client's timeslot        | I know which timeslots are not available for my new clients                            |
+| `* *`    | user                             | delete client that I am not training anymore                                   | the client list I have is not messy                                                    |
+| `* *`    | forgetful user                   | set reminders for training sessions                                            | I do not forget or miss a training session with my client                              |
+| `* *`    | user                             | set goal deadlines for clients                                                 | I know which session to have a sit down with client                                    |
+| `*`      | organized user                   | sort my clients chronologically                                                | I will know which clients I will be meeting with soon.                                 |
+| `*`      | user                             | sort my clients based on months or weeks                                       | I can better plan for the clients that are in the upcoming months / weeks              |
 
 ### Use cases
 
