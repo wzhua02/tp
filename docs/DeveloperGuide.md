@@ -300,20 +300,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User requests to delete the client.
 3. FitFlow shows the client’s details to be deleted and prompts the user to confirm the decision to delete.
 4. User confirms.
-5. FitFlow shows the details of the client that has been deleted.<br>
+5. FitFlow shows the details of the client that has been deleted.
    Use case ends.
 
 **Extensions**
 
-- **1a.** The list is empty.<br>
+- **1a.** The list is empty.
   Use case ends.
 - **2a.** The given client is invalid.
     - 2a1. FitFlow shows an error message and prompts the user the format of the command.
-    - 2a2. User re-enters the command.<br>
-      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+    - 2a2. User re-enters the command.
+      Steps 2a1-2a2 repeat until the command is entered correctly.
       Use case resumes at step 3.
 - **4a.** The user decides not to delete the client.
-    - 4a1. FitFlow aborts the delete command.<br>
+    - 4a1. FitFlow aborts the delete command.
     Use case ends.
 
 ---
