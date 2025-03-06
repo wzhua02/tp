@@ -350,7 +350,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **1a.** The client being searched for does not exist.<br>
     - 1a1. FitFlow tells the User that it was unable to find a match.<br>
       Use case ends.
-
 - **1b.** The given client is invalid.<br>
     - 1b1. FitFlow shows an error message and prompts the user the format of the command.
     - 1b2. User re-enters the command.<br>
