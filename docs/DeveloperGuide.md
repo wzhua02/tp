@@ -262,71 +262,205 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* a professional personal trainer in Singapore helping clients achieve fitness goals
+* needs to track and manage individual client goals
+* creates and edits customised training plans based on client needs
+* keeps track of client details (name, phone number, training days, goals, medical history and location)
+* manages weekly schedule and multiple training locations across Singapore
+* organise group workout sessions with clients who have similar exercise profiles and live close together
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: streamlines client management, workout planning, and scheduling, maximizing productivity
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                          | I want to …​                                                                   | So that I can…​                                                                        |
+|----------|----------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `* * *`  | user                             | add my clients' contact details and address to the app                         | I can contact them easily if there are any changes in plans                            |
+| `* * *`  | user                             | add my clients' workout goals in the app                                       | I can easily plan workout routines for my clients                                      |
+| `* * *`  | user                             | add my clients' previous or existing injuries in the app                       | I can better plan exercises that avoid aggrevating their injury                        |
+| `* * *`  | user                             | add my clients' preferred location                                             | I can collate a list of clients in the same area to train                              |
+| `* * *`  | user                             | sort my clients' information to see if they match with my schedule             | I can better plan the timing to train while I am free                                  |
+| `* * *`  | new user                         | look at the onboarding/help section                                            | I know the features the app provides and how to use them                               |
+| `* * *`  | new user                         | go through a guided tutorial from the application                              | learn the basic features of the app and test it out                                    |
+| `* * *`  | user                             | view the schedule for each day                                                 | I can plan my day accordingly                                                          |
+| `* * *`  | user                             | update each clients' details                                                   | I can make changes and keep things up to date with what happens IRL                    |
+| `* * *`  | user                             | view client's preference on solo or group trainings                            | I can organise a joint training session to maximise productivity                       |
+| `* *`    | user                             | add recurring events for clients that have training on the same day every week | I don't need to manually add and manage my schedule every single week                  |
+| `* *`    | user                             | be notified of a conflicting timeslot when I update a client's timeslot        | I know which timeslots are not available for my new clients                            |
+| `* *`    | user                             | delete client that I am not training anymore                                   | the client list I have is not messy                                                    |
+| `* *`    | forgetful user                   | set reminders for training sessions                                            | I do not forget or miss a training session with my client                              |
+| `* *`    | user                             | set goal deadlines for clients                                                 | I know which session to have a sit down with client                                    |
+| `*`      | organized user                   | sort my clients chronologically                                                | I will know which clients I will be meeting with soon.                                 |
+| `*`      | user                             | sort my clients based on months or weeks                                       | I can better plan for the clients that are in the upcoming months / weeks              |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FitFlow` and the **Actor** is the `User`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+
+**Use case 5: Delete Client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. User requests to <ins>view the client (Use Case 3)</ins> or find the client from the displayed client list.
+2. User requests to delete the client.
+3. FitFlow shows the client’s details to be deleted and prompts the user to confirm the decision to delete.
+4. User confirms.
+5. FitFlow shows the details of the client that has been deleted.<br>
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-
+- **1a.** The list is empty.<br>
   Use case ends.
+- **2a.** The given client is invalid.
+    - 2a1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2a2. User re-enters the command.<br>
+      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 3.
+- **4a.** The user decides not to delete the client.
+    - 4a1. FitFlow aborts the delete command.<br>
+    Use case ends.
 
-* 3a. The given index is invalid.
+---
 
-    * 3a1. AddressBook shows an error message.
+**Use case 6: Edit Client's Details**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1. User requests to <ins>view the client (Use Case 3)</ins> or find the client from the displayed client list.
+2. User requests to edit the client's details.
+3. FitFlow stores the new details of the client and indicates success.
+4. FitFlow updates the details of the client on the displayed client list.<br>
+   Use case ends.
+
+**Extensions**
+
+- **1a.** The list is empty.<br>
+  Use case ends.
+- **2a.** The given client is invalid or the client details are given in the wrong format.
+    - 2a1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2a2. User re-enters the command.<br>
+      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 3.
+
+---
+
+**Use case 7: Add session to client**
+
+**MSS**
+
+1. User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+2. User requests to <ins>edit client's details (Use Case 6)</ins> to add a session to the client.
+3. FitFlow stores the new session details to the client details.
+4. FitFlow updates the details on the displayed client list.<br>
+   Use case ends.
+
+**Extensions**
+
+- **1a.** The schedule is empty.<br>
+  Use case ends.
+- **2a.** The given client is invalid or the session details are given in the wrong format.
+    - 2a1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2a2. User re-enters the command.<br>
+      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 3.
+
+---
+
+**Use case 8: Delete session to client**
+
+**MSS**
+
+1. User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+2. User requests to <ins>edit client's details (Use Case 6)</ins> to delete a session from the client.
+3. FitFlow removes the session details from the client details.
+4. FitFlow removes the session details from the displayed client list.<br>
+   Use case ends.
+
+**Extensions**
+
+- **1a.** The schedule is empty.<br>
+  Use case ends.
+- **2a.** The given client is invalid or the session given is invalid.
+    - 2a1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2a2. User re-enters the command.<br>
+      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 3.
+
+---
+
+**Use case 9: Modify session details for client**
+
+**MSS**
+
+1. User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+2. User requests to <ins>edit client's details (Use Case 6)</ins> to modify session details for the client.
+3. FitFlow stores the new session details for the client.
+4. FitFlow modifies the session details on the displayed client list.<br>
+   Use case ends.
+
+**Extensions**
+
+- **1a.** The schedule is empty.<br>
+  Use case ends.
+- **2a.** The given client is invalid or the session details are given in the wrong format.
+    - 2a1. FitFlow shows an error message and prompts the user the format of the command.
+    - 2a2. User re-enters the command.<br>
+      Steps 2a1-2a2 repeat until the command is entered correctly.<br>
+      Use case resumes at step 3.
+
+---
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### User Requirements:
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. The program should be able to work locally on someone’s device, without any connection to the Internet.
+3. Someone who is a fast typist but isn’t familiar with command line interfaces should be able to pick up the application quickly.
+4. The GUI should be designed for resolutions 1920x1080 or higher, with scales 100% and 125%, and work well on them.
+5. The GUI should still be usable for resolutions 1280x720 and higher, and scales 150%.
 
-*{More to be added}*
+
+#### Technical Requirements:
+1. Should work on any mainstream OS as long as it has Java 17 or above installed.
+2. The application should be contained within a single file, without the need for installation of extra dependencies.
+3. The system should work on both 32-bit and 64-bit environments.
+
+#### Data requirements:
+1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Data should be stored locally, in a human-readable and human-editable file.
+
+#### Performance requirements:
+1. The application should be responsive to user input, and there shouldn’t be any input lag exceeding 1s.
+
+#### Business/Domain rules:
+1. Each contact must have at least a name and contact number.
+
+#### Notes about project scope:
+1. The application is not required to provide suggestions on schedules to the user.
+2. The application is meant for a single-user.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Above Average Typing Seed**: Refers to a user capable of typing text (in natural language) at a faster rate than the typical user, enabling quick entry of commands or form data.
+* **Command Line Interface (CLI)**: A text-based interface that accepts typed commands. Users interact with the application by entering commands, rather than by clicking or tapping on-screen elements.
+* **Contact**: An individual entry in the system’s address book or database, typically including (at minimum) a **name** and **contact number**.
+* **Fast Typist (Fast Typing)**: A user who can input typed text swiftly, increasing overall efficiency when using a CLI-based or text-based system.
+* **Graphical User Interface (GUI)**: A visual, interactive interface that uses elements such as windows, buttons, and menus. Users interact by pointing, clicking, or tapping, rather than typing commands.
+* **Human-Editable Format**: A data storage format (e.g., CSV, JSON, YAML) that can be opened in any text editor and modified directly by a human without needing specialized software or database tools.
+* **Human-Readable Format**: A data storage format that is **easily understood** by users (e.g., structured text instead of proprietary binary formats). This makes it simpler for users to inspect or debug stored data.
+* **Input Lag**: The delay between the user performing an action (e.g., typing a command, clicking a button) and the system responding. A well-optimized application keeps this delay under 1 second to feel “instant” to the user.
+* **Local Data Storage**: Storing all user or application data on the same device that the application is running on. This setup does not require an internet connection or external servers.
+* **Performance Sluggishness**: A noticeable delay in the application’s responsiveness, typically when dealing with large datasets or intense processing tasks. The requirement states that managing up to 1000 contacts should not cause any discernible slowdown.
+* **Scale Factor**: The magnification or zoom level applied to on-screen elements (e.g., 100%, 125%, 150%). This is relevant for accessibility and ensuring proper display on high-resolution monitors.
+* **Screen Resolution**: The pixel dimensions of the display (e.g., 1920×1080, 1280×720). Higher resolutions typically allow more UI elements to appear clearly on screen. The application must remain usable and visually clear at both high and moderate resolutions.
+* **Single-File Application**: An application distributed as a single executable or JAR file, avoiding the need for extra installations or additional dependencies on the user’s system.
+* **Single-User Application**: Intended for use by one person at a time, with no requirement for multi-user logins or collaborative functionality.
 
 --------------------------------------------------------------------------------------------------------------------
 
