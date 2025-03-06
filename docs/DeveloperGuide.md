@@ -307,13 +307,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. The new user requests for help from Fit Flow to see the functionality of the application.
 2. FitFlow displays usage instructions for each function.
-3. The new user reads the instructions
+3. The new user reads the instructions.<br>
    Use case ends.
 
 **Extensions**
 
 - **2a.** User requests to see the specific help page for a command (e.g. help add)
-    - 2a1. FitFlow shows the User the specific command’s help text
+    - 2a1. FitFlow shows the User the specific command’s help text.<br>
       Use case resumes at step 3.
 
 ---
@@ -324,15 +324,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User chooses to add a new client.
 2. FitFlow stores the details of the client and indicates success.
-3. The new client is added to the displayed client list.
+3. The new client is added to the displayed client list.<br>
    Use case ends.
 
 **Extensions**
 
 - **1a.** The client details are given in the wrong format.
     - 1a1. FitFlow shows the user the format the client’s details should be entered.
-    - 1a2. User enters new data.
-      Steps 1a1-1a2 repeat until the data is entered
+    - 1a2. User enters new data.<br>
+      Steps 1a1-1a2 repeat until the data is entered.<br>
       Use case resumes at step 2.
 
 ---
@@ -342,19 +342,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to view a specific client.
-2. FitFlow shows the details of the client on the app.
+2. FitFlow shows the details of the client on the app.<br>
    Use case ends.
 
 **Extensions**
 
-- **1a.** The client being searched for does not exist.
-    - 1a1. FitFlow tells the User that it was unable to find a match.
+- **1a.** The client being searched for does not exist.<br>
+    - 1a1. FitFlow tells the User that it was unable to find a match.<br>
       Use case ends.
 
-- **1b.** The given client is invalid.
+- **1b.** The given client is invalid.<br>
     - 1b1. FitFlow shows an error message and prompts the user the format of the command.
-    - 1b2. User re-enters the command.
-      Steps 1b1-1b2 repeat until the command is entered correctly
+    - 1b2. User re-enters the command.<br>
+      Steps 1b1-1b2 repeat until the command is entered correctly.<br>
       Use case resumes at step 2.
 
 ---
@@ -364,15 +364,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to view their schedule on a specific day.
-2. FitFlow shows the list of clients that have a session for the specified day.
+2. FitFlow shows the list of clients that have a session for the specified day.<br>
    Use case ends.
 
 **Extensions**
 
 - **1a.** The given day is invalid.
     - 1a1. FitFlow shows an error message and prompts the user the format of the command.
-    - 1a2. User re-enters the command.
-      Steps 1a1-1a2 repeat until the command is entered correctly
+    - 1a2. User re-enters the command.<br>
+      Steps 1a1-1a2 repeat until the command is entered correctly.<br>
       Use case resumes at step 2.
 
 ---
