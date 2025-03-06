@@ -312,7 +312,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** User requests to see the specific help page for a command (e.g. help add)
+- **2a.** User requests to see the specific help page for a command (e.g. help add).
     - 2a1. FitFlow shows the User the specific command’s help text.<br>
       Use case resumes at step 3.
 
