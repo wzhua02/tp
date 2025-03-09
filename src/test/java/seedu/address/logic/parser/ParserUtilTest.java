@@ -103,26 +103,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseLocation_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation((String) null));
     }
 
     @Test
     public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLocation(INVALID_ADDRESS));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
+    public void parseAddress_validValueWithoutWhitespace_returnsLocation() throws Exception {
         Location expectedLocation = new Location(VALID_ADDRESS);
-        assertEquals(expectedLocation, ParserUtil.parseAddress(VALID_ADDRESS));
+        assertEquals(expectedLocation, ParserUtil.parseLocation(VALID_ADDRESS));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
+    public void parseAddress_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Location expectedLocation = new Location(VALID_ADDRESS);
-        assertEquals(expectedLocation, ParserUtil.parseAddress(addressWithWhitespace));
+        assertEquals(expectedLocation, ParserUtil.parseLocation(addressWithWhitespace));
     }
 
     @Test
