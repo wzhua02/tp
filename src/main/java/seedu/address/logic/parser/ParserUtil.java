@@ -4,15 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,6 +94,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String oneTimeDate} into an {@code OneTimeDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code oneTimeDate} is invalid.
+     */
+    public static OneTimeDate parseOneTimeDate(String oneTimeDate) throws ParseException {
+        requireNonNull(oneTimeDate);
+        String trimmedOneTimeDate = oneTimeDate.trim();
+        if (!OneTimeDate.isValidOneTimeDate(trimmedOneTimeDate)) {
+            throw new ParseException(OneTimeDate.MESSAGE_CONSTRAINTS);
+        }
+        return new OneTimeDate(trimmedOneTimeDate);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -121,4 +134,5 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 }
