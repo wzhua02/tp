@@ -98,7 +98,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Location updatedLocation = editPersonDescriptor.getAddress().orElse(personToEdit.getLocation());
+        Location updatedLocation = editPersonDescriptor.getLocation().orElse(personToEdit.getLocation());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedLocation, updatedTags);
@@ -188,7 +188,7 @@ public class EditCommand extends Command {
             this.location = location;
         }
 
-        public Optional<Location> getAddress() {
+        public Optional<Location> getLocation() {
             return Optional.ofNullable(location);
         }
 

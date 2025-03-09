@@ -66,8 +66,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Location} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setLocation(new Location(address));
+    public EditPersonDescriptorBuilder withLocation(String location) {
+        descriptor.setLocation(new Location(location));
         return this;
     }
 

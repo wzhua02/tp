@@ -68,7 +68,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Location} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public PersonBuilder withLocation(String address) {
         this.location = new Location(address);
         return this;
     }
