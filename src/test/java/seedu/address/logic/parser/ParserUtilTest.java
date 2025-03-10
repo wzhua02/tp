@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Goals;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -102,6 +103,29 @@ public class ParserUtilTest {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    }
+
+    @Test
+    public void parseGoals_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGoals((String) null));
+    }
+
+    @Test
+    public void parseGoals_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoals(INVALID_GOALS));
+    }
+
+    @Test
+    public void parseGoals_validValueWithoutWhitespace_returnsGoals() throws Exception {
+        Goals expectedGoals = new Goals(VALID_GOALS);
+        assertEquals(expectedGoals, ParserUtil.parseGoals(VALID_GOALS));
+    }
+
+    @Test
+    public void parseGoals_validValueWithWhitespace_returnsTrimmedGoals() throws Exception {
+        String goalsWithWhitespace = WHITESPACE + VALID_GOALS + WHITESPACE;
+        Goals expectedGoals = new Goals(VALID_GOALS);
+        assertEquals(expectedGoals, ParserUtil.parseGoals(goalsWithWhitespace));
     }
 
     @Test
