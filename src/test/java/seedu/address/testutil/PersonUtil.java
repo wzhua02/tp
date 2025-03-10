@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -36,9 +37,10 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getOneTimeSchedules().stream().forEach(
-                s -> sb.append(PREFIX_ONETIMESCHEDULE + s.value + " ")
-        );
+        sb.append(PREFIX_ONETIMESCHEDULE).append(person.getOneTimeSchedules().stream()
+            .map(s -> s.value)
+            .collect(Collectors.joining(", ")))
+            .append(" ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -60,8 +62,11 @@ public class PersonUtil {
             if (oneTimeSchedules.isEmpty()) {
                 sb.append(PREFIX_ONETIMESCHEDULE).append(" ");
             } else {
-                oneTimeSchedules.forEach(s -> sb.append(PREFIX_ONETIMESCHEDULE)
-                        .append(s.value).append(" "));
+                sb.append(PREFIX_ONETIMESCHEDULE)
+                        .append(oneTimeSchedules.stream()
+                                .map(s -> s.value)
+                                .collect(Collectors.joining(", "))
+                        ).append(" ");
             }
         }
 

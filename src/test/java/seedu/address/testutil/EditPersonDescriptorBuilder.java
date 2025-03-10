@@ -76,7 +76,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code OneTimeSchedule} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withOneTimeSchedules(String oneTimeSchedules) {
+    public EditPersonDescriptorBuilder withOneTimeSchedules(String... oneTimeSchedules) {
         Set<OneTimeSchedule> oneTimeScheduleSet = Stream.of(oneTimeSchedules)
                 .map(OneTimeSchedule::new)
                 .collect(Collectors.toSet());
