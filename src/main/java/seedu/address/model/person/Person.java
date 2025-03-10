@@ -22,20 +22,20 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Location location;
     private final Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, oneTimeSchedule, tags);
+    public Person(Name name, Phone phone, Email email,
+                  Location location, Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, location, oneTimeSchedule, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.location = location;
         this.oneTimeSchedules.addAll(oneTimeSchedule);
         this.tags.addAll(tags);
     }
@@ -52,8 +52,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Location getLocation() {
+        return location;
     }
 
     public Set<OneTimeSchedule> getOneTimeSchedules() {
@@ -100,7 +100,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && location.equals(otherPerson.location)
                 && oneTimeSchedules.equals(otherPerson.oneTimeSchedules)
                 && tags.equals(otherPerson.tags);
     }
@@ -108,7 +108,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, oneTimeSchedules, tags);
+        return Objects.hash(name, phone, email, location, oneTimeSchedules, tags);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("location", location)
                 .add("oneTimeSchedule", oneTimeSchedules)
                 .add("tags", tags)
                 .toString();
