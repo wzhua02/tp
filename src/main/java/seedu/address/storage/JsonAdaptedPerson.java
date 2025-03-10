@@ -101,6 +101,9 @@ class JsonAdaptedPerson {
         if (goals == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Goals.class.getSimpleName()));
         }
+        if (!Goals.isValidGoals(goals)) {
+            throw new IllegalValueException(Goals.MESSAGE_CONSTRAINTS);
+        }
         final Goals modelGoals = new Goals(goals);
 
         if (address == null) {
