@@ -337,11 +337,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case 3: View Client**
+**Use case 3: Find Client**
 
 **MSS**
 
-1. User requests to view a specific client.
+1. User requests to find a specific client.
 2. FitFlow shows the details of the client on the app.<br>
    Use case ends.
 
@@ -380,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or find the client from the displayed client list.
+1. User requests to <ins>find client (Use Case 3)</ins> or find the client to delete from the displayed client list.
 2. User requests to delete the client.
 3. FitFlow shows the client’s details to be deleted and prompts the user to confirm the decision to delete.
 4. User confirms.
@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or find the client from the displayed client list.
+1. User requests to <ins>find client (Use Case 3)</ins> or find the client to delete from the displayed client list.
 2. User requests to edit the client's details.
 3. FitFlow stores the new details of the client and indicates success.
 4. FitFlow updates the details of the client on the displayed client list.<br>
@@ -434,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2. User requests to <ins>edit client's details (Use Case 6)</ins> to add a session to the client.
 3. FitFlow stores the new session details to the client details.
 4. FitFlow updates the details on the displayed client list.<br>
@@ -456,7 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2. User requests to <ins>edit client's details (Use Case 6)</ins> to delete a session from the client.
 3. FitFlow removes the session details from the client details.
 4. FitFlow removes the session details from the displayed client list.<br>
@@ -478,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>view the client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
+1. User requests to <ins>find client (Use Case 3)</ins> or <ins>view schedule (Use Case 4)</ins>.
 2. User requests to <ins>edit client's details (Use Case 6)</ins> to modify session details for the client.
 3. FitFlow stores the new session details for the client.
 4. FitFlow modifies the session details on the displayed client list.<br>
@@ -538,7 +538,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **5a.** The user decides not to delete the session.
     - 5a1. FitFlow aborts the delete session command.<br>
       Use case ends.
-
 
 ---
 
