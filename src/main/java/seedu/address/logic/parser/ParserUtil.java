@@ -102,23 +102,24 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code oneTimeSchedule} is invalid.
      */
-    public static OneTimeSchedule parseOneTimeSchedule(String oneTimeSchedule) throws ParseException {
+    public static OneTimeSchedule parseOneTimeSchedules(String oneTimeSchedule) throws ParseException {
         requireNonNull(oneTimeSchedule);
         String trimmedOneTimeSchedule = oneTimeSchedule.trim();
-        if (!seedu.address.model.person.OneTimeSchedule.isValidOneTimeSchedule(trimmedOneTimeSchedule)) {
-            throw new ParseException(seedu.address.model.person.OneTimeSchedule.MESSAGE_CONSTRAINTS);
+        if (!OneTimeSchedule.isValidOneTimeSchedule(trimmedOneTimeSchedule)) {
+            throw new ParseException(OneTimeSchedule.MESSAGE_CONSTRAINTS);
         }
         return new OneTimeSchedule(trimmedOneTimeSchedule);
     }
 
     /**
-     * Parses {@code Collection<String> one time schedules} into a {@code Set<OneTimeSchedule>}.
+     * Parses {@code Collection<String> one time schedules} into a {@code Set<OneTimeSchedules>}.
      */
-    public static Set<OneTimeSchedule> parseOneTimeSchedule(Collection<String> oneTimeSchedule) throws ParseException {
-        requireNonNull(oneTimeSchedule);
+    public static Set<OneTimeSchedule> parseOneTimeSchedules(Collection<String> oneTimeSchedules)
+            throws ParseException {
+        requireNonNull(oneTimeSchedules);
         final Set<OneTimeSchedule> oneTimeScheduleSet = new HashSet<>();
-        for (String oneTimeScheduleDate : oneTimeSchedule) {
-            oneTimeScheduleSet.add(parseOneTimeSchedule(oneTimeScheduleDate));
+        for (String oneTimeScheduleDate : oneTimeSchedules) {
+            oneTimeScheduleSet.add(parseOneTimeSchedules(oneTimeScheduleDate));
         }
         return oneTimeScheduleSet;
     }

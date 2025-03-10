@@ -91,7 +91,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ? Collections.emptySet()
                 : oneTimeSchedules;
 
-        return Optional.of(ParserUtil.parseOneTimeSchedule(oneTimeScheduleSet));
+        return Optional.of(ParserUtil.parseOneTimeSchedules(oneTimeScheduleSet));
     }
 
     /**
