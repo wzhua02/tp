@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class MedicalHistory {
 
-    public static final String MESSAGE_CONSTRAINTS = "Medical History can take any values";
+    public static final String MESSAGE_CONSTRAINTS = "Medical History can take any ASCII characters";
 
     /*
      * Medical history accepts any ASCII characters, including a space as the first input.

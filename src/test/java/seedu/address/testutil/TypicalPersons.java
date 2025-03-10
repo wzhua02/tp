@@ -32,31 +32,31 @@ public class TypicalPersons {
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withMedicalHistory("Twisted right ankle")
+            .withMedicalHistory("Lower Back Injury")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withMedicalHistory("Twisted right ankle")
+            .withMedicalHistory("Fractured right hand")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withMedicalHistory("Twisted right ankle")
+            .withMedicalHistory("Dislocated left shoulder")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withMedicalHistory("Twisted right ankle")
+            .withMedicalHistory("High blood pressure")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withMedicalHistory("Twisted right ankle")
+            .withMedicalHistory("Twisted left ankle")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withMedicalHistory("Twisted right ankle")
+            .withMedicalHistory("Metal rod in right arm")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withMedicalHistory("Twisted right ankle")
+            .withMedicalHistory("Pancreas surgery")
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withMedicalHistory("Twisted right ankle")
+            .withMedicalHistory("Left eye infection")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
