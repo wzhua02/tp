@@ -4,9 +4,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's training date in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidOneTimeDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidOneTimeSchedule(String)}
  */
-public class OneTimeDate {
+public class OneTimeSchedule {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Dates must be in the format: date start end, either [d/m HHmm HHmm] or [d/m/yy HHmm HHmm].\n"
@@ -26,9 +26,9 @@ public class OneTimeDate {
      * Times: 24-hour time format
      */
     public static final String VALIDATION_REGEX =
-        "([0-9]|[0-2][0-9]|3[0-1])/([0-9]|0[1-9]|1[0-2])(/\\d{2})?\\s" +    // Date
-        "([01][0-9]|2[0-3])[0-5][0-9]\\s" +                                 // Start time
-        "([01][0-9]|2[0-3])[0-5][0-9]";                                     // End time
+        "([0-9]|[0-2][0-9]|3[0-1])/([0-9]|0[1-9]|1[0-2])(/\\d{2})?\\s" // Date
+        + "([01][0-9]|2[0-3])[0-5][0-9]\\s" // Start time
+        + "([01][0-9]|2[0-3])[0-5][0-9]"; // End time
 
     public final String value;
 
@@ -37,16 +37,16 @@ public class OneTimeDate {
      *
      * @param date A valid one time date.
      */
-    public OneTimeDate(String date) {
+    public OneTimeSchedule(String date) {
         requireNonNull(date);
-        checkArgument(isValidOneTimeDate(date), MESSAGE_CONSTRAINTS);
-        value = date;
+        checkArgument(isValidOneTimeSchedule(date), MESSAGE_CONSTRAINTS);
+        this.value = date;
     }
 
     /**
      * Returns true if a given date is a valid one time date.
      */
-    public static boolean isValidOneTimeDate(String test) {
+    public static boolean isValidOneTimeSchedule(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -63,17 +63,18 @@ public class OneTimeDate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof OneTimeDate)) {
+        if (!(other instanceof OneTimeSchedule)) {
             return false;
         }
 
-        OneTimeDate otherOneTimeDate = (OneTimeDate) other;
-        return value.equals(otherOneTimeDate.value);
+        OneTimeSchedule otherOneTimeSchedule = (OneTimeSchedule) other;
+        return value.equals(otherOneTimeSchedule.value);
     }
 
     @Override
     public int hashCode() {
         return value.hashCode();
     }
+
 
 }

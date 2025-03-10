@@ -23,19 +23,20 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final OneTimeDate oneTimeDate;
+    private final Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, OneTimeDate oneTimeDate, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, oneTimeDate, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, oneTimeSchedule, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.oneTimeDate = oneTimeDate;
+        this.oneTimeSchedules.addAll(oneTimeSchedule);
         this.tags.addAll(tags);
     }
 
@@ -55,8 +56,8 @@ public class Person {
         return address;
     }
 
-    public OneTimeDate getOneTimeDate() {
-        return oneTimeDate;
+    public Set<OneTimeSchedule> getOneTimeSchedules() {
+        return Collections.unmodifiableSet(oneTimeSchedules);
     }
 
     /**
@@ -100,14 +101,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && oneTimeDate.equals(otherPerson.oneTimeDate)
+                && oneTimeSchedules.equals(otherPerson.oneTimeSchedules)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, oneTimeDate, tags);
+        return Objects.hash(name, phone, email, address, oneTimeSchedules, tags);
     }
 
     @Override
@@ -117,7 +118,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("schedule", oneTimeDate)
+                .add("oneTimeSchedule", oneTimeSchedules)
                 .add("tags", tags)
                 .toString();
     }

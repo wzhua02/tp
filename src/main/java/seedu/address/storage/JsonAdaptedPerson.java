@@ -13,9 +13,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.OneTimeDate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +29,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String oneTimeDate;
+    private final List<JsonAdaptedOneTimeSchedule> oneTimeSchedules = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,13 +38,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("schedule") String oneTimeDate,
+            @JsonProperty("oneTimeSchedule") List<JsonAdaptedOneTimeSchedule> oneTimeSchedules,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.oneTimeDate = oneTimeDate;
+        if (oneTimeSchedules != null) {
+            this.oneTimeSchedules.addAll(oneTimeSchedules);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -58,7 +60,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        oneTimeDate = source.getOneTimeDate().value;
+        oneTimeSchedules.addAll(source.getOneTimeSchedules().stream()
+                .map(JsonAdaptedOneTimeSchedule::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -70,6 +74,11 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<OneTimeSchedule> personOneTimeSchedules = new ArrayList<>();
+        for (JsonAdaptedOneTimeSchedule oneTimeSchedule : oneTimeSchedules) {
+            personOneTimeSchedules.add(oneTimeSchedule.toModelType());
+        }
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -107,16 +116,11 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (oneTimeDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, OneTimeDate.class.getSimpleName()));
-        }
-        if (!OneTimeDate.isValidOneTimeDate(oneTimeDate)) {
-            throw new IllegalValueException(OneTimeDate.MESSAGE_CONSTRAINTS);
-        }
-        final OneTimeDate modelOneTimeDate = new OneTimeDate(oneTimeDate);
+        final Set<OneTimeSchedule> modelOneTimeSchedules = new HashSet<>(personOneTimeSchedules);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOneTimeDate, modelTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOneTimeSchedules, modelTags);
     }
 
 }

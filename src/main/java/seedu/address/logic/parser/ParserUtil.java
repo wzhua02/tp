@@ -4,13 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -94,18 +97,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String oneTimeDate} into an {@code OneTimeDate}.
+     * Parses a {@code String oneTimeSchedule} into an {@code OneTimeSchedule}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code oneTimeDate} is invalid.
+     * @throws ParseException if the given {@code oneTimeSchedule} is invalid.
      */
-    public static OneTimeDate parseOneTimeDate(String oneTimeDate) throws ParseException {
-        requireNonNull(oneTimeDate);
-        String trimmedOneTimeDate = oneTimeDate.trim();
-        if (!OneTimeDate.isValidOneTimeDate(trimmedOneTimeDate)) {
-            throw new ParseException(OneTimeDate.MESSAGE_CONSTRAINTS);
+    public static OneTimeSchedule parseOneTimeSchedule(String oneTimeSchedule) throws ParseException {
+        requireNonNull(oneTimeSchedule);
+        String trimmedOneTimeSchedule = oneTimeSchedule.trim();
+        if (!seedu.address.model.person.OneTimeSchedule.isValidOneTimeSchedule(trimmedOneTimeSchedule)) {
+            throw new ParseException(seedu.address.model.person.OneTimeSchedule.MESSAGE_CONSTRAINTS);
         }
-        return new OneTimeDate(trimmedOneTimeDate);
+        return new OneTimeSchedule(trimmedOneTimeSchedule);
+    }
+
+    /**
+     * Parses {@code Collection<String> one time schedules} into a {@code Set<OneTimeSchedule>}.
+     */
+    public static Set<OneTimeSchedule> parseOneTimeSchedule(Collection<String> oneTimeSchedule) throws ParseException {
+        requireNonNull(oneTimeSchedule);
+        final Set<OneTimeSchedule> oneTimeScheduleSet = new HashSet<>();
+        for (String oneTimeScheduleDate : oneTimeSchedule) {
+            oneTimeScheduleSet.add(parseOneTimeSchedule(oneTimeScheduleDate));
+        }
+        return oneTimeScheduleSet;
     }
 
     /**
