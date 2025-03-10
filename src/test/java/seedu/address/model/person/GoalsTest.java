@@ -16,22 +16,22 @@ public class GoalsTest {
     @Test
     public void constructor_invalidGoals_throwsIllegalArgumentException() {
         String invalidGoals = "";
-        assertThrows(IllegalArgumentException.class, () -> new Address(invalidGoals));
+        assertThrows(IllegalArgumentException.class, () -> new Goals(invalidGoals));
     }
 
     @Test
-    public void isValidAddress() {
+    public void isValidGoal() {
         // null goal
         assertThrows(NullPointerException.class, () -> Goals.isValidGoals(null));
 
-        // invalid addresses
+        // invalid goals
         assertFalse(Goals.isValidGoals("")); // empty string
         assertFalse(Goals.isValidGoals(" ")); // spaces only
 
-        // valid addresses
+        // valid goals
         assertTrue(Goals.isValidGoals("Get fitter"));
         assertTrue(Goals.isValidGoals("G")); // one character
-        assertTrue(Goals.isValidGoals("Get fitter; Learn more techniques; Gain muscle mass")); // long address
+        assertTrue(Goals.isValidGoals("Get fitter; Learn more techniques; Gain muscle mass")); // long goal
     }
 
     @Test
@@ -51,6 +51,6 @@ public class GoalsTest {
         assertFalse(goals.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(goals.equals(new Address("Other Valid Address")));
+        assertFalse(goals.equals(new Goals("Other Valid Goal")));
     }
 }
