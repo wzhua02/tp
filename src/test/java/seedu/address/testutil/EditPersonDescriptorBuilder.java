@@ -66,7 +66,6 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-<<<<<<< HEAD
      * Sets the {@code Goals} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withGoals(String goals) {
@@ -75,10 +74,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
-=======
      * Sets the {@code Location} of the {@code EditPersonDescriptor} that we are building.
->>>>>>> master
      */
     public EditPersonDescriptorBuilder withLocation(String location) {
         descriptor.setLocation(new Location(location));
