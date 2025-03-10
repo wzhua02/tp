@@ -14,7 +14,7 @@ public class MedicalHistory {
     /*
      * Medical history accepts any ASCII characters, including a space as the first input.
      */
-    public static final String VALIDATION_REGEX = "[\\\\x00-\\\\x7F]*";
+    public static final String VALIDATION_REGEX = ".*";
 
     public final String value;
 
@@ -24,7 +24,7 @@ public class MedicalHistory {
      * @param medicalHistory A valid medical history.
      */
     public MedicalHistory(String medicalHistory) {
-        //requireNonNull(medicalHistory);
+        requireNonNull(medicalHistory);
         checkArgument(isValidMedicalHistory(medicalHistory), MESSAGE_CONSTRAINTS);
         value = medicalHistory;
     }

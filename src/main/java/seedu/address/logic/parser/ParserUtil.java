@@ -103,7 +103,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code medicalHistory} is invalid.
      */
     public static MedicalHistory parseMedicalHistory(String medicalHistory) throws ParseException {
-        //requireNonNull(medicalHistory);
+        requireNonNull(medicalHistory);
         String trimmedMedicalHistory = medicalHistory.trim();
         if (!MedicalHistory.isValidMedicalHistory(trimmedMedicalHistory)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
