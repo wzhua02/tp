@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -99,7 +99,8 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (medicalHistory == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MedicalHistory.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, MedicalHistory.class.getSimpleName()));
         }
         if (!MedicalHistory.isValidMedicalHistory(medicalHistory)) {
             throw new IllegalValueException(MedicalHistory.MESSAGE_CONSTRAINTS);

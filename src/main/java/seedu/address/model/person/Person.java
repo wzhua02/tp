@@ -55,7 +55,9 @@ public class Person {
         return address;
     }
 
-    public MedicalHistory getMedicalHistory() { return medicalHistory; }
+    public MedicalHistory getMedicalHistory() {
+        return medicalHistory;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
