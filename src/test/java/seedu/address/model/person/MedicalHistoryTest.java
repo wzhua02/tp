@@ -15,21 +15,20 @@ public class MedicalHistoryTest {
 
     @Test
     public void constructor_invalidMedicalHistory_throwsIllegalArgumentException() {
-        String invalidMedicalHistory = "é";
+        String invalidMedicalHistory = " ";
         assertThrows(IllegalArgumentException.class, () -> new MedicalHistory(invalidMedicalHistory));
     }
 
     @Test
     public void isValidMedicalHistory() {
-        // null medical history is accepted
-        //assertThrows(NullPointerException.class, () -> MedicalHistory.isValidMedicalHistory(null));
+        //null medical history
+        assertThrows(NullPointerException.class, () -> MedicalHistory.isValidMedicalHistory(null));
 
-        // invalid medical history
-        assertFalse(MedicalHistory.isValidMedicalHistory("é")); // empty string
+        // invalid medical histories
+        assertFalse(MedicalHistory.isValidMedicalHistory(" ")); // blank space
 
         // valid medical histories
         assertTrue(MedicalHistory.isValidMedicalHistory("Lower Back Injury"));
-        assertTrue(MedicalHistory.isValidMedicalHistory(" ")); // Space
         assertTrue(MedicalHistory.isValidMedicalHistory("Fractured 4 fingers on right hand, "
                 + "Subluxations and ligament damage of vetebrae")); // Long medical history
     }
@@ -45,7 +44,7 @@ public class MedicalHistoryTest {
         assertTrue(medicalHistory.equals(medicalHistory));
 
         // null -> returns false
-        assertTrue(medicalHistory.equals(null));
+        assertFalse(medicalHistory.equals(null));
 
         // different types -> returns false
         assertFalse(medicalHistory.equals(5.0f));
