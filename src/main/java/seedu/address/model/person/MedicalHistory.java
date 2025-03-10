@@ -9,12 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class MedicalHistory {
 
-    public static final String MESSAGE_CONSTRAINTS = "Medical History can take any ASCII characters";
+    public static final String MESSAGE_CONSTRAINTS = "Medical History can take any values, and it should not be blank";
 
     /*
      * Medical history accepts any ASCII characters, including a space as the first input.
      */
-    public static final String VALIDATION_REGEX = ".*";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 

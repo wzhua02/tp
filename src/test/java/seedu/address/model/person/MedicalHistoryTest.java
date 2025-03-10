@@ -30,8 +30,8 @@ public class MedicalHistoryTest {
         // valid medical histories
         assertTrue(MedicalHistory.isValidMedicalHistory("Lower Back Injury"));
         assertTrue(MedicalHistory.isValidMedicalHistory(" ")); // Space
-        assertTrue(MedicalHistory.isValidMedicalHistory("Fractured 4 fingers on right hand, " +
-                "Subluxations and ligament damage of vetebrae")); // Long medical history
+        assertTrue(MedicalHistory.isValidMedicalHistory("Fractured 4 fingers on right hand, "
+                + "Subluxations and ligament damage of vetebrae")); // Long medical history
     }
 
     @Test
