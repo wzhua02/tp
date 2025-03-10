@@ -52,7 +52,7 @@ public class Messages {
             builder.append(schedule);
         });
 
-                builder.append("; Tags: ");
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
