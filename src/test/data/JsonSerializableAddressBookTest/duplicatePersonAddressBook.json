@@ -4,13 +4,13 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "goals" : "Calisthenics improvement",
-    "address": "123, Jurong West Ave 6, #08-111",
+    "location": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "goals" : "Calisthenics improvement",
-    "address": "4th street"
+    "location": "4th street"
   } ]
 }

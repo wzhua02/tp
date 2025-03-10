@@ -3,9 +3,9 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Goals;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -21,13 +21,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GOALS = "Bee the best Amy strongwoman";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_LOCATION = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Goals goals;
-    private Address address;
+    private Location location;
     private Set<Tag> tags;
 
     /**
@@ -38,7 +38,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         goals = new Goals(DEFAULT_GOALS);
-        address = new Address(DEFAULT_ADDRESS);
+        location = new Location(DEFAULT_LOCATION);
         tags = new HashSet<>();
     }
 
@@ -50,7 +50,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         goals = personToCopy.getGoals();
-        address = personToCopy.getAddress();
+        location = personToCopy.getLocation();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -79,10 +79,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Location} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withLocation(String address) {
+        this.location = new Location(address);
         return this;
     }
 
@@ -103,7 +103,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, goals, address, tags);
+        return new Person(name, phone, email, goals, location, tags);
     }
 
 }
