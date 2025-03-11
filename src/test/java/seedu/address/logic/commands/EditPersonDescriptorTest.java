@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ONETIMESCHEDULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RECURRING_SCHEDULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,11 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different recurring schedule -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB)
+                .build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different email -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -67,7 +73,8 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
+                + editPersonDescriptor.getPhone().orElse(null) + ", recurringSchedules="
+                + editPersonDescriptor.getRecurringSchedules().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", location="
                 + editPersonDescriptor.getLocation().orElse(null) + ", oneTimeSchedule="
                 + editPersonDescriptor.getOneTimeSchedules().orElse(null) + ", tags="

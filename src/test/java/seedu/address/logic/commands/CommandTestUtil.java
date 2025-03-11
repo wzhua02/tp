@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -32,6 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "88888888";
     public static final String VALID_PHONE_BOB = "99999999";
+    public static final String VALID_RECURRING_SCHEDULE_AMY = "Mon 1400 1600";
+    public static final String VALID_RECURRING_SCHEDULE_BOB = "Wed 1500 1700";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_GOALS_AMY = "Train arms";
@@ -47,6 +50,10 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String RECURRING_SCHEDULE_DESC_AMY = " " + PREFIX_RECURRING_SCHEDULE
+            + VALID_RECURRING_SCHEDULE_AMY;
+    public static final String RECURRING_SCHEDULE_DESC_BOB = " " + PREFIX_RECURRING_SCHEDULE
+            + VALID_RECURRING_SCHEDULE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String GOALS_DESC_AMY = " " + PREFIX_GOALS + VALID_GOALS_AMY;
@@ -60,6 +67,8 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Jamesé"; // 'é' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_RECURRING_SCHEDULE_DESC = " " + PREFIX_RECURRING_SCHEDULE
+            + "yay"; // yay is not a valid day
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_GOALS_DESC = " " + PREFIX_GOALS; // empty string not allowed for goals
     public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION; // empty string not allowed for addresses
@@ -75,10 +84,12 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withRecurringSchedules(VALID_RECURRING_SCHEDULE_AMY)
                 .withGoals(VALID_GOALS_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withLocation(VALID_LOCATION_AMY)
                 .withOneTimeSchedules(VALID_ONETIMESCHEDULE_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB)
                 .withGoals(VALID_GOALS_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withLocation(VALID_LOCATION_BOB)
                 .withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();

@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,13 +20,14 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_PHONE = "88888888";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GOALS = "Bee the best Amy strongwoman";
     public static final String DEFAULT_LOCATION = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
+    private Set<RecurringSchedule> recurringSchedules;
     private Email email;
     private Goals goals;
     private Location location;
@@ -38,6 +40,7 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
+        recurringSchedules = new HashSet<>();
         email = new Email(DEFAULT_EMAIL);
         goals = new Goals(DEFAULT_GOALS);
         location = new Location(DEFAULT_LOCATION);
@@ -51,6 +54,7 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
+        recurringSchedules = new HashSet<>(personToCopy.getRecurringSchedules());
         email = personToCopy.getEmail();
         goals = personToCopy.getGoals();
         location = personToCopy.getLocation();
@@ -99,6 +103,15 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code recurringSchedules} into a {@code Set<RecurringSchedule>} and set it to the {@code Person}
+     * that we are building.
+     */
+    public PersonBuilder withRecurringSchedules(String ... recurringSchedules) {
+        this.recurringSchedules = SampleDataUtil.getRecurringScheduleSet(recurringSchedules);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
@@ -116,7 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, goals, location, oneTimeSchedules, tags);
+        return new Person(name, phone, recurringSchedules, email, goals, location, oneTimeSchedules, tags);
     }
 
 }
