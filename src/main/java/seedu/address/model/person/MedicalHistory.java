@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a Person's medical history in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMedicalHistory(String)}
  */
 public class MedicalHistory {
@@ -14,7 +14,7 @@ public class MedicalHistory {
     /*
      * Medical history accepts any ASCII characters, including a space as the first input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "[^\\s][\\p{ASCII}]*";
 
     public final String value;
 

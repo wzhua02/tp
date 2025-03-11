@@ -15,7 +15,7 @@ public class MedicalHistoryTest {
 
     @Test
     public void constructor_invalidMedicalHistory_throwsIllegalArgumentException() {
-        String invalidMedicalHistory = " ";
+        String invalidMedicalHistory = "é©";
         assertThrows(IllegalArgumentException.class, () -> new MedicalHistory(invalidMedicalHistory));
     }
 
@@ -25,7 +25,8 @@ public class MedicalHistoryTest {
         assertThrows(NullPointerException.class, () -> MedicalHistory.isValidMedicalHistory(null));
 
         // invalid medical histories
-        assertFalse(MedicalHistory.isValidMedicalHistory(" ")); // blank space
+        assertFalse(MedicalHistory.isValidMedicalHistory(" "));// blank space
+        assertFalse(MedicalHistory.isValidMedicalHistory("é©"));// non-ASCII character
 
         // valid medical histories
         assertTrue(MedicalHistory.isValidMedicalHistory("Lower Back Injury"));
