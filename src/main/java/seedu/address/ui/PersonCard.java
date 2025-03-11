@@ -35,6 +35,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
+    private Label goals;
+    @FXML
     private Label trainingLocation;
     @FXML
     private Label email;
@@ -52,6 +54,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
+        goals.setText(person.getGoals().value);
         trainingLocation.setText(person.getLocation().value);
         email.setText(person.getEmail().value);
         person.getOneTimeSchedules().stream()

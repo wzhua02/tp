@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
@@ -20,11 +21,13 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_GOALS = "Bee the best Amy strongwoman";
     public static final String DEFAULT_LOCATION = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Goals goals;
     private Location location;
     private Set<OneTimeSchedule> oneTimeSchedules;
     private Set<Tag> tags;
@@ -36,6 +39,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        goals = new Goals(DEFAULT_GOALS);
         location = new Location(DEFAULT_LOCATION);
         oneTimeSchedules = new HashSet<>();
         tags = new HashSet<>();
@@ -48,6 +52,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        goals = personToCopy.getGoals();
         location = personToCopy.getLocation();
         oneTimeSchedules = new HashSet<>(personToCopy.getOneTimeSchedules());
         tags = new HashSet<>(personToCopy.getTags());
@@ -66,6 +71,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code goals} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGoals(String goals) {
+        this.goals = new Goals(goals);
         return this;
     }
 
@@ -103,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, location, oneTimeSchedules, tags);
+        return new Person(name, phone, email, goals, location, oneTimeSchedules, tags);
     }
 
 }

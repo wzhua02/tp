@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
@@ -28,6 +29,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String goals;
     private final String location;
     private final List<JsonAdaptedOneTimeSchedule> oneTimeSchedules = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -37,12 +39,14 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("location") String location,
+            @JsonProperty("email") String email, @JsonProperty("goals") String goals,
+            @JsonProperty("location") String location,
             @JsonProperty("oneTimeSchedule") List<JsonAdaptedOneTimeSchedule> oneTimeSchedules,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.goals = goals;
         this.location = location;
         if (oneTimeSchedules != null) {
             this.oneTimeSchedules.addAll(oneTimeSchedules);
@@ -59,6 +63,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        goals = source.getGoals().value;
         location = source.getLocation().value;
         oneTimeSchedules.addAll(source.getOneTimeSchedules().stream()
                 .map(JsonAdaptedOneTimeSchedule::new)
@@ -108,9 +113,17 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (goals == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Goals.class.getSimpleName()));
+        }
+        if (!Goals.isValidGoals(goals)) {
+            throw new IllegalValueException(Goals.MESSAGE_CONSTRAINTS);
+        }
+        final Goals modelGoals = new Goals(goals);
+
         if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Location.class.getSimpleName()));
+            throw new
+                    IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName()));
         }
         if (!Location.isValidLocation(location)) {
             throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
@@ -120,7 +133,9 @@ class JsonAdaptedPerson {
         final Set<OneTimeSchedule> modelOneTimeSchedules = new HashSet<>(personOneTimeSchedules);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelLocation, modelOneTimeSchedules, modelTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelGoals, modelLocation,
+                modelOneTimeSchedules, modelTags);
     }
 
 }

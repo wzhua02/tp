@@ -22,6 +22,7 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Goals goals;
     private final Location location;
     private final Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
@@ -29,12 +30,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email,
-                  Location location, Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Goals goals, Location location,
+                  Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, location, oneTimeSchedule, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.goals = goals;
         this.location = location;
         this.oneTimeSchedules.addAll(oneTimeSchedule);
         this.tags.addAll(tags);
@@ -50,6 +52,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Goals getGoals() {
+        return goals;
     }
 
     public Location getLocation() {
@@ -100,6 +106,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
+                && goals.equals(otherPerson.goals)
                 && location.equals(otherPerson.location)
                 && oneTimeSchedules.equals(otherPerson.oneTimeSchedules)
                 && tags.equals(otherPerson.tags);
@@ -108,7 +115,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, location, oneTimeSchedules, tags);
+        return Objects.hash(name, phone, email, goals, location, oneTimeSchedules, tags);
     }
 
     @Override
@@ -117,6 +124,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
+                .add("goals", goals)
                 .add("location", location)
                 .add("oneTimeSchedule", oneTimeSchedules)
                 .add("tags", tags)

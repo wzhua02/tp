@@ -23,6 +23,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
@@ -101,12 +102,13 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Goals updatedGoals = editPersonDescriptor.getGoals().orElse(personToEdit.getGoals());
         Location updatedLocation = editPersonDescriptor.getLocation().orElse(personToEdit.getLocation());
         Set<OneTimeSchedule> updatedOneTimeSchedules = editPersonDescriptor.getOneTimeSchedules()
                 .orElse(personToEdit.getOneTimeSchedules());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedLocation,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedGoals, updatedLocation,
                 updatedOneTimeSchedules, updatedTags);
     }
 
@@ -142,6 +144,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Goals goals;
         private Location location;
         private Set<OneTimeSchedule> oneTimeSchedules;
         private Set<Tag> tags;
@@ -156,6 +159,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setGoals(toCopy.goals);
             setLocation(toCopy.location);
             setOneTimeSchedules(toCopy.oneTimeSchedules);
             setTags(toCopy.tags);
@@ -165,7 +169,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, location, oneTimeSchedules, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, goals, location, oneTimeSchedules, tags);
         }
 
         public void setName(Name name) {
@@ -190,6 +194,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setGoals(Goals goals) {
+            this.goals = goals;
+        }
+
+        public Optional<Goals> getGoals() {
+            return Optional.ofNullable(goals);
         }
 
         public void setLocation(Location location) {
