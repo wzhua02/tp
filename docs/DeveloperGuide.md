@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>find client (Use Case 3)</ins> or find the client to delete from the displayed client list.
+1. User requests to <ins>find client (Use Case 3)</ins> or find the client to edit from the displayed client list.
 2. User requests to edit the client's details.
 3. FitFlow stores the new details of the client and indicates success.
 4. FitFlow updates the details of the client on the displayed client list.<br>
