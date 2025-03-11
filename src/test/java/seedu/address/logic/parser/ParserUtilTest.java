@@ -133,12 +133,12 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
+    public void parseLocation_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
+    public void parseLocation_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseLocation(INVALID_LOCATION));
     }
 
