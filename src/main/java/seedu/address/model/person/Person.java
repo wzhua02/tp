@@ -24,18 +24,21 @@ public class Person {
     // Data fields
     private final Goals goals;
     private final Location location;
+    private final Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Goals goals, Location location, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, location, tags);
+    public Person(Name name, Phone phone, Email email, Goals goals, Location location,
+                  Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, location, oneTimeSchedule, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.goals = goals;
         this.location = location;
+        this.oneTimeSchedules.addAll(oneTimeSchedule);
         this.tags.addAll(tags);
     }
 
@@ -57,6 +60,10 @@ public class Person {
 
     public Location getLocation() {
         return location;
+    }
+
+    public Set<OneTimeSchedule> getOneTimeSchedules() {
+        return Collections.unmodifiableSet(oneTimeSchedules);
     }
 
     /**
@@ -101,13 +108,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && goals.equals(otherPerson.goals)
                 && location.equals(otherPerson.location)
+                && oneTimeSchedules.equals(otherPerson.oneTimeSchedules)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, goals, location, tags);
+        return Objects.hash(name, phone, email, goals, location, oneTimeSchedules, tags);
     }
 
     @Override
@@ -118,6 +126,7 @@ public class Person {
                 .add("email", email)
                 .add("goals", goals)
                 .add("location", location)
+                .add("oneTimeSchedule", oneTimeSchedules)
                 .add("tags", tags)
                 .toString();
     }

@@ -7,6 +7,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -28,6 +29,7 @@ public class PersonBuilder {
     private Email email;
     private Goals goals;
     private Location location;
+    private Set<OneTimeSchedule> oneTimeSchedules;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +41,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         goals = new Goals(DEFAULT_GOALS);
         location = new Location(DEFAULT_LOCATION);
+        oneTimeSchedules = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -51,6 +54,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         goals = personToCopy.getGoals();
         location = personToCopy.getLocation();
+        oneTimeSchedules = new HashSet<>(personToCopy.getOneTimeSchedules());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -102,8 +106,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code oneTimeSchedules} into a {@code Set<OneTimeSchedule>} and set it to the
+     * {@code Person} that we are building.
+     */
+    public PersonBuilder withOneTimeSchedules(String ... oneTimeSchedules) {
+        this.oneTimeSchedules = SampleDataUtil.getOneTimeScheduleSet(oneTimeSchedules);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, goals, location, tags);
+        return new Person(name, phone, email, goals, location, oneTimeSchedules, tags);
     }
 
 }
