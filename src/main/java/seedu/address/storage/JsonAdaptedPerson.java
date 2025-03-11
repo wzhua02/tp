@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +29,7 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
+    private final List<JsonAdaptedRecurringSchedule> recurringSchedules = new ArrayList<>();
     private final String email;
     private final String goals;
     private final String location;
@@ -39,12 +41,16 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+            @JsonProperty("recurringSchedule") List<JsonAdaptedRecurringSchedule> recurringSchedules,
             @JsonProperty("email") String email, @JsonProperty("goals") String goals,
             @JsonProperty("location") String location,
             @JsonProperty("oneTimeSchedule") List<JsonAdaptedOneTimeSchedule> oneTimeSchedules,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
+        if (recurringSchedules != null) {
+            this.recurringSchedules.addAll(recurringSchedules);
+        }
         this.email = email;
         this.goals = goals;
         this.location = location;
@@ -62,6 +68,9 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
+        recurringSchedules.addAll(source.getRecurringSchedules().stream()
+                .map(JsonAdaptedRecurringSchedule::new)
+                .collect(Collectors.toList()));
         email = source.getEmail().value;
         goals = source.getGoals().value;
         location = source.getLocation().value;
@@ -79,6 +88,12 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+
+        final List<RecurringSchedule> personRecurringSchedules = new ArrayList<>();
+        for (JsonAdaptedRecurringSchedule recurringSchedule : recurringSchedules) {
+            personRecurringSchedules.add(recurringSchedule.toModelType());
+        }
+
         final List<OneTimeSchedule> personOneTimeSchedules = new ArrayList<>();
         for (JsonAdaptedOneTimeSchedule oneTimeSchedule : oneTimeSchedules) {
             personOneTimeSchedules.add(oneTimeSchedule.toModelType());
@@ -130,11 +145,13 @@ class JsonAdaptedPerson {
         }
         final Location modelLocation = new Location(location);
 
+        final Set<RecurringSchedule> modelRecurringSchedules = new HashSet<>(personRecurringSchedules);
+
         final Set<OneTimeSchedule> modelOneTimeSchedules = new HashSet<>(personOneTimeSchedules);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelGoals, modelLocation,
+        return new Person(modelName, modelPhone, modelRecurringSchedules, modelEmail, modelGoals, modelLocation,
                 modelOneTimeSchedules, modelTags);
     }
 

@@ -35,6 +35,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
+    private FlowPane recurringSchedules;
+    @FXML
     private Label goals;
     @FXML
     private Label trainingLocation;
@@ -54,6 +56,10 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
+        person.getRecurringSchedules().stream()
+                .sorted(Comparator.comparing(recurringSchedule -> recurringSchedule.schedule))
+                .forEach(recurringSchedule -> recurringSchedules
+                        .getChildren().add(new Label(recurringSchedule.schedule)));
         goals.setText(person.getGoals().value);
         trainingLocation.setText(person.getLocation().value);
         email.setText(person.getEmail().value);

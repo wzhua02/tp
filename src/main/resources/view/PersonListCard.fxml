@@ -29,6 +29,7 @@
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      <FlowPane fx:id="recurringSchedules" />
       <Label fx:id="goals" styleClass="cell_small_label" text="\$goals" />
       <Label fx:id="trainingLocation" styleClass="cell_small_label" text="\$trainingLocation" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />

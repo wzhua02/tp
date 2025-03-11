@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,6 +26,7 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
+            + PREFIX_RECURRING_SCHEDULE + "RECURRING SCHEDULE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE "
@@ -32,6 +34,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
+            + PREFIX_RECURRING_SCHEDULE + "Mon 1400 1600 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_ONETIMESCHEDULE + "23/02/25 1000 1200 "
