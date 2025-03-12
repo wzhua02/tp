@@ -13,6 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
+        descriptor.setRecurringSchedules(person.getRecurringSchedules());
         descriptor.setEmail(person.getEmail());
         descriptor.setGoals(person.getGoals());
         descriptor.setLocation(person.getLocation());
@@ -58,6 +60,17 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Parses the {@code recurringSchedules} into a {@code Set<RecurringSchedule>} and set it
+     * to the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRecurringSchedules(String... recurringSchedules) {
+        Set<RecurringSchedule> recurringScheduleSet = Stream.of(recurringSchedules).map(RecurringSchedule::new)
+                .collect(Collectors.toSet());
+        descriptor.setRecurringSchedules(recurringScheduleSet);
         return this;
     }
 

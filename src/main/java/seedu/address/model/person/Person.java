@@ -22,6 +22,7 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Set<RecurringSchedule> recurringSchedules = new HashSet<>();
     private final Goals goals;
     private final MedicalHistory medicalHistory;
     private final Location location;
@@ -31,11 +32,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Goals goals, MedicalHistory medicalHistory, Location location,
+    public Person(Name name, Phone phone, Set<RecurringSchedule> recurringSchedules, Email email, Goals goals, 
+                  MedicalHistory medicalHistory, Location location,
                   Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, medicalHistory, location, oneTimeSchedule, tags);
         this.name = name;
         this.phone = phone;
+        this.recurringSchedules.addAll(recurringSchedules);
         this.email = email;
         this.goals = goals;
         this.medicalHistory = medicalHistory;
@@ -50,6 +53,14 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    /**
+     * Returns an immutable recurringSchedule set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<RecurringSchedule> getRecurringSchedules() {
+        return Collections.unmodifiableSet(recurringSchedules);
     }
 
     public Email getEmail() {
@@ -113,6 +124,7 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
+                && recurringSchedules.equals(otherPerson.recurringSchedules)
                 && email.equals(otherPerson.email)
                 && goals.equals(otherPerson.goals)
                 && medicalHistory.equals(otherPerson.medicalHistory)
@@ -124,7 +136,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, goals, medicalHistory, location, oneTimeSchedules, tags);
+        return Objects.hash(name, phone, recurringSchedules, email, goals, medicalHistory, location, oneTimeSchedules, tags);
     }
 
     @Override
@@ -132,6 +144,7 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
+                .add("recurringSchedules", recurringSchedules)
                 .add("email", email)
                 .add("goals", goals)
                 .add("medical history", medicalHistory)

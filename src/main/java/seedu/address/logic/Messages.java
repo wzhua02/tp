@@ -39,7 +39,16 @@ public class Messages {
         builder.append(person.getName())
                 .append("; Phone: ")
                 .append(person.getPhone())
-                .append("; Email: ")
+                .append("; RecurringSchedule: ");
+
+        person.getRecurringSchedules().forEach(schedule -> {
+            if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
+                builder.append(", ");
+            }
+            builder.append(schedule);
+        });
+
+        builder.append("; Email: ")
                 .append(person.getEmail())
                 .append("; Goals: ")
                 .append(person.getGoals())

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -21,6 +22,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.OneTimeSchedule;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,8 +38,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GOALS,
-                        PREFIX_MEDICAL_HISTORY, PREFIX_LOCATION, PREFIX_ONETIMESCHEDULE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_RECURRING_SCHEDULE, PREFIX_EMAIL,
+                        PREFIX_GOALS, PREFIX_MEDICAL_HISTORY, PREFIX_LOCATION, PREFIX_ONETIMESCHEDULE, PREFIX_TAG);
 
         Index index;
 
@@ -58,6 +60,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
+
+        parseRecurringSchedulesForEdit(argMultimap.getAllValues(PREFIX_RECURRING_SCHEDULE))
+                .ifPresent(editPersonDescriptor::setRecurringSchedules);
+
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
@@ -85,6 +91,25 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editPersonDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> recurringSchedules} into a {@code Set<RecurringSchedule>}
+     * if {@code recurringSchedules} is non-empty.
+     * If {@code recurringSchedules} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<RecurringSchedule>} containing zero recurringSchedules.
+     */
+    private Optional<Set<RecurringSchedule>> parseRecurringSchedulesForEdit(Collection<String> recurringSchedules)
+            throws ParseException {
+        assert recurringSchedules != null;
+
+        if (recurringSchedules.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> recurringScheduleSet = recurringSchedules.size() == 1 && recurringSchedules.contains("")
+                ? Collections.emptySet()
+                : recurringSchedules;
+        return Optional.of(ParserUtil.parseRecurringSchedules(recurringScheduleSet));
     }
 
     /**
