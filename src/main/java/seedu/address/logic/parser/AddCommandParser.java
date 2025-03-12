@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -21,6 +22,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,8 +37,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GOALS,
-                        PREFIX_LOCATION, PREFIX_ONETIMESCHEDULE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_RECURRING_SCHEDULE,
+                        PREFIX_EMAIL, PREFIX_GOALS, PREFIX_LOCATION, PREFIX_ONETIMESCHEDULE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -47,6 +49,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_GOALS, PREFIX_LOCATION);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Set<RecurringSchedule> recurringScheduleList = ParserUtil
+                .parseRecurringSchedules(argMultimap.getAllValues(PREFIX_RECURRING_SCHEDULE));
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse("no@email"));
         Goals goals = ParserUtil.parseGoals(argMultimap.getValue(PREFIX_GOALS).orElse("No goals"));
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).orElse("No location"));
@@ -54,7 +58,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .getAllValues(PREFIX_ONETIMESCHEDULE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, goals, location, oneTimeScheduleList, tagList);
+        Person person = new Person(name, phone, recurringScheduleList, email, goals, location, oneTimeScheduleList,
+                tagList);
 
         return new AddCommand(person);
     }

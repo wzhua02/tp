@@ -2,6 +2,7 @@
   "persons": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
+    "recurringSchedule": ["Mon 1400 1600", "Wed 1500 1700"],
     "email": "alice@example.com",
     "goals" : "Calisthenics improvement",
     "location": "123, Jurong West Ave 6, #08-111",
@@ -9,6 +10,7 @@
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
+    "recurringSchedule": ["Mon 1400 1600", "Wed 1500 1700"],
     "email": "pauline@example.com",
     "goals" : "Calisthenics improvement",
     "location": "4th street"

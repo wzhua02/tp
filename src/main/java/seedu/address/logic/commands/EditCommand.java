@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -29,6 +30,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,6 +46,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_RECURRING_SCHEDULE + "RECURRING SCHEDULE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE] "
@@ -101,6 +104,8 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Set<RecurringSchedule> updatedRecurringSchedules = editPersonDescriptor.getRecurringSchedules()
+                .orElse(personToEdit.getRecurringSchedules());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Goals updatedGoals = editPersonDescriptor.getGoals().orElse(personToEdit.getGoals());
         Location updatedLocation = editPersonDescriptor.getLocation().orElse(personToEdit.getLocation());
@@ -108,8 +113,8 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getOneTimeSchedules());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedGoals, updatedLocation,
-                updatedOneTimeSchedules, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedRecurringSchedules, updatedEmail, updatedGoals,
+                updatedLocation, updatedOneTimeSchedules, updatedTags);
     }
 
     @Override
@@ -143,6 +148,7 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
+        private Set<RecurringSchedule> recurringSchedules;
         private Email email;
         private Goals goals;
         private Location location;
@@ -158,6 +164,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
+            setRecurringSchedules(toCopy.recurringSchedules);
             setEmail(toCopy.email);
             setGoals(toCopy.goals);
             setLocation(toCopy.location);
@@ -169,7 +176,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, goals, location, oneTimeSchedules, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, recurringSchedules, email, goals, location,
+                    oneTimeSchedules, tags);
         }
 
         public void setName(Name name) {
@@ -186,6 +194,25 @@ public class EditCommand extends Command {
 
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
+        }
+
+        /**
+         * Sets {@code recurringSchedules} to this object's {@code recurringSchedules}.
+         * A defensive copy of {@code recurringSchedules} is used internally.
+         */
+        public void setRecurringSchedules(Set<RecurringSchedule> recurringSchedules) {
+            this.recurringSchedules = (recurringSchedules != null) ? new HashSet<>(recurringSchedules) : null;
+        }
+
+        /**
+         * Returns an unmodifiable recurringSchedule set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code recurringSchedules} is null.
+         */
+        public Optional<Set<RecurringSchedule>> getRecurringSchedules() {
+            return (recurringSchedules != null)
+                    ? Optional.of(Collections.unmodifiableSet(recurringSchedules))
+                    : Optional.empty();
         }
 
         public void setEmail(Email email) {
@@ -252,6 +279,7 @@ public class EditCommand extends Command {
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                    && Objects.equals(recurringSchedules, otherEditPersonDescriptor.recurringSchedules)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(location, otherEditPersonDescriptor.location)
                     && Objects.equals(oneTimeSchedules, otherEditPersonDescriptor.oneTimeSchedules)
@@ -263,6 +291,7 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("phone", phone)
+                    .add("recurringSchedules", recurringSchedules)
                     .add("email", email)
                     .add("location", location)
                     .add("oneTimeSchedule", oneTimeSchedules)
