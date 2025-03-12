@@ -26,7 +26,7 @@ public class TypicalPersons {
             .withLocation("123, Jurong West Ave 6, #08-111")
             .withOneTimeSchedules("1/2 1000 1200", "2/3 1000 1200").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
-            .withEmail("johnd@example.com").withGoals("Lose weight")
+            .withEmail("johnd@example.com").withGoals("Lose weight").withMedicalHistory("Fractured right ankle")
             .withLocation("311, Clementi Ave 2, #02-25")
             .withOneTimeSchedules("2/3 1200 1400").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
