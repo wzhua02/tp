@@ -3,10 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Goals;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -20,14 +22,17 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_GOALS = "Bee the best Amy strongwoman";
+    public static final String DEFAULT_LOCATION = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_MEDICAL_HISTORY = "Twisted right ankle";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Goals goals;
     private MedicalHistory medicalHistory;
-    private Address address;
+    private Location location;
+    private Set<OneTimeSchedule> oneTimeSchedules;
     private Set<Tag> tags;
 
     /**
@@ -37,8 +42,10 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        goals = new Goals(DEFAULT_GOALS);
         medicalHistory = new MedicalHistory(DEFAULT_MEDICAL_HISTORY);
-        address = new Address(DEFAULT_ADDRESS);
+        location = new Location(DEFAULT_LOCATION);
+        oneTimeSchedules = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -49,8 +56,10 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        goals = personToCopy.getGoals();
         medicalHistory = personToCopy.getMedicalHistory();
-        address = personToCopy.getAddress();
+        location = personToCopy.getLocation();
+        oneTimeSchedules = new HashSet<>(personToCopy.getOneTimeSchedules());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -71,10 +80,26 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Parses the {@code goals} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withGoals(String goals) {
+        this.goals = new Goals(goals);
+        return this;
+    }
+
+    /**
+     * Sets the {@code MedicalHistory} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMedicalHistory(String medicalHistory) {
+        this.medicalHistory = new MedicalHistory(medicalHistory);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Location} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLocation(String address) {
+        this.location = new Location(address);
         return this;
     }
 
@@ -95,15 +120,16 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code MedicalHistory} of the {@code Person} that we are building.
+     * Parses the {@code oneTimeSchedules} into a {@code Set<OneTimeSchedule>} and set it to the
+     * {@code Person} that we are building.
      */
-    public PersonBuilder withMedicalHistory(String medicalHistory) {
-        this.medicalHistory = new MedicalHistory(medicalHistory);
+    public PersonBuilder withOneTimeSchedules(String ... oneTimeSchedules) {
+        this.oneTimeSchedules = SampleDataUtil.getOneTimeScheduleSet(oneTimeSchedules);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, medicalHistory, address, tags);
+        return new Person(name, phone, email, goals, medicalHistory, location, oneTimeSchedules, tags);
     }
 
 }

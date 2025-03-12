@@ -41,11 +41,23 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
+                .append("; Goals: ")
+                .append(person.getGoals())
                 .append("; Medical History: ")
                 .append(person.getMedicalHistory())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
+                .append("; Location: ")
+                .append(person.getLocation())
+                .append("; OneTimeSchedule: ");
+
+        person.getOneTimeSchedules().forEach(schedule -> {
+            if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
+                builder.append(", ");
+            }
+            builder.append(schedule);
+        });
+
+        builder.append("; Tags: ");
+
         person.getTags().forEach(builder::append);
         return builder.toString();
     }

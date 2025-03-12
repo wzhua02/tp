@@ -22,20 +22,25 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Goals goals;
     private final MedicalHistory medicalHistory;
+    private final Location location;
+    private final Set<OneTimeSchedule> oneTimeSchedules = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, MedicalHistory medicalHistory, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, medicalHistory, address, tags);
+    public Person(Name name, Phone phone, Email email, Goals goals, MedicalHistory medicalHistory, Location location,
+                  Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, medicalHistory, location, oneTimeSchedule, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.goals = goals;
         this.medicalHistory = medicalHistory;
-        this.address = address;
+        this.location = location;
+        this.oneTimeSchedules.addAll(oneTimeSchedule);
         this.tags.addAll(tags);
     }
 
@@ -51,13 +56,23 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Goals getGoals() {
+        return goals;
     }
 
     public MedicalHistory getMedicalHistory() {
         return medicalHistory;
     }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public Set<OneTimeSchedule> getOneTimeSchedules() {
+        return Collections.unmodifiableSet(oneTimeSchedules);
+    }
+
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -99,15 +114,17 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
+                && goals.equals(otherPerson.goals)
                 && medicalHistory.equals(otherPerson.medicalHistory)
-                && address.equals(otherPerson.address)
+                && location.equals(otherPerson.location)
+                && oneTimeSchedules.equals(otherPerson.oneTimeSchedules)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, medicalHistory, address, tags);
+        return Objects.hash(name, phone, email, goals, medicalHistory, location, oneTimeSchedules, tags);
     }
 
     @Override
@@ -116,8 +133,10 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
+                .add("goals", goals)
                 .add("medical history", medicalHistory)
-                .add("address", address)
+                .add("location", location)
+                .add("oneTimeSchedule", oneTimeSchedules)
                 .add("tags", tags)
                 .toString();
     }

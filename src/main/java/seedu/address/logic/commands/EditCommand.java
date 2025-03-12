@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -22,10 +23,12 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Goals;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -45,7 +48,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_MEDICAL_HISTORY + "MEDICAL_HISTORY] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -101,12 +105,16 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Goals updatedGoals = editPersonDescriptor.getGoals().orElse(personToEdit.getGoals());
+        Location updatedLocation = editPersonDescriptor.getLocation().orElse(personToEdit.getLocation());
+        Set<OneTimeSchedule> updatedOneTimeSchedules = editPersonDescriptor.getOneTimeSchedules()
+                .orElse(personToEdit.getOneTimeSchedules());
         MedicalHistory updatedMedicalHistory = editPersonDescriptor.getMedicalHistory()
                 .orElse(personToEdit.getMedicalHistory());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedMedicalHistory, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedGoals, updatedMedicalHistory, updatedLocation,
+                updatedOneTimeSchedules, updatedTags);
     }
 
     @Override
@@ -141,8 +149,10 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Goals goals;
         private MedicalHistory medicalHistory;
-        private Address address;
+        private Location location;
+        private Set<OneTimeSchedule> oneTimeSchedules;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -155,8 +165,10 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setGoals(toCopy.goals);
             setMedicalHistory(toCopy.medicalHistory);
-            setAddress(toCopy.address);
+            setLocation(toCopy.location);
+            setOneTimeSchedules(toCopy.oneTimeSchedules);
             setTags(toCopy.tags);
         }
 
@@ -164,7 +176,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, medicalHistory, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, goals, medicalHistory location, oneTimeSchedules, tags);
         }
 
         public void setName(Name name) {
@@ -191,12 +203,29 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setGoals(Goals goals) {
+            this.goals = goals;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Goals> getGoals() {
+            return Optional.ofNullable(goals);
+        }
+
+        public void setLocation(Location location) {
+            this.location = location;
+        }
+
+        public Optional<Location> getLocation() {
+            return Optional.ofNullable(location);
+        }
+
+        public void setOneTimeSchedules(Set<OneTimeSchedule> oneTimeSchedules) {
+            this.oneTimeSchedules = (oneTimeSchedules != null) ? new HashSet<>(oneTimeSchedules) : null;
+        }
+
+        public Optional<Set<OneTimeSchedule>> getOneTimeSchedules() {
+            return (oneTimeSchedules != null)
+                    ? Optional.of(Collections.unmodifiableSet(oneTimeSchedules)) : Optional.empty();
         }
 
         public void setMedicalHistory(MedicalHistory medicalHistory) {
@@ -240,7 +269,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(medicalHistory, otherEditPersonDescriptor.medicalHistory)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(location, otherEditPersonDescriptor.location)
+                    && Objects.equals(oneTimeSchedules, otherEditPersonDescriptor.oneTimeSchedules)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -251,7 +281,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("medicalHistory", medicalHistory)
-                    .add("address", address)
+                    .add("location", location)
+                    .add("oneTimeSchedule", oneTimeSchedules)
                     .add("tags", tags)
                     .toString();
         }

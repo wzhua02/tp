@@ -9,10 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Goals;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -67,18 +69,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String goals} into an a {@code Goals}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code goals} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Goals parseGoals(String goals) throws ParseException {
+        requireNonNull(goals);
+        String trimmedGoals = goals.trim();
+        if (!Goals.isValidGoals(trimmedGoals)) {
+            throw new ParseException(Goals.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Goals(trimmedGoals);
+    }
+
+    /**
+     * Parses a {@code String location} into an {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code location} is invalid.
+     */
+    public static Location parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
+        return new Location(trimmedLocation);
     }
 
     /**
@@ -94,6 +111,34 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String oneTimeSchedule} into an {@code OneTimeSchedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code oneTimeSchedule} is invalid.
+     */
+    public static OneTimeSchedule parseOneTimeSchedules(String oneTimeSchedule) throws ParseException {
+        requireNonNull(oneTimeSchedule);
+        String trimmedOneTimeSchedule = oneTimeSchedule.trim();
+        if (!OneTimeSchedule.isValidOneTimeSchedule(trimmedOneTimeSchedule)) {
+            throw new ParseException(OneTimeSchedule.MESSAGE_CONSTRAINTS);
+        }
+        return new OneTimeSchedule(trimmedOneTimeSchedule);
+    }
+
+    /**
+     * Parses {@code Collection<String> one time schedules} into a {@code Set<OneTimeSchedules>}.
+     */
+    public static Set<OneTimeSchedule> parseOneTimeSchedules(Collection<String> oneTimeSchedules)
+            throws ParseException {
+        requireNonNull(oneTimeSchedules);
+        final Set<OneTimeSchedule> oneTimeScheduleSet = new HashSet<>();
+        for (String oneTimeScheduleDate : oneTimeSchedules) {
+            oneTimeScheduleSet.add(parseOneTimeSchedules(oneTimeScheduleDate));
+        }
+        return oneTimeScheduleSet;
     }
 
     /**
@@ -137,4 +182,5 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 }

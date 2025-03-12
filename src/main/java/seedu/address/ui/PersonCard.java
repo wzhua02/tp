@@ -35,11 +35,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label goals;
+    @FXML
+    private Label medicalHistory;
+    @FXML
+    private Label trainingLocation;
     @FXML
     private Label email;
     @FXML
-    private Label medicalHistory;
+    private FlowPane oneTimeSchedules;
     @FXML
     private FlowPane tags;
 
@@ -52,9 +56,13 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        goals.setText(person.getGoals().value);
         medicalHistory.setText(person.getMedicalHistory().value);
+        trainingLocation.setText(person.getLocation().value);
+        email.setText(person.getEmail().value);
+        person.getOneTimeSchedules().stream()
+                .sorted(Comparator.comparing(oneTimeSchedule -> oneTimeSchedule.value))
+                .forEach(oneTimeSchedule -> oneTimeSchedules.getChildren().add(new Label(oneTimeSchedule.value)));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

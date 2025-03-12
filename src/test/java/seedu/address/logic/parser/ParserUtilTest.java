@@ -14,23 +14,30 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Goals;
+import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "Réchel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_GOALS = " ";
+    private static final String INVALID_LOCATION = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_ONETIMESCHEDULE = "33/1 1000 1200";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_PHONE = "88888888";
+    private static final String VALID_GOALS = "Get fitter";
+    private static final String VALID_LOCATION = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_ONETIMESCHEDULE_1 = "01/12 1000 1200";
+    private static final String VALID_ONETIMESCHEDULE_2 = "1/1 1000 1200";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -103,26 +110,49 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseGoals_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGoals((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+    public void parseGoals_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGoals(INVALID_GOALS));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+    public void parseGoals_validValueWithoutWhitespace_returnsGoals() throws Exception {
+        Goals expectedGoals = new Goals(VALID_GOALS);
+        assertEquals(expectedGoals, ParserUtil.parseGoals(VALID_GOALS));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    public void parseGoals_validValueWithWhitespace_returnsTrimmedGoals() throws Exception {
+        String goalsWithWhitespace = WHITESPACE + VALID_GOALS + WHITESPACE;
+        Goals expectedGoals = new Goals(VALID_GOALS);
+        assertEquals(expectedGoals, ParserUtil.parseGoals(goalsWithWhitespace));
+    }
+
+    @Test
+    public void parseLocation_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation((String) null));
+    }
+
+    @Test
+    public void parseLocation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLocation(INVALID_LOCATION));
+    }
+
+    @Test
+    public void parseAddress_validValueWithoutWhitespace_returnsLocation() throws Exception {
+        Location expectedLocation = new Location(VALID_LOCATION);
+        assertEquals(expectedLocation, ParserUtil.parseLocation(VALID_LOCATION));
+    }
+
+    @Test
+    public void parseAddress_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
+        String addressWithWhitespace = WHITESPACE + VALID_LOCATION + WHITESPACE;
+        Location expectedLocation = new Location(VALID_LOCATION);
+        assertEquals(expectedLocation, ParserUtil.parseLocation(addressWithWhitespace));
     }
 
     @Test
@@ -146,6 +176,51 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseOneTimeSchedules_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseOneTimeSchedules((String) null));
+    }
+
+    @Test
+    public void parseOneTimeSchedule_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_ONETIMESCHEDULE));
+    }
+
+    @Test
+    public void parseOneTimeSchedules_validValueWithoutWhitespace_returnsOneTimeSchedule() throws Exception {
+        OneTimeSchedule expectedOneTimeSchedule = new OneTimeSchedule(VALID_ONETIMESCHEDULE_1);
+        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedules(VALID_ONETIMESCHEDULE_1));
+    }
+
+    @Test
+    public void parseOneTimeSchedules_validValueWithWhitespace_returnsTrimmedOneTimeSchedule() throws Exception {
+        String tagWithWhitespace = WHITESPACE + VALID_ONETIMESCHEDULE_1 + WHITESPACE;
+        OneTimeSchedule expectedOneTimeSchedule = new OneTimeSchedule(VALID_ONETIMESCHEDULE_1);
+        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedules(tagWithWhitespace));
+    }
+
+    @Test
+    public void parseOneTimeSchedules_collectionWithInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedules(
+                Arrays.asList(VALID_ONETIMESCHEDULE_1, INVALID_ONETIMESCHEDULE)));
+    }
+
+    @Test
+    public void parseOneTimeSchedules_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseOneTimeSchedules(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseOneTimeSchedules_collectionWithValidTags_returnsOneTimeScheduleSetSet() throws Exception {
+        Set<OneTimeSchedule> actualOneTimeScheduleSet = ParserUtil.parseOneTimeSchedules(
+                Arrays.asList(VALID_ONETIMESCHEDULE_1, VALID_ONETIMESCHEDULE_2));
+        Set<OneTimeSchedule> expectedOneTimeScheduleSet = new HashSet<OneTimeSchedule>(
+                Arrays.asList(new OneTimeSchedule(VALID_ONETIMESCHEDULE_1),
+                        new OneTimeSchedule(VALID_ONETIMESCHEDULE_2)));
+
+        assertEquals(expectedOneTimeScheduleSet, actualOneTimeScheduleSet);
     }
 
     @Test
