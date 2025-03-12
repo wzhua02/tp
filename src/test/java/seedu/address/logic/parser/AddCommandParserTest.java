@@ -56,8 +56,8 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
-                        + RECURRING_SCHEDULE_DESC_BOB + GOALS_DESC_BOB + LOCATION_DESC_BOB + TAG_DESC_FRIEND
-                , new AddCommand(expectedPerson));
+                        + RECURRING_SCHEDULE_DESC_BOB + GOALS_DESC_BOB + LOCATION_DESC_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -158,8 +158,8 @@ public class AddCommandParserTest {
 
         // invalid recurring schedule
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_RECURRING_SCHEDULE_DESC
-                        + LOCATION_DESC_BOB + GOALS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
-                , RecurringSchedule.MESSAGE_CONSTRAINTS);
+                        + LOCATION_DESC_BOB + GOALS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                RecurringSchedule.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + RECURRING_SCHEDULE_DESC_BOB
