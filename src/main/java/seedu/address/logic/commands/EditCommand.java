@@ -106,11 +106,11 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Goals updatedGoals = editPersonDescriptor.getGoals().orElse(personToEdit.getGoals());
+        MedicalHistory updatedMedicalHistory = editPersonDescriptor.getMedicalHistory()
+                .orElse(personToEdit.getMedicalHistory());
         Location updatedLocation = editPersonDescriptor.getLocation().orElse(personToEdit.getLocation());
         Set<OneTimeSchedule> updatedOneTimeSchedules = editPersonDescriptor.getOneTimeSchedules()
                 .orElse(personToEdit.getOneTimeSchedules());
-        MedicalHistory updatedMedicalHistory = editPersonDescriptor.getMedicalHistory()
-                .orElse(personToEdit.getMedicalHistory());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedGoals, updatedMedicalHistory, updatedLocation,
@@ -176,7 +176,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, goals, medicalHistory location, oneTimeSchedules, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, goals, medicalHistory, location, oneTimeSchedules, tags);
         }
 
         public void setName(Name name) {
@@ -211,6 +211,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(goals);
         }
 
+        public void setMedicalHistory(MedicalHistory medicalHistory) {
+            this.medicalHistory = medicalHistory;
+        }
+
+        public Optional<MedicalHistory> getMedicalHistory() {
+            return Optional.ofNullable(medicalHistory);
+        }
+
         public void setLocation(Location location) {
             this.location = location;
         }
@@ -226,14 +234,6 @@ public class EditCommand extends Command {
         public Optional<Set<OneTimeSchedule>> getOneTimeSchedules() {
             return (oneTimeSchedules != null)
                     ? Optional.of(Collections.unmodifiableSet(oneTimeSchedules)) : Optional.empty();
-        }
-
-        public void setMedicalHistory(MedicalHistory medicalHistory) {
-            this.medicalHistory = medicalHistory;
-        }
-
-        public Optional<MedicalHistory> getMedicalHistory() {
-            return Optional.ofNullable(medicalHistory);
         }
 
         /**
@@ -268,7 +268,6 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(medicalHistory, otherEditPersonDescriptor.medicalHistory)
                     && Objects.equals(location, otherEditPersonDescriptor.location)
                     && Objects.equals(oneTimeSchedules, otherEditPersonDescriptor.oneTimeSchedules)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);

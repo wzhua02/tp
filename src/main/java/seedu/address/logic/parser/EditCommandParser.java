@@ -61,8 +61,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
+
         if (argMultimap.getValue(PREFIX_GOALS).isPresent()) {
             editPersonDescriptor.setGoals(ParserUtil.parseGoals(argMultimap.getValue(PREFIX_GOALS).get()));
+        }
 
         if (argMultimap.getValue(PREFIX_MEDICAL_HISTORY).isPresent()) {
             editPersonDescriptor.setMedicalHistory(
@@ -92,7 +94,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code Set<OneTimeSchedule>} containing zero schedules.
      */
     private Optional<Set<OneTimeSchedule>> parseOneTimeSchedulesForEdit(Collection<String> oneTimeSchedules)
-            throws ParseException {
+        throws ParseException {
         assert oneTimeSchedules != null;
 
         if (oneTimeSchedules.isEmpty()) {
@@ -119,5 +121,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }

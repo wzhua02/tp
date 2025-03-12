@@ -58,7 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .getAllValues(PREFIX_ONETIMESCHEDULE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, goals, medicalHistory location, oneTimeScheduleList, tagList);
+        Person person = new Person(name, phone, email, goals, medicalHistory, location, oneTimeScheduleList, tagList);
 
         return new AddCommand(person);
     }
