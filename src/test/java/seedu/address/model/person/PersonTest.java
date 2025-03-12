@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ONETIMESCHEDULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RECURRING_SCHEDULE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RECURRING_SCHEDULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -36,7 +38,9 @@ public class PersonTest {
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
                 .withGoals(VALID_GOALS_BOB).withLocation(VALID_LOCATION_BOB)
-                .withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB)
+                .withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -81,6 +85,14 @@ public class PersonTest {
 
         // different address -> returns false
         editedAlice = new PersonBuilder(ALICE).withLocation(VALID_LOCATION_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different one-time schedules -> returns false
+        editedAlice = new PersonBuilder(ALICE).withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different recurring schedules -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
