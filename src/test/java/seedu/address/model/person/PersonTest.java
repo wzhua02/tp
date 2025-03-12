@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GOALS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -35,7 +34,7 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
                 .withGoals(VALID_GOALS_BOB).withLocation(VALID_LOCATION_BOB)
                 .withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
@@ -76,10 +75,6 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different goals -> returns false
         editedAlice = new PersonBuilder(ALICE).withGoals(VALID_GOALS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -97,7 +92,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", recurringSchedules=" + ALICE.getRecurringSchedules()
-                + ", email=" + ALICE.getEmail() + ", goals=" + ALICE.getGoals() + ", location=" + ALICE.getLocation()
+                + ", goals=" + ALICE.getGoals() + ", location=" + ALICE.getLocation()
                 + ", oneTimeSchedule=" + ALICE.getOneTimeSchedules() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

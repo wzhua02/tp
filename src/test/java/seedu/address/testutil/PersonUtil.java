@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOALS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -40,7 +39,6 @@ public class PersonUtil {
         person.getRecurringSchedules().stream().forEach(
                 s -> sb.append(PREFIX_RECURRING_SCHEDULE + s.schedule + " ")
         );
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_GOALS + person.getGoals().value + " ");
         sb.append(PREFIX_LOCATION + person.getLocation().value + " ");
         person.getOneTimeSchedules().stream().forEach(
@@ -69,7 +67,6 @@ public class PersonUtil {
             }
         }
 
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getLocation().ifPresent(
                 address -> sb.append(PREFIX_LOCATION).append(address.value).append(" "));
 
