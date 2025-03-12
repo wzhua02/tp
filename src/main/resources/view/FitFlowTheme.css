@@ -3,6 +3,10 @@
     background-color: #FFFFFF; /* Used in the default.html file */
 }
 
+.main-root {
+    -fx-background-color: #FFFFFF;
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -136,8 +140,10 @@
      -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-.pane-with-border {
-
+.paneList-with-border {
+    -fx-background-color: #4981F2;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
 }
 
 .status-bar {
