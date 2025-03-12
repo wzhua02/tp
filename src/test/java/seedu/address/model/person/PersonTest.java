@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GOALS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
@@ -97,6 +98,47 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        // same values -> has same hashcode
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+
+        // same object -> same hashcode
+        assertEquals(ALICE.hashCode(), ALICE.hashCode());
+
+        // different person -> different hashcode
+        assertNotEquals(ALICE.hashCode(), BOB.hashCode());
+
+        // different name -> different hashcode
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different phone -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different goals -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withGoals(VALID_GOALS_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different address -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withLocation(VALID_LOCATION_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different one-time schedules -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different recurring schedules -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different tags -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
     }
 
     @Test
