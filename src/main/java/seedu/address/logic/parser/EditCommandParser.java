@@ -119,7 +119,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code Set<OneTimeSchedule>} containing zero schedules.
      */
     private Optional<Set<OneTimeSchedule>> parseOneTimeSchedulesForEdit(Collection<String> oneTimeSchedules)
-        throws ParseException {
+            throws ParseException {
         assert oneTimeSchedules != null;
 
         if (oneTimeSchedules.isEmpty()) {

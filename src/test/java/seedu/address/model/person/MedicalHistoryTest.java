@@ -25,8 +25,8 @@ public class MedicalHistoryTest {
         assertThrows(NullPointerException.class, () -> MedicalHistory.isValidMedicalHistory(null));
 
         // invalid medical histories
-        assertFalse(MedicalHistory.isValidMedicalHistory(" "));// blank space
-        assertFalse(MedicalHistory.isValidMedicalHistory("é©"));// non-ASCII character
+        assertFalse(MedicalHistory.isValidMedicalHistory(" ")); // blank space
+        assertFalse(MedicalHistory.isValidMedicalHistory("é©")); // non-ASCII character
 
         // valid medical histories
         assertTrue(MedicalHistory.isValidMedicalHistory("Lower Back Injury"));

@@ -32,7 +32,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Set<RecurringSchedule> recurringSchedules, Email email, Goals goals, 
+    public Person(Name name, Phone phone, Set<RecurringSchedule> recurringSchedules, Email email, Goals goals,
                   MedicalHistory medicalHistory, Location location,
                   Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, medicalHistory, location, oneTimeSchedule, tags);
@@ -136,7 +136,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, recurringSchedules, email, goals, medicalHistory, location, oneTimeSchedules, tags);
+        return Objects.hash(name, phone, recurringSchedules, email, goals, medicalHistory, location, oneTimeSchedules,
+                tags);
     }
 
     @Override
