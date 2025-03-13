@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ONETIMESCHEDULE_BOB;
@@ -51,10 +50,6 @@ public class EditPersonDescriptorTest {
                 .build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
-
         // different location -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withLocation(VALID_LOCATION_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -74,8 +69,8 @@ public class EditPersonDescriptorTest {
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", recurringSchedules="
-                + editPersonDescriptor.getRecurringSchedules().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", medicalHistory="
+                + editPersonDescriptor.getRecurringSchedules().orElse(null) + ", goals="
+                + editPersonDescriptor.getGoals().orElse(null) + ", medicalHistory="
                 + editPersonDescriptor.getMedicalHistory().orElse(null) + ", location="
                 + editPersonDescriptor.getLocation().orElse(null) + ", oneTimeSchedule="
                 + editPersonDescriptor.getOneTimeSchedules().orElse(null) + ", tags="

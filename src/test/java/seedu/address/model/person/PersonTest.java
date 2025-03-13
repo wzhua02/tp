@@ -2,14 +2,15 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GOALS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICAL_HISTORY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ONETIMESCHEDULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RECURRING_SCHEDULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -36,9 +37,10 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
                 .withGoals(VALID_GOALS_BOB).withMedicalHistory(VALID_MEDICAL_HISTORY_BOB)
                 .withLocation(VALID_LOCATION_BOB).withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB)
+                .withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -78,10 +80,6 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different goals -> returns false
         editedAlice = new PersonBuilder(ALICE).withGoals(VALID_GOALS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -94,17 +92,66 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withLocation(VALID_LOCATION_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different one-time schedules -> returns false
+        editedAlice = new PersonBuilder(ALICE).withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different recurring schedules -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
+    public void hashCodeMethod() {
+        // same values -> has same hashcode
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+
+        // same object -> same hashcode
+        assertEquals(ALICE.hashCode(), ALICE.hashCode());
+
+        // different person -> different hashcode
+        assertNotEquals(ALICE.hashCode(), BOB.hashCode());
+
+        // different name -> different hashcode
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different phone -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different goals -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withGoals(VALID_GOALS_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different address -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withLocation(VALID_LOCATION_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different one-time schedules -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different recurring schedules -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different tags -> different hashcode
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", recurringSchedules=" + ALICE.getRecurringSchedules()
-                + ", email=" + ALICE.getEmail() + ", goals=" + ALICE.getGoals()
-                + ", medical history=" + ALICE.getMedicalHistory() + ", location=" + ALICE.getLocation()
+                + ", goals=" + ALICE.getGoals() + ", medical history=" + ALICE.getMedicalHistory()
+                + ", location=" + ALICE.getLocation()
                 + ", oneTimeSchedule=" + ALICE.getOneTimeSchedules() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

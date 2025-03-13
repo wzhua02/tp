@@ -1,9 +1,8 @@
 {
   "persons": [ {
     "name": "Hans Muster",
-    "phone": "9482424",
+    "phone": "94824241",
     "recurringSchedule": [],
-    "email": "invalid@email!3e",
     "location": "4th street"
   } ]
 }

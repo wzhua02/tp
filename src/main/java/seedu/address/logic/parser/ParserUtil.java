@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.MedicalHistory;
@@ -128,21 +127,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Email(trimmedEmail);
-    }
-
-    /**
      * Parses a {@code String oneTimeSchedule} into an {@code OneTimeSchedule}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -180,7 +164,7 @@ public class ParserUtil {
         requireNonNull(medicalHistory);
         String trimmedMedicalHistory = medicalHistory.trim();
         if (!MedicalHistory.isValidMedicalHistory(trimmedMedicalHistory)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MedicalHistory.MESSAGE_CONSTRAINTS);
         }
         return new MedicalHistory(trimmedMedicalHistory);
     }
