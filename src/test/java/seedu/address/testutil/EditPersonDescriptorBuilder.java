@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
@@ -40,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setGoals(person.getGoals());
         descriptor.setLocation(person.getLocation());
         descriptor.setOneTimeSchedules(person.getOneTimeSchedules());
+        descriptor.setMedicalHistory(person.getMedicalHistory());
         descriptor.setTags(person.getTags());
     }
 
@@ -67,6 +69,14 @@ public class EditPersonDescriptorBuilder {
         Set<RecurringSchedule> recurringScheduleSet = Stream.of(recurringSchedules).map(RecurringSchedule::new)
                 .collect(Collectors.toSet());
         descriptor.setRecurringSchedules(recurringScheduleSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Medical History} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withMedicalHistory(String medicalHistory) {
+        descriptor.setMedicalHistory(new MedicalHistory(medicalHistory));
         return this;
     }
 

@@ -4,6 +4,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GOALS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GOALS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICAL_HISTORY_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICAL_HISTORY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ONETIMESCHEDULE_AMY;
@@ -28,50 +30,50 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
             .withRecurringSchedules("Mon 1400 1600", "Wed 1500 1700")
-            .withGoals("Get fitter")
+            .withGoals("Get fitter").withMedicalHistory("Twisted right ankle")
             .withLocation("123, Jurong West Ave 6, #08-111")
             .withOneTimeSchedules("1/2 1000 1200", "2/3 1000 1200").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
             .withRecurringSchedules("Mon 1400 1600")
-            .withGoals("Lose weight")
+            .withGoals("Lose weight").withMedicalHistory("Fractured right ankle")
             .withLocation("311, Clementi Ave 2, #02-25")
             .withOneTimeSchedules("2/3 1200 1400").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withRecurringSchedules("Mon 1400 1600")
-            .withGoals("Gain muscle mass")
+            .withGoals("Gain muscle mass").withMedicalHistory("Fractured right hand")
             .withLocation("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withGoals("Get stronger")
+            .withGoals("Get stronger").withMedicalHistory("Dislocated left shoulder")
             .withLocation("10th street")
             .withOneTimeSchedules("2/2 1000 1200").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822241")
-            .withGoals("Work on stamina")
+            .withGoals("Work on stamina").withMedicalHistory("High blood pressure")
             .withLocation("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824271")
-            .withGoals("Calisthenics improvement")
+            .withGoals("Calisthenics improvement").withMedicalHistory("Twisted left ankle")
             .withLocation("little tokyo")
             .withOneTimeSchedules("10/03 1800 2000").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824421")
-            .withGoals("Calisthenics improvement")
+            .withGoals("Calisthenics improvement").withMedicalHistory("Metal rod in right arm")
             .withLocation("4th street").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824241")
-            .withGoals("Drink more water")
+            .withGoals("Drink more water").withMedicalHistory("Pancreas surgery")
             .withLocation("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84821311")
-            .withGoals("Leg strength")
+            .withGoals("Leg strength").withMedicalHistory("Left eye infection")
             .withLocation("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withRecurringSchedules(VALID_RECURRING_SCHEDULE_AMY)
-            .withGoals(VALID_GOALS_AMY)
+            .withGoals(VALID_GOALS_AMY).withMedicalHistory(VALID_MEDICAL_HISTORY_AMY)
             .withLocation(VALID_LOCATION_AMY)
             .withOneTimeSchedules(VALID_ONETIMESCHEDULE_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB)
-            .withGoals(VALID_GOALS_BOB)
+            .withGoals(VALID_GOALS_BOB).withMedicalHistory(VALID_MEDICAL_HISTORY_BOB)
             .withLocation(VALID_LOCATION_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 

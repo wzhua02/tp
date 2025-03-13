@@ -50,6 +50,8 @@ public class Messages {
 
         builder.append("; Goals: ")
                 .append(person.getGoals())
+                .append("; Medical History: ")
+                .append(person.getMedicalHistory())
                 .append("; Location: ")
                 .append(person.getLocation())
                 .append("; OneTimeSchedule: ");

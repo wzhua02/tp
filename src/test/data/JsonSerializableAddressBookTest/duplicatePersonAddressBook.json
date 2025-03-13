@@ -4,6 +4,7 @@
     "phone": "94351253",
     "recurringSchedule": ["Mon 1400 1600", "Wed 1500 1700"],
     "goals" : "Calisthenics improvement",
+    "medicalHistory" : "Left shoulder injury",
     "location": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ]
   }, {
@@ -11,6 +12,7 @@
     "phone": "94351253",
     "recurringSchedule": ["Mon 1400 1600", "Wed 1500 1700"],
     "goals" : "Calisthenics improvement",
+    "medicalHistory" : "Right shoulder injury",
     "location": "4th street"
   } ]
 }

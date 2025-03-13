@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
@@ -45,6 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_RECURRING_SCHEDULE + "RECURRING SCHEDULE] "
+            + "[" + PREFIX_MEDICAL_HISTORY + "MEDICAL_HISTORY] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -103,13 +106,15 @@ public class EditCommand extends Command {
         Set<RecurringSchedule> updatedRecurringSchedules = editPersonDescriptor.getRecurringSchedules()
                 .orElse(personToEdit.getRecurringSchedules());
         Goals updatedGoals = editPersonDescriptor.getGoals().orElse(personToEdit.getGoals());
+        MedicalHistory updatedMedicalHistory = editPersonDescriptor.getMedicalHistory()
+                .orElse(personToEdit.getMedicalHistory());
         Location updatedLocation = editPersonDescriptor.getLocation().orElse(personToEdit.getLocation());
         Set<OneTimeSchedule> updatedOneTimeSchedules = editPersonDescriptor.getOneTimeSchedules()
                 .orElse(personToEdit.getOneTimeSchedules());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedRecurringSchedules, updatedGoals,
-                updatedLocation, updatedOneTimeSchedules, updatedTags);
+                updatedMedicalHistory, updatedLocation, updatedOneTimeSchedules, updatedTags);
     }
 
     @Override
@@ -145,6 +150,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Set<RecurringSchedule> recurringSchedules;
         private Goals goals;
+        private MedicalHistory medicalHistory;
         private Location location;
         private Set<OneTimeSchedule> oneTimeSchedules;
         private Set<Tag> tags;
@@ -160,6 +166,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setRecurringSchedules(toCopy.recurringSchedules);
             setGoals(toCopy.goals);
+            setMedicalHistory(toCopy.medicalHistory);
             setLocation(toCopy.location);
             setOneTimeSchedules(toCopy.oneTimeSchedules);
             setTags(toCopy.tags);
@@ -169,7 +176,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, recurringSchedules, goals, location,
+            return CollectionUtil.isAnyNonNull(name, phone, recurringSchedules, goals, medicalHistory, location,
                     oneTimeSchedules, tags);
         }
 
@@ -214,6 +221,14 @@ public class EditCommand extends Command {
 
         public Optional<Goals> getGoals() {
             return Optional.ofNullable(goals);
+        }
+
+        public void setMedicalHistory(MedicalHistory medicalHistory) {
+            this.medicalHistory = medicalHistory;
+        }
+
+        public Optional<MedicalHistory> getMedicalHistory() {
+            return Optional.ofNullable(medicalHistory);
         }
 
         public void setLocation(Location location) {
@@ -276,6 +291,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("recurringSchedules", recurringSchedules)
+                    .add("medicalHistory", medicalHistory)
                     .add("location", location)
                     .add("oneTimeSchedule", oneTimeSchedules)
                     .add("tags", tags)

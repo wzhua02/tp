@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOALS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -36,6 +37,8 @@ public class CommandTestUtil {
     public static final String VALID_RECURRING_SCHEDULE_BOB = "Wed 1500 1700";
     public static final String VALID_GOALS_AMY = "Train arms";
     public static final String VALID_GOALS_BOB = "Train back";
+    public static final String VALID_MEDICAL_HISTORY_AMY = "Twisted right ankle";
+    public static final String VALID_MEDICAL_HISTORY_BOB = "Upper back injury";
     public static final String VALID_LOCATION_AMY = "Block 312, Amy Street 1";
     public static final String VALID_LOCATION_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ONETIMESCHEDULE_AMY = "2/2 1000 1200";
@@ -53,6 +56,8 @@ public class CommandTestUtil {
             + VALID_RECURRING_SCHEDULE_BOB;
     public static final String GOALS_DESC_AMY = " " + PREFIX_GOALS + VALID_GOALS_AMY;
     public static final String GOALS_DESC_BOB = " " + PREFIX_GOALS + VALID_GOALS_BOB;
+    public static final String MEDICAL_HISTORY_DESC_AMY = " " + PREFIX_MEDICAL_HISTORY + VALID_MEDICAL_HISTORY_AMY;
+    public static final String MEDICAL_HISTORY_DESC_BOB = " " + PREFIX_MEDICAL_HISTORY + VALID_MEDICAL_HISTORY_BOB;
     public static final String LOCATION_DESC_AMY = " " + PREFIX_LOCATION + VALID_LOCATION_AMY;
     public static final String LOCATION_DESC_BOB = " " + PREFIX_LOCATION + VALID_LOCATION_BOB;
     public static final String ONETIMESCHEDULE_DESC_AMY = " " + PREFIX_ONETIMESCHEDULE + VALID_ONETIMESCHEDULE_AMY;
@@ -65,6 +70,7 @@ public class CommandTestUtil {
     public static final String INVALID_RECURRING_SCHEDULE_DESC = " " + PREFIX_RECURRING_SCHEDULE
             + "yay"; // yay is not a valid day
     public static final String INVALID_GOALS_DESC = " " + PREFIX_GOALS; // empty string not allowed for goals
+    public static final String INVALID_MEDICAL_HISTORY_DESC = " " + PREFIX_MEDICAL_HISTORY + "é©"; //non-ASCII character
     public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION; // empty string not allowed for addresses
     // empty string not allowed for one time date
     public static final String INVALID_ONETIMESCHEDULE_DESC = " " + PREFIX_ONETIMESCHEDULE + "abc";
@@ -77,13 +83,13 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withRecurringSchedules(VALID_RECURRING_SCHEDULE_AMY)
-                .withGoals(VALID_GOALS_AMY).withPhone(VALID_PHONE_AMY).withLocation(VALID_LOCATION_AMY)
+        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withRecurringSchedules(VALID_RECURRING_SCHEDULE_AMY).withGoals(VALID_GOALS_AMY)
+                .withMedicalHistory(VALID_MEDICAL_HISTORY_AMY).withLocation(VALID_LOCATION_AMY)
                 .withOneTimeSchedules(VALID_ONETIMESCHEDULE_AMY).withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB)
-                .withGoals(VALID_GOALS_BOB).withPhone(VALID_PHONE_BOB).withLocation(VALID_LOCATION_BOB)
+        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB).withGoals(VALID_GOALS_BOB)
+                .withMedicalHistory(VALID_MEDICAL_HISTORY_BOB).withLocation(VALID_LOCATION_BOB)
                 .withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

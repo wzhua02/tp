@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
@@ -22,11 +23,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "88888888";
     public static final String DEFAULT_GOALS = "Bee the best Amy strongwoman";
     public static final String DEFAULT_LOCATION = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_MEDICAL_HISTORY = "Twisted right ankle";
 
     private Name name;
     private Phone phone;
     private Set<RecurringSchedule> recurringSchedules;
     private Goals goals;
+    private MedicalHistory medicalHistory;
     private Location location;
     private Set<OneTimeSchedule> oneTimeSchedules;
     private Set<Tag> tags;
@@ -39,6 +42,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         recurringSchedules = new HashSet<>();
         goals = new Goals(DEFAULT_GOALS);
+        medicalHistory = new MedicalHistory(DEFAULT_MEDICAL_HISTORY);
         location = new Location(DEFAULT_LOCATION);
         oneTimeSchedules = new HashSet<>();
         tags = new HashSet<>();
@@ -52,6 +56,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         recurringSchedules = new HashSet<>(personToCopy.getRecurringSchedules());
         goals = personToCopy.getGoals();
+        medicalHistory = personToCopy.getMedicalHistory();
         location = personToCopy.getLocation();
         oneTimeSchedules = new HashSet<>(personToCopy.getOneTimeSchedules());
         tags = new HashSet<>(personToCopy.getTags());
@@ -78,6 +83,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withGoals(String goals) {
         this.goals = new Goals(goals);
+        return this;
+    }
+
+    /**
+     * Sets the {@code MedicalHistory} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMedicalHistory(String medicalHistory) {
+        this.medicalHistory = new MedicalHistory(medicalHistory);
         return this;
     }
 
@@ -115,8 +128,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a person object.
+     */
     public Person build() {
-        return new Person(name, phone, recurringSchedules, goals, location, oneTimeSchedules, tags);
+        return new Person(name, phone, recurringSchedules, goals, medicalHistory, location, oneTimeSchedules, tags);
     }
 
 }
