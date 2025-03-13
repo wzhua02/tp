@@ -71,7 +71,7 @@ public class PersonUtil {
 
         descriptor.getMedicalHistory().ifPresent(medicalHistory -> sb.append(PREFIX_MEDICAL_HISTORY)
                 .append(medicalHistory.value).append(" "));
-        
+        descriptor.getGoals().ifPresent(goals -> sb.append(PREFIX_GOALS).append(goals.value).append(" "));
         descriptor.getLocation().ifPresent(
                 address -> sb.append(PREFIX_LOCATION).append(address.value).append(" "));
 

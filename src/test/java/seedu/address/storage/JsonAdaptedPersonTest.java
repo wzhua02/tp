@@ -113,6 +113,23 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
+    public void toModelType_invalidMedicalHistory_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_RECURRING_SCHEDULES, VALID_GOALS,
+                        INVALID_MEDICAL_HISTORY, VALID_LOCATION, VALID_ONETIMESCHEDULES, VALID_TAGS);
+        String expectedMessage = MedicalHistory.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullMedicalHistory_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_RECURRING_SCHEDULES,
+                VALID_GOALS, null, VALID_LOCATION, VALID_ONETIMESCHEDULES, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, MedicalHistory.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidLocation_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_RECURRING_SCHEDULES,

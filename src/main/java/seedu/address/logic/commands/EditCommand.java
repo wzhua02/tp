@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GOALS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -47,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_RECURRING_SCHEDULE + "RECURRING SCHEDULE] "
+            + "[" + PREFIX_GOALS + "GOALS]"
             + "[" + PREFIX_MEDICAL_HISTORY + "MEDICAL_HISTORY] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE] "
@@ -291,6 +293,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("recurringSchedules", recurringSchedules)
+                    .add("goals", goals)
                     .add("medicalHistory", medicalHistory)
                     .add("location", location)
                     .add("oneTimeSchedule", oneTimeSchedules)

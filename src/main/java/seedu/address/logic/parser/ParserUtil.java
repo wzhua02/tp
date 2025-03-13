@@ -164,7 +164,7 @@ public class ParserUtil {
         requireNonNull(medicalHistory);
         String trimmedMedicalHistory = medicalHistory.trim();
         if (!MedicalHistory.isValidMedicalHistory(trimmedMedicalHistory)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MedicalHistory.MESSAGE_CONSTRAINTS);
         }
         return new MedicalHistory(trimmedMedicalHistory);
     }

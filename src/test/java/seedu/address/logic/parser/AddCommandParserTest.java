@@ -183,12 +183,13 @@ public class AddCommandParserTest {
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + RECURRING_SCHEDULE_DESC_BOB
-                + INVALID_LOCATION_DESC + GOALS_DESC_BOB + MEDICAL_HISTORY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + INVALID_LOCATION_DESC + GOALS_DESC_BOB + MEDICAL_HISTORY_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Location.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + RECURRING_SCHEDULE_DESC_BOB
-                + LOCATION_DESC_BOB + GOALS_DESC_BOB + MEDICAL_HISTORY_DESC_BOB  + INVALID_TAG_DESC + VALID_TAG_FRIEND,
+                + LOCATION_DESC_BOB + GOALS_DESC_BOB + MEDICAL_HISTORY_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND,
                 Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
