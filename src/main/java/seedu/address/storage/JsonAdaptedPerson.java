@@ -136,7 +136,6 @@ class JsonAdaptedPerson {
         if (!MedicalHistory.isValidMedicalHistory(medicalHistory)) {
             throw new IllegalValueException(MedicalHistory.MESSAGE_CONSTRAINTS);
         }
-
         final MedicalHistory modelMedicalHistory = new MedicalHistory(medicalHistory);
 
         if (location == null) {
