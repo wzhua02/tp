@@ -124,14 +124,15 @@
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-text-fill: #010504;
+    -fx-font-weight: bold;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 16px;
+    -fx-text-fill: #555555;
 }
 
 .stack-pane {
@@ -196,7 +197,10 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #4981F2;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-padding: 4;
 }
 
 .context-menu .label {
@@ -204,18 +208,45 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #4981F2;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #3e7b91;
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
-    -fx-opacity: 0.9;
+    -fx-opacity: 1;
+}
+
+.menu-bar .menu {
+    -fx-background-color: #4981F2;
+    -fx-transition: background-color 0.2s;
+}
+
+.menu-bar .menu:hover, .menu-bar .menu:showing {
+    -fx-background-color: #88ABF2;
+}
+
+.menu-item {
+    -fx-padding: 8 16 8 16;
+    -fx-text-fill: white;
+    -fx-background-color: #4981F2;
+    -fx-transition: background-color 0.2s;
+}
+
+.menu-item:hover, .menu-item:focused {
+    -fx-background-color: #88ABF2;
+}
+
+.menu-item .label {
+    -fx-font-size: 12pt;
+    -fx-text-fill: white;
 }
 
 .menu .left-container {
-    -fx-background-color: black;
+    -fx-background-color: transparent;
 }
 
 /*
@@ -328,6 +359,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
     -fx-padding: 8px;
     -fx-margin-right: 10px;
+    -fx-border-width: 0;
 }
 
 #commandTypeLabel {
