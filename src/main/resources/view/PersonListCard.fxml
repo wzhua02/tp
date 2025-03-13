@@ -33,6 +33,7 @@
       <Label fx:id="goals" styleClass="cell_small_label" text="\$goals" />
       <Label fx:id="trainingLocation" styleClass="cell_small_label" text="\$trainingLocation" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="medicalHistory" styleClass="cell_small_label" text="\$medicalHistory" />
       <FlowPane fx:id="oneTimeSchedules" />
     </VBox>
   </GridPane>

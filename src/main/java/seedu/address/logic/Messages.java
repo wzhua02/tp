@@ -52,6 +52,8 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Goals: ")
                 .append(person.getGoals())
+                .append("; Medical History: ")
+                .append(person.getMedicalHistory())
                 .append("; Location: ")
                 .append(person.getLocation())
                 .append("; OneTimeSchedule: ");

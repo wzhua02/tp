@@ -6,6 +6,7 @@
     "recurringSchedule": ["Mon 1400 1600", "Wed 1500 1700"],
     "email" : "alice@example.com",
     "goals" : "Get fitter",
+    "medicalHistory" : "Twisted right ankle",
     "location" : "123, Jurong West Ave 6, #08-111",
     "oneTimeSchedule" : [ "1/2 1000 1200", "2/3 1000 1200" ],
     "tags" : [ "friends" ]
@@ -15,6 +16,7 @@
     "recurringSchedule": ["Mon 1400 1600"],
     "email" : "johnd@example.com",
     "goals" : "Lose weight",
+    "medicalHistory" : "Fractured right ankle",
     "location" : "311, Clementi Ave 2, #02-25",
     "oneTimeSchedule" : [ "2/3 1200 1400" ],
     "tags" : [ "owesMoney", "friends" ]
@@ -24,6 +26,7 @@
     "recurringSchedule": ["Mon 1400 1600"],
     "email" : "heinz@example.com",
     "goals" : "Gain muscle mass",
+    "medicalHistory" : "Fractured right hand",
     "location" : "wall street",
     "oneTimeSchedule" : [ ],
     "tags" : [ ]
@@ -33,6 +36,7 @@
     "recurringSchedule": [],
     "email" : "cornelia@example.com",
     "goals" : "Get stronger",
+    "medicalHistory" : "Dislocated left shoulder",
     "location" : "10th street",
     "oneTimeSchedule" : [ "2/2 1000 1200" ],
     "tags" : [ "friends" ]
@@ -42,6 +46,7 @@
     "recurringSchedule": [],
     "email" : "werner@example.com",
     "goals" : "Work on stamina",
+    "medicalHistory" : "High blood pressure",
     "location" : "michegan ave",
     "oneTimeSchedule" : [ ],
     "tags" : [ ]
@@ -51,6 +56,7 @@
     "recurringSchedule": [],
     "email" : "lydia@example.com",
     "goals" : "Calisthenics improvement",
+    "medicalHistory" : "Twisted left ankle",
     "location" : "little tokyo",
     "oneTimeSchedule" : [ "10/03 1800 2000" ],
     "tags" : [ ]
@@ -60,6 +66,7 @@
     "recurringSchedule": [],
     "email" : "anna@example.com",
     "goals" : "Calisthenics improvement",
+    "medicalHistory" : "Metal rod in right arm",
     "location" : "4th street",
     "oneTimeSchedule" : [ ],
     "tags" : [ ]

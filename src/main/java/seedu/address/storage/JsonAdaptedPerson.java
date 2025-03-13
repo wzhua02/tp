@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
@@ -34,6 +35,7 @@ class JsonAdaptedPerson {
     private final String goals;
     private final String location;
     private final List<JsonAdaptedOneTimeSchedule> oneTimeSchedules = new ArrayList<>();
+    private final String medicalHistory;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -43,6 +45,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("recurringSchedule") List<JsonAdaptedRecurringSchedule> recurringSchedules,
             @JsonProperty("email") String email, @JsonProperty("goals") String goals,
+                             @JsonProperty("medicalHistory") String medicalHistory,
             @JsonProperty("location") String location,
             @JsonProperty("oneTimeSchedule") List<JsonAdaptedOneTimeSchedule> oneTimeSchedules,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
@@ -53,10 +56,12 @@ class JsonAdaptedPerson {
         }
         this.email = email;
         this.goals = goals;
+        this.medicalHistory = medicalHistory;
         this.location = location;
         if (oneTimeSchedules != null) {
             this.oneTimeSchedules.addAll(oneTimeSchedules);
         }
+
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -73,6 +78,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         email = source.getEmail().value;
         goals = source.getGoals().value;
+        medicalHistory = source.getMedicalHistory().value;
         location = source.getLocation().value;
         oneTimeSchedules.addAll(source.getOneTimeSchedules().stream()
                 .map(JsonAdaptedOneTimeSchedule::new)
@@ -131,10 +137,23 @@ class JsonAdaptedPerson {
         if (goals == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Goals.class.getSimpleName()));
         }
+
         if (!Goals.isValidGoals(goals)) {
             throw new IllegalValueException(Goals.MESSAGE_CONSTRAINTS);
         }
+
         final Goals modelGoals = new Goals(goals);
+
+        if (medicalHistory == null) {
+            //System.out.println(medicalHistory);
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, MedicalHistory.class.getSimpleName()));
+        }
+        if (!MedicalHistory.isValidMedicalHistory(medicalHistory)) {
+            throw new IllegalValueException(MedicalHistory.MESSAGE_CONSTRAINTS);
+        }
+
+        final MedicalHistory modelMedicalHistory = new MedicalHistory(medicalHistory);
 
         if (location == null) {
             throw new
@@ -151,8 +170,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelRecurringSchedules, modelEmail, modelGoals, modelLocation,
-                modelOneTimeSchedules, modelTags);
+        return new Person(modelName, modelPhone, modelRecurringSchedules, modelEmail, modelGoals, modelMedicalHistory,
+                modelLocation, modelOneTimeSchedules, modelTags);
     }
 
 }
