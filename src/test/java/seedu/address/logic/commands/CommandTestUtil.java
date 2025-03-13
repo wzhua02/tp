@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOALS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -45,7 +46,13 @@ public class CommandTestUtil {
     public static final String VALID_ONETIMESCHEDULE_BOB = "3/6 1000 1200";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_MEDICAL_HISTORY_AMY = "Twisted right ankle";
+    public static final String VALID_MEDICAL_HISTORY_BOB = "Upper back injury";
 
+    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
+    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String MEDICAL_HISTORY_DESC_AMY = " " + PREFIX_MEDICAL_HISTORY + VALID_MEDICAL_HISTORY_AMY;
+    public static final String MEDICAL_HISTORY_DESC_BOB = " " + PREFIX_MEDICAL_HISTORY + VALID_MEDICAL_HISTORY_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -54,8 +61,6 @@ public class CommandTestUtil {
             + VALID_RECURRING_SCHEDULE_AMY;
     public static final String RECURRING_SCHEDULE_DESC_BOB = " " + PREFIX_RECURRING_SCHEDULE
             + VALID_RECURRING_SCHEDULE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String GOALS_DESC_AMY = " " + PREFIX_GOALS + VALID_GOALS_AMY;
     public static final String GOALS_DESC_BOB = " " + PREFIX_GOALS + VALID_GOALS_BOB;
     public static final String LOCATION_DESC_AMY = " " + PREFIX_LOCATION + VALID_LOCATION_AMY;
@@ -65,11 +70,12 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_MEDICAL_HISTORY_DESC = " " + PREFIX_MEDICAL_HISTORY + "é©"; //non-ASCII character
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Jamesé"; // 'é' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_RECURRING_SCHEDULE_DESC = " " + PREFIX_RECURRING_SCHEDULE
             + "yay"; // yay is not a valid day
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_GOALS_DESC = " " + PREFIX_GOALS; // empty string not allowed for goals
     public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION; // empty string not allowed for addresses
     // empty string not allowed for one time date
@@ -85,12 +91,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withRecurringSchedules(VALID_RECURRING_SCHEDULE_AMY)
-                .withGoals(VALID_GOALS_AMY)
+                .withGoals(VALID_GOALS_AMY).withMedicalHistory(VALID_MEDICAL_HISTORY_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withLocation(VALID_LOCATION_AMY)
                 .withOneTimeSchedules(VALID_ONETIMESCHEDULE_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withRecurringSchedules(VALID_RECURRING_SCHEDULE_BOB)
-                .withGoals(VALID_GOALS_BOB)
+                .withGoals(VALID_GOALS_BOB).withMedicalHistory(VALID_MEDICAL_HISTORY_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withLocation(VALID_LOCATION_BOB)
                 .withOneTimeSchedules(VALID_ONETIMESCHEDULE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }

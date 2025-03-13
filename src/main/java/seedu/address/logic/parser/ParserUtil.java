@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Phone;
@@ -167,6 +168,21 @@ public class ParserUtil {
             oneTimeScheduleSet.add(parseOneTimeSchedules(oneTimeScheduleDate));
         }
         return oneTimeScheduleSet;
+    }
+
+    /**
+     * Parses a {@code String medicalHistory} into an {@code medicalHistory}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code medicalHistory} is invalid.
+     */
+    public static MedicalHistory parseMedicalHistory(String medicalHistory) throws ParseException {
+        requireNonNull(medicalHistory);
+        String trimmedMedicalHistory = medicalHistory.trim();
+        if (!MedicalHistory.isValidMedicalHistory(trimmedMedicalHistory)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new MedicalHistory(trimmedMedicalHistory);
     }
 
     /**

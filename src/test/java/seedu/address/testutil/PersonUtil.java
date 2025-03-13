@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOALS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ONETIMESCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -42,6 +43,7 @@ public class PersonUtil {
         );
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_GOALS + person.getGoals().value + " ");
+        sb.append(PREFIX_MEDICAL_HISTORY + person.getMedicalHistory().value + " ");
         sb.append(PREFIX_LOCATION + person.getLocation().value + " ");
         person.getOneTimeSchedules().stream().forEach(
                 s -> sb.append(PREFIX_ONETIMESCHEDULE + s.value + " ")
@@ -70,6 +72,8 @@ public class PersonUtil {
         }
 
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getMedicalHistory().ifPresent(medicalHistory -> sb.append(PREFIX_MEDICAL_HISTORY)
+                .append(medicalHistory.value).append(" "));
         descriptor.getLocation().ifPresent(
                 address -> sb.append(PREFIX_LOCATION).append(address.value).append(" "));
 
