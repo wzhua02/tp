@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GOALS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -24,7 +24,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Goals;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.MedicalHistory;
@@ -49,14 +48,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_RECURRING_SCHEDULE + "RECURRING SCHEDULE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_GOALS + "GOALS]"
             + "[" + PREFIX_MEDICAL_HISTORY + "MEDICAL_HISTORY] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -109,7 +107,6 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Set<RecurringSchedule> updatedRecurringSchedules = editPersonDescriptor.getRecurringSchedules()
                 .orElse(personToEdit.getRecurringSchedules());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Goals updatedGoals = editPersonDescriptor.getGoals().orElse(personToEdit.getGoals());
         MedicalHistory updatedMedicalHistory = editPersonDescriptor.getMedicalHistory()
                 .orElse(personToEdit.getMedicalHistory());
@@ -118,7 +115,7 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getOneTimeSchedules());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedRecurringSchedules, updatedEmail, updatedGoals,
+        return new Person(updatedName, updatedPhone, updatedRecurringSchedules, updatedGoals,
                 updatedMedicalHistory, updatedLocation, updatedOneTimeSchedules, updatedTags);
     }
 
@@ -154,7 +151,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Set<RecurringSchedule> recurringSchedules;
-        private Email email;
         private Goals goals;
         private MedicalHistory medicalHistory;
         private Location location;
@@ -171,7 +167,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setRecurringSchedules(toCopy.recurringSchedules);
-            setEmail(toCopy.email);
             setGoals(toCopy.goals);
             setMedicalHistory(toCopy.medicalHistory);
             setLocation(toCopy.location);
@@ -183,7 +178,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, recurringSchedules, email, goals, medicalHistory, location,
+            return CollectionUtil.isAnyNonNull(name, phone, recurringSchedules, goals, medicalHistory, location,
                     oneTimeSchedules, tags);
         }
 
@@ -220,14 +215,6 @@ public class EditCommand extends Command {
             return (recurringSchedules != null)
                     ? Optional.of(Collections.unmodifiableSet(recurringSchedules))
                     : Optional.empty();
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
         }
 
         public void setGoals(Goals goals) {
@@ -295,7 +282,6 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(recurringSchedules, otherEditPersonDescriptor.recurringSchedules)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(location, otherEditPersonDescriptor.location)
                     && Objects.equals(oneTimeSchedules, otherEditPersonDescriptor.oneTimeSchedules)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
@@ -307,7 +293,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("recurringSchedules", recurringSchedules)
-                    .add("email", email)
+                    .add("goals", goals)
                     .add("medicalHistory", medicalHistory)
                     .add("location", location)
                     .add("oneTimeSchedule", oneTimeSchedules)

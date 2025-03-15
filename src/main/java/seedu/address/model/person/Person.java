@@ -19,7 +19,6 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
 
     // Data fields
     private final Set<RecurringSchedule> recurringSchedules = new HashSet<>();
@@ -32,14 +31,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Set<RecurringSchedule> recurringSchedules, Email email, Goals goals,
+    public Person(Name name, Phone phone, Set<RecurringSchedule> recurringSchedules, Goals goals,
                   MedicalHistory medicalHistory, Location location,
                   Set<OneTimeSchedule> oneTimeSchedule, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, medicalHistory, location, oneTimeSchedule, tags);
+        requireAllNonNull(name, phone, medicalHistory, location, oneTimeSchedule, tags);
         this.name = name;
         this.phone = phone;
         this.recurringSchedules.addAll(recurringSchedules);
-        this.email = email;
         this.goals = goals;
         this.medicalHistory = medicalHistory;
         this.location = location;
@@ -63,10 +61,6 @@ public class Person {
         return Collections.unmodifiableSet(recurringSchedules);
     }
 
-    public Email getEmail() {
-        return email;
-    }
-
     public Goals getGoals() {
         return goals;
     }
@@ -82,8 +76,6 @@ public class Person {
     public Set<OneTimeSchedule> getOneTimeSchedules() {
         return Collections.unmodifiableSet(oneTimeSchedules);
     }
-
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -125,7 +117,6 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && recurringSchedules.equals(otherPerson.recurringSchedules)
-                && email.equals(otherPerson.email)
                 && goals.equals(otherPerson.goals)
                 && medicalHistory.equals(otherPerson.medicalHistory)
                 && location.equals(otherPerson.location)
@@ -136,8 +127,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, recurringSchedules, email, goals, medicalHistory, location, oneTimeSchedules,
-                tags);
+        return Objects.hash(name, phone, recurringSchedules, goals, medicalHistory, location, oneTimeSchedules, tags);
     }
 
     @Override
@@ -146,7 +136,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("recurringSchedules", recurringSchedules)
-                .add("email", email)
                 .add("goals", goals)
                 .add("medical history", medicalHistory)
                 .add("location", location)

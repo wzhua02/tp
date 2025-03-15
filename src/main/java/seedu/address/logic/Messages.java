@@ -48,9 +48,7 @@ public class Messages {
             builder.append(schedule);
         });
 
-        builder.append("; Email: ")
-                .append(person.getEmail())
-                .append("; Goals: ")
+        builder.append("; Goals: ")
                 .append(person.getGoals())
                 .append("; Medical History: ")
                 .append(person.getMedicalHistory())
