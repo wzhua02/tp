@@ -54,6 +54,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE] "
             + "[" + PREFIX_TAG + "TAG]...\n\n"
+            + "RECURRING SCHEDULE Format: DAY HHmm HHmm\n"
+            + "ONE TIME SCHEDULE Format: DD/MM[/YY] HHmm HHmm\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 ";
 
