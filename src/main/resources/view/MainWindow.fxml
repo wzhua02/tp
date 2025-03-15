@@ -2,27 +2,31 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="FitFlow" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@FitFlowTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox>
+      <VBox styleClass="main-root" stylesheets="@FitFlowTheme.css">
+
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -32,27 +36,45 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <GridPane VBox.vgrow="ALWAYS">
+          <columnConstraints>
+            <ColumnConstraints percentWidth="50" />
+            <ColumnConstraints percentWidth="50" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints vgrow="ALWAYS" />
+          </rowConstraints>
+        <VBox spacing="10" GridPane.columnIndex="0">
+
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
+          </padding>
+
+        <StackPane fx:id="commandBoxPlaceholder" style="-fx-background-color: #FFFFFF; -fx-border-radius: 12; -fx-border-width: 5; -fx-border-color: #4981F2;" styleClass="pane-with-border" stylesheets="@FitFlowTheme.css" VBox.vgrow="NEVER">
+          <padding>
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+          <VBox fx:id="personList" styleClass="paneList-with-border" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <StackPane fx:id="personListPanelPlaceholder" stylesheets="@FitFlowTheme.css" VBox.vgrow="ALWAYS" />
+          </VBox>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+
         </VBox>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+          <StackPane fx:id="resultDisplayPlaceholder" minHeight="100" style="-fx-background-color: #FFFFFF;" styleClass="pane-with-border" GridPane.columnIndex="1">
+            <padding>
+              <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+          </StackPane>
+
+        </GridPane>
+
+<!--        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />-->
       </VBox>
     </Scene>
   </scene>

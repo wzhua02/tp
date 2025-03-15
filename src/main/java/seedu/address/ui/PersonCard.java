@@ -1,10 +1,7 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -34,18 +31,6 @@ public class PersonCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label phone;
-    @FXML
-    private FlowPane recurringSchedules;
-    @FXML
-    private Label goals;
-    @FXML
-    private Label medicalHistory;
-    @FXML
-    private Label trainingLocation;
-    @FXML
-    private FlowPane oneTimeSchedules;
-    @FXML
-    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -56,18 +41,5 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        person.getRecurringSchedules().stream()
-                .sorted(Comparator.comparing(recurringSchedule -> recurringSchedule.schedule))
-                .forEach(recurringSchedule -> recurringSchedules
-                        .getChildren().add(new Label(recurringSchedule.schedule)));
-        goals.setText(person.getGoals().value);
-        medicalHistory.setText(person.getMedicalHistory().value);
-        trainingLocation.setText(person.getLocation().value);
-        person.getOneTimeSchedules().stream()
-                .sorted(Comparator.comparing(oneTimeSchedule -> oneTimeSchedule.value))
-                .forEach(oneTimeSchedule -> oneTimeSchedules.getChildren().add(new Label(oneTimeSchedule.value)));
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
