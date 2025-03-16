@@ -37,9 +37,9 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
+                .append("\nPhone: ")
                 .append(person.getPhone())
-                .append("; RecurringSchedule: ");
+                .append("\nRecurringSchedule: ");
 
         person.getRecurringSchedules().forEach(schedule -> {
             if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
@@ -48,13 +48,13 @@ public class Messages {
             builder.append(schedule);
         });
 
-        builder.append("; Goals: ")
+        builder.append("\nGoals: ")
                 .append(person.getGoals())
-                .append("; Medical History: ")
+                .append("\nMedical History: ")
                 .append(person.getMedicalHistory())
-                .append("; Location: ")
+                .append("\nLocation: ")
                 .append(person.getLocation())
-                .append("; OneTimeSchedule: ");
+                .append("\nOneTimeSchedule: ");
 
         person.getOneTimeSchedules().forEach(schedule -> {
             if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
@@ -63,7 +63,7 @@ public class Messages {
             builder.append(schedule);
         });
 
-        builder.append("; Tags: ");
+        builder.append("\nTags: ");
 
         person.getTags().forEach(builder::append);
         return builder.toString();
