@@ -30,7 +30,9 @@ public class OneTimeSchedule {
         + "([01][0-9]|2[0-3])[0-5][0-9]\\s" // Start time
         + "([01][0-9]|2[0-3])[0-5][0-9]"; // End time
 
-    public final String value;
+    public final String date;
+    public final String startTime;
+    public final String endTime;
 
     /**
      * Constructs a {@code OneTimeDate}.
@@ -40,7 +42,10 @@ public class OneTimeSchedule {
     public OneTimeSchedule(String date) {
         requireNonNull(date);
         checkArgument(isValidOneTimeSchedule(date), MESSAGE_CONSTRAINTS);
-        this.value = date;
+        String[] oneTimeScheduleArgs = date.split(" ");
+        this.date = oneTimeScheduleArgs[0];
+        this.startTime = oneTimeScheduleArgs[1];
+        this.endTime = oneTimeScheduleArgs[2];
     }
 
     /**
@@ -53,7 +58,7 @@ public class OneTimeSchedule {
 
     @Override
     public String toString() {
-        return value;
+        return date + " " + startTime + " " + endTime;
     }
 
     @Override
@@ -68,12 +73,16 @@ public class OneTimeSchedule {
         }
 
         OneTimeSchedule otherOneTimeSchedule = (OneTimeSchedule) other;
-        return value.equals(otherOneTimeSchedule.value);
+        Boolean isDateEquals = date.equals(otherOneTimeSchedule.date);
+        Boolean isStartTimeEquals = startTime.equals(otherOneTimeSchedule.startTime);
+        Boolean isEndTimeEquals = endTime.equals(otherOneTimeSchedule.endTime);
+        return isDateEquals && isStartTimeEquals && isEndTimeEquals;
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        String toHash = date + " " + startTime + " " + endTime;
+        return toHash.hashCode();
     }
 
 
