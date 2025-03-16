@@ -111,4 +111,68 @@ public class RecurringScheduleTest {
         assertThrows(NullPointerException.class, () -> RecurringSchedule.isValidTime(null));
     }
 
+    @Test
+    public void constructor_formatsMonday_correctly() {
+        // Abbreviated and full form for Monday.
+        RecurringSchedule scheduleAbbrev = new RecurringSchedule("mon 0800 1200");
+        assertEquals("[Monday 0800 1200]", scheduleAbbrev.toString());
+        RecurringSchedule scheduleFull = new RecurringSchedule("monday 0800 1200");
+        assertEquals("[Monday 0800 1200]", scheduleFull.toString());
+    }
+
+    @Test
+    public void constructor_formatsTuesday_correctly() {
+        // Abbreviated and full form for Tuesday.
+        RecurringSchedule scheduleAbbrev = new RecurringSchedule("tue 0800 1200");
+        assertEquals("[Tuesday 0800 1200]", scheduleAbbrev.toString());
+        RecurringSchedule scheduleFull = new RecurringSchedule("tuesday 0800 1200");
+        assertEquals("[Tuesday 0800 1200]", scheduleFull.toString());
+    }
+
+    @Test
+    public void constructor_formatsWednesday_correctly() {
+        // Abbreviated and full form for Wednesday.
+        RecurringSchedule scheduleAbbrev = new RecurringSchedule("wed 0800 1200");
+        assertEquals("[Wednesday 0800 1200]", scheduleAbbrev.toString());
+        RecurringSchedule scheduleFull = new RecurringSchedule("wednesday 0800 1200");
+        assertEquals("[Wednesday 0800 1200]", scheduleFull.toString());
+    }
+
+    @Test
+    public void constructor_formatsThursday_correctly() {
+        // Abbreviated and full form for Thursday.
+        RecurringSchedule scheduleAbbrev = new RecurringSchedule("thu 0800 1200");
+        assertEquals("[Thursday 0800 1200]", scheduleAbbrev.toString());
+        RecurringSchedule scheduleFull = new RecurringSchedule("thursday 0800 1200");
+        assertEquals("[Thursday 0800 1200]", scheduleFull.toString());
+    }
+
+    @Test
+    public void constructor_formatsFriday_correctly() {
+        // Abbreviated and full form for Friday.
+        RecurringSchedule scheduleAbbrev = new RecurringSchedule("fri 0800 1200");
+        assertEquals("[Friday 0800 1200]", scheduleAbbrev.toString());
+        RecurringSchedule scheduleFull = new RecurringSchedule("friday 0800 1200");
+        assertEquals("[Friday 0800 1200]", scheduleFull.toString());
+    }
+
+    @Test
+    public void constructor_formatsSaturday_correctly() {
+        // Abbreviated and full form for Saturday.
+        RecurringSchedule scheduleAbbrev = new RecurringSchedule("sat 0800 1200");
+        assertEquals("[Saturday 0800 1200]", scheduleAbbrev.toString());
+        RecurringSchedule scheduleFull = new RecurringSchedule("saturday 0800 1200");
+        assertEquals("[Saturday 0800 1200]", scheduleFull.toString());
+    }
+
+    @Test
+    public void constructor_formatsSunday_correctly() {
+        // Abbreviated and full form for Sunday.
+        RecurringSchedule scheduleAbbrev = new RecurringSchedule("sun 0800 1200");
+        assertEquals("[Sunday 0800 1200]", scheduleAbbrev.toString());
+        RecurringSchedule scheduleFull = new RecurringSchedule("sunday 0800 1200");
+        assertEquals("[Sunday 0800 1200]", scheduleFull.toString());
+    }
+
+
 }
