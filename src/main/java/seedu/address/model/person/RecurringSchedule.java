@@ -63,7 +63,6 @@ public class RecurringSchedule {
         int startHour = Integer.parseInt(startTime.substring(0, 2));
         int startMinute = Integer.parseInt(startTime.substring(2));
         int startTotal = startHour * 60 + startMinute;
-        
         int endHour = Integer.parseInt(endTime.substring(0, 2));
         int endMinute = Integer.parseInt(endTime.substring(2));
         int endTotal = endHour * 60 + endMinute;
