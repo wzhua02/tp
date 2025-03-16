@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+FitFlow is a **desktop app for personal trainers in Singapore to manage their clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FitFlow can manage your clients faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -17,24 +17,38 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your FitFlow app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fitflow.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `add n/John Doe p/81234567` : Adds a client named `John Doe` to the FitFlow.
+   
+   * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym ots/1/2 1000 1200 t/friends` : Adds a client named `Alice Pauline` with many details such as her schedule, fitness goal, medical history and location.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `find John Doe` : Finds a specific client and displays their details.
+   
+   * `schedule monday` : Displays the sessions the personal trainer has with the clients on that day.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `schedule 17/2/25` : Displays the sessions the personal trainer has with the clients on that day.
 
-   * `clear` : Deletes all contacts.
+   * `edit 1 p/81234567 rs/Tues 1600 1800 g/Do 10 pull ups` : Edits the details of the 1st client shown in the current list.
 
-   * `exit` : Exits the app.
+   * `delete 3` : Deletes the 3rd client shown in the current list.
+
+   * `help` : Displays the list of available commands the user can use in FitFlow.
+
+   * `help add` : Displays the format for the specific command in FitFlow.
+
+   * `list` : Lists all clients.
+
+   * `clear` : Deletes all clients.
+
+   * `exit` : Exits the FitFlow app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -73,46 +87,23 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a client: `add`
 
-Adds a person to the address book.
+Adds a client to FitFlow.
 
-Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [ots/ONE_TIME_SCHEDULE]…​ [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A client can have any number of recurring schedule, one time schedule, or tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym ots/1/2 1000 1200 t/friends`
+* `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/1234567 mh/Lower back injury rs/Wed 1500 1700`
 
-### Listing all persons : `list`
+### Locating clients by name: `find`
 
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 l/Anytime Fitness` Edits the phone number and location of the 1st person to be `91234567` and `Anytime Fitness` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
+Finds clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -128,9 +119,42 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### View schedule: `view schedule`
 
-Deletes the specified person from the address book.
+Displays the sessions the personal trainer has with clients on that day.
+
+Format: `view schedule [DAY] [DAY_SHORT_FORM] [DATE (DD/MM/YY)] [DATE (DD/MM)]`
+
+* The search is case-insensitive. e.g `Monday` will match `monday`
+* At least one of the optional fields must be provided.
+* For Days, it will refer to the earliest upcoming day, for example if today is Tuesday, `view schedule Monday` will view the schedules on the Monday 6 days later.
+* For Days, short-forms are allowed, `Monday` will match with `mon` and for Dates, the format has to be (DD/MM/YY) but the year can be omitted and the day and month can have a leading 0. e.g `25/2/2025`, `25/02/2025`, `25/2`, and `25/02` will all match.
+
+Examples:
+* `view schedule Monday` returns the list of clients with sessions on Monday.
+* `view schedule 25/02/2025` returns the list of clients with sessions on 25/02/2025.<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+
+### Editing a client : `edit`
+
+Edits an existing client in FitFlow.
+
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [ots/ONE_TIME_SCHEDULE]…​ [t/TAG]…​`
+
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing recurring schedules, one time schedules or tags, the existing parameters of the person will be removed i.e it is not cumulative.
+* You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
+
+Examples:
+*  `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400` Edits the phone number, location, and one time schedule of the 1st person to be `91234567`, `Anytime Fitness`, and `4/4 1200 1400` respectively.
+*  `edit 2 n/Betsy Crower rs/ ots/ t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing recurring schedules, one time schedules and tags.
+
+### Deleting a client : `delete`
+
+Deletes the specified client from FitFlow.
 
 Format: `delete INDEX`
 
@@ -138,15 +162,18 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+### Help : `help`
+
+Displays the description and formatting of commands in FitFlow.
+
+Format: `help [add] [view] [schedule] [edit] [delete] [clear] [exit]`
+
+* `help` will display all the available commands in FitFlow.
+* `help` can be called on its own, calling help followed by a specific command will give the specific description and formatting for that command. e.g `help add` will display the description of the add command and its formatting.
+
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -154,17 +181,24 @@ Exits the program.
 
 Format: `exit`
 
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+FitFlow data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+FitFlow data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, FitFlow will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause FitFlow to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -191,10 +225,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
+**Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [ots/ONE_TIME_SCHEDULE]…​ [t/TAG]…​` <br> e.g., `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym ots/1/2 1000 1200 t/friends`
+**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John`
+**View Schedule** | `view schedule [DAY] [DAY_SHORT_FORM] [DATE (DD/MM/YY)] [DATE (DD/MM)]` <br> e.g., `view schedule Monday`
+**Edit** | `edit edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [ots/ONE_TIME_SCHEDULE]…​ [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Help** | `help [add] [view] [schedule] [edit] [delete] [clear] [exit]` <br> e.g., `help add`
+**Clear** | `clear`
+**Exit** | `exit`
+
