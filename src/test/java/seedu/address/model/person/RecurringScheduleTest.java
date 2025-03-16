@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -74,4 +75,40 @@ public class RecurringScheduleTest {
         String expected = "[Monday 0900 1700]";
         assertTrue(schedule.toString().equals(expected));
     }
+
+    @Test
+    public void isValidTime_validTimes_returnsTrue() {
+        // Valid schedule where end time is after start time.
+        assertTrue(RecurringSchedule.isValidTime("Monday 0900 1700"));
+    }
+
+    @Test
+    public void isValidTime_invalidTimes_returnsFalse() {
+        // Although the format is valid, the end time is not after the start time.
+        assertFalse(RecurringSchedule.isValidTime("Monday 1400 1200"));
+    }
+
+    @Test
+    public void constructor_abbreviatedDayFormatsToFullDay() {
+        // Provide an abbreviated day and check that it is formatted to its full, capitalized form.
+        RecurringSchedule schedule = new RecurringSchedule("fri 0800 1200");
+        assertEquals("[Friday 0800 1200]", schedule.toString());
+    }
+
+    @Test
+    public void constructor_edgeCaseTimes_returnsCorrectFormat() {
+        // Test the edge valid times: one minute past midnight and near midnight.
+        RecurringSchedule schedule1 = new RecurringSchedule("Monday 0000 0001");
+        assertEquals("[Monday 0000 0001]", schedule1.toString());
+
+        RecurringSchedule schedule2 = new RecurringSchedule("Monday 2358 2359");
+        assertEquals("[Monday 2358 2359]", schedule2.toString());
+    }
+
+    @Test
+    public void isValidTime_null_throwsNullPointerException() {
+        // The method should throw a NullPointerException when provided with null.
+        assertThrows(NullPointerException.class, () -> RecurringSchedule.isValidTime(null));
+    }
+
 }
