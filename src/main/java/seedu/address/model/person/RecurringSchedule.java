@@ -15,7 +15,6 @@ public class RecurringSchedule {
     public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:"
             + " [day HHmm HHmm].";
     public static final String MESSAGE_TIME_CONSTRAINTS = "End time (second time) must be later than start time (first time).";
-    
     /*
      * A valid schedule format:
      * - Must start with a valid day of the week (full or abbreviated).
@@ -68,7 +67,7 @@ public class RecurringSchedule {
         int endHour = Integer.parseInt(endTime.substring(0, 2));
         int endMinute = Integer.parseInt(endTime.substring(2));
         int endTotal = endHour * 60 + endMinute;
-        
+
         return endTotal > startTotal;
     }
 
