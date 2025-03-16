@@ -133,7 +133,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseRecurringSchedule_validValueWithWhitespaceAndAbbreviatedDay_returnsRecurringSchedule() throws Exception {
+    public void parseRecurringSchedule_validValueWithWhitespaceAndAbbreviatedDay_returnsRecurringSchedule() throws
+            Exception {
         String input = "   fri 0800 1200   ";
         // The constructor converts "fri" to "Friday", so the expected schedule should be "Friday 0800 1200"
         RecurringSchedule expected = new RecurringSchedule("fri 0800 1200");
