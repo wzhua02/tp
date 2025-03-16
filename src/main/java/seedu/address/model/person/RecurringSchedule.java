@@ -14,7 +14,8 @@ public class RecurringSchedule {
 
     public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:"
             + " [day HHmm HHmm].";
-    public static final String MESSAGE_TIME_CONSTRAINTS = "End time (second time) must be later than start time (first time).";
+    public static final String MESSAGE_TIME_CONSTRAINTS = "End time (second time) must be later than start time"
+            + " (first time).";
     /*
      * A valid schedule format:
      * - Must start with a valid day of the week (full or abbreviated).
@@ -55,6 +56,12 @@ public class RecurringSchedule {
         return pattern.matcher(test).matches();
     }
 
+    /**
+     * Returns true if the end time is later than the start time in the given schedule.
+     *
+     * @param test A valid recurring schedule.
+     * @return true if the end time is later than the start time, false otherwise.
+     */
     public static boolean isValidTime(String test) {
         String[] parts = test.split("\\s+");
         String startTime = parts[1];
@@ -79,29 +86,29 @@ public class RecurringSchedule {
     private static String formatDay(String day) {
         String lowerDay = day.toLowerCase();
         switch (lowerDay) {
-            case "mon":
-            case "monday":
-                return "Monday";
-            case "tue":
-            case "tuesday":
-                return "Tuesday";
-            case "wed":
-            case "wednesday":
-                return "Wednesday";
-            case "thu":
-            case "thursday":
-                return "Thursday";
-            case "fri":
-            case "friday":
-                return "Friday";
-            case "sat":
-            case "saturday":
-                return "Saturday";
-            case "sun":
-            case "sunday":
-                return "Sunday";
-            default:
-                throw new IllegalArgumentException("Invalid day: " + day);
+        case "mon":
+        case "monday":
+            return "Monday";
+        case "tue":
+        case "tuesday":
+            return "Tuesday";
+        case "wed":
+        case "wednesday":
+            return "Wednesday";
+        case "thu":
+        case "thursday":
+            return "Thursday";
+        case "fri":
+        case "friday":
+            return "Friday";
+        case "sat":
+        case "saturday":
+            return "Saturday";
+        case "sun":
+        case "sunday":
+            return "Sunday";
+        default:
+            throw new IllegalArgumentException("Invalid day: " + day);
         }
     }
 
