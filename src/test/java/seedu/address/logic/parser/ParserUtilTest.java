@@ -19,6 +19,7 @@ import seedu.address.model.person.Location;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -105,6 +106,41 @@ public class ParserUtilTest {
         Phone expectedPhone = new Phone(VALID_PHONE);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
+
+    @Test
+    public void parseRecurringSchedule_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRecurringSchedule(null));
+    }
+
+    @Test
+    public void parseRecurringSchedule_invalidFormat_throwsParseException() {
+        String invalidRecurringSchedule = "invalid schedule";
+        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(invalidRecurringSchedule));
+    }
+
+    @Test
+    public void parseRecurringSchedule_invalidTimeOrder_throwsParseException() {
+        // Although the format is valid, the end time is before the start time.
+        String invalidRecurringSchedule = "Monday 1400 1200";
+        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(invalidRecurringSchedule));
+    }
+
+    @Test
+    public void parseRecurringSchedule_validValueWithoutWhitespace_returnsRecurringSchedule() throws Exception {
+        String validRecurringSchedule = "Tuesday 0900 1700";
+        RecurringSchedule expected = new RecurringSchedule(validRecurringSchedule);
+        assertEquals(expected, ParserUtil.parseRecurringSchedule(validRecurringSchedule));
+    }
+
+    @Test
+    public void parseRecurringSchedule_validValueWithWhitespaceAndAbbreviatedDay_returnsRecurringSchedule() throws
+            Exception {
+        String input = "   fri 0800 1200   ";
+        // The constructor converts "fri" to "Friday", so the expected schedule should be "Friday 0800 1200"
+        RecurringSchedule expected = new RecurringSchedule("fri 0800 1200");
+        assertEquals(expected, ParserUtil.parseRecurringSchedule(input));
+    }
+
 
     @Test
     public void parseGoals_null_throwsNullPointerException() {
