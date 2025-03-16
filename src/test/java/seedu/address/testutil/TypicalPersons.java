@@ -37,7 +37,7 @@ public class TypicalPersons {
             .withRecurringSchedules("Mon 1400 1600")
             .withGoals("Lose weight").withMedicalHistory("Fractured right ankle")
             .withLocation("311, Clementi Ave 2, #02-25")
-            .withOneTimeSchedules("2/3 1200 1400").withTags("owesMoney", "friends").build();
+            .withOneTimeSchedules("2/2 1200 1400").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withRecurringSchedules("Mon 1400 1600")
             .withGoals("Gain muscle mass").withMedicalHistory("Fractured right hand")

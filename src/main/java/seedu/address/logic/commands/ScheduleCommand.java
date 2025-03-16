@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.ScheduleContainsKeywordsPredicate;
+import seedu.address.model.person.ScheduleContainsKeywordPredicate;
 
 /**
  * Finds and lists all persons in address book who has sessions that matches any of the argument keywords.
@@ -17,13 +17,13 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose sessions contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Parameters: DAY/DATE \n"
             + "Example: " + COMMAND_WORD + " Monday\n"
             + "Example: " + COMMAND_WORD + " 15/06";
 
-    private final ScheduleContainsKeywordsPredicate predicate;
+    private final ScheduleContainsKeywordPredicate predicate;
 
-    public ScheduleCommand(ScheduleContainsKeywordsPredicate predicate) {
+    public ScheduleCommand(ScheduleContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 

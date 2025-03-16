@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ScheduleContainsKeywordsPredicate;
+import seedu.address.model.person.ScheduleContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -23,7 +23,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 
-        return new ScheduleCommand(new ScheduleContainsKeywordsPredicate(trimmedArg));
+        return new ScheduleCommand(new ScheduleContainsKeywordPredicate(trimmedArg));
     }
 
 }
