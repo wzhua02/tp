@@ -80,6 +80,9 @@ public class ParserUtil {
         if (!RecurringSchedule.isValidSchedule(trimmedRecurringSchedule)) {
             throw new ParseException(RecurringSchedule.MESSAGE_CONSTRAINTS);
         }
+        if (!RecurringSchedule.isValidTime(trimmedRecurringSchedule)) {
+            throw new ParseException(RecurringSchedule.MESSAGE_TIME_CONSTRAINTS);
+        }
         return new RecurringSchedule(trimmedRecurringSchedule);
     }
 

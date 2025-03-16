@@ -44,5 +44,4 @@ class JsonAdaptedRecurringSchedule {
         }
         return new RecurringSchedule(recurringSchedule);
     }
-
 }
