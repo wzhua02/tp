@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.HelpCommand.GENERIC_HELP_MESSAGE;
 
@@ -72,5 +75,35 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult = new CommandResult(GENERIC_HELP_MESSAGE);
         assertCommandSuccess(
                 new HelpCommand("aasdgae"), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        HelpCommand helpAddCommand = new HelpCommand("add");
+        HelpCommand helpEditCommand = new HelpCommand("edit");
+
+        // same object -> returns true
+        assertTrue(helpAddCommand.equals(helpAddCommand));
+
+        // same values -> returns true
+        HelpCommand helpAddCommandCopy = new HelpCommand("add");
+        assertTrue(helpAddCommand.equals(helpAddCommandCopy));
+
+        // different types -> returns false
+        assertFalse(helpAddCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(helpAddCommand.equals(null));
+
+        // different commandRequested -> returns false
+        assertFalse(helpAddCommand.equals(helpEditCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        String command = "delete";
+        HelpCommand helpCommand = new HelpCommand(command);
+        String expected = HelpCommand.class.getCanonicalName() + "{commandRequested=" + command + "}";
+        assertEquals(expected, helpCommand.toString());
     }
 }
