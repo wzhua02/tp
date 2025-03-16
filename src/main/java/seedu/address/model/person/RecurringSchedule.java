@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -29,7 +28,9 @@ public class RecurringSchedule {
 
     private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
 
-    public final String schedule;
+    public final String day;
+    public final String startTime;
+    public final String endTime;
 
     /**
      * Constructs a {@code RecurringSchedule}.
@@ -46,7 +47,9 @@ public class RecurringSchedule {
         String endTime = parts[2];
 
         String formattedDay = formatDay(day);
-        this.schedule = formattedDay + " " + startTime + " " + endTime;
+        this.day = formattedDay;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -124,19 +127,23 @@ public class RecurringSchedule {
         }
 
         RecurringSchedule otherRecurringSchedule = (RecurringSchedule) other;
-        return Objects.equals(schedule, otherRecurringSchedule.schedule);
+        Boolean isDayEquals = day.equals(otherRecurringSchedule.day);
+        Boolean isStartTimeEquals = startTime.equals(otherRecurringSchedule.startTime);
+        Boolean isEndTimeEquals = endTime.equals(otherRecurringSchedule.endTime);
+        return isDayEquals && isStartTimeEquals && isEndTimeEquals;
     }
 
     @Override
     public int hashCode() {
-        return schedule.hashCode();
+        String toHash = day + " " + startTime + " " + endTime;
+        return toHash.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + schedule + ']';
+        return '[' + day + " " + startTime + " " + endTime + ']';
     }
 
 }

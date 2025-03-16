@@ -58,7 +58,7 @@ public class OneTimeSchedule {
 
     @Override
     public String toString() {
-        return date + " " + startTime + " " + endTime;
+        return "[" + date + " " + startTime + " " + endTime + "]";
     }
 
     @Override
