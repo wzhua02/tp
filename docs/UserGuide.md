@@ -120,6 +120,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+
 ### View schedule: `view schedule`
 
 Displays the sessions the personal trainer has with clients on that day.
