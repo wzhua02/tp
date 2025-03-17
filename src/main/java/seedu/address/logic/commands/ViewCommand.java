@@ -2,9 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.OneTimeSchedule;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.person.ScheduleContainsKeywordPredicate;
 
 /**
@@ -31,8 +37,50 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        String keyword = predicate.getKeyword();
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, keyword)).append("\n\n");
+        if (isDay(keyword)) {
+            //search recurringSchedule
+            model.getFilteredPersonList().forEach(person -> {
+                List<String> matchingTimes = findMatchingRecurringSchedule(person, keyword);
+                sb.append(person.getName()).append(": ").append(String.join(", ", matchingTimes)).append("\n");
+            });
+        } else {
+            //search oneTimeSchedule
+            model.getFilteredPersonList().forEach(person -> {
+                List<String> matchingTimes = findMatchingOneTimeSchedule(person, keyword);
+                sb.append(person.getName()).append(": ").append(String.join(", ", matchingTimes)).append("\n");
+            });
+        }
+        return new CommandResult(sb.toString().trim());
+    }
+
+    private boolean isDay(String str) {
+        return switch (str.toLowerCase()) {
+        case "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" -> true;
+        default -> false;
+        };
+    }
+
+    private List<String> findMatchingRecurringSchedule(Person person, String keyword) {
+        Set<RecurringSchedule> recurringSchedules = person.getRecurringSchedules();
+        List<String> matchingTimes = recurringSchedules.stream()
+                .filter(schedule -> schedule.getDay().equalsIgnoreCase(keyword))
+                .map(schedule -> String.format("%s-%s", schedule.getStartTime(),
+                        schedule.getEndTime()))
+                .toList();
+        return matchingTimes;
+    }
+
+    private List<String> findMatchingOneTimeSchedule(Person person, String keyword) {
+        Set<OneTimeSchedule> oneTimeSchedules = person.getOneTimeSchedules();
+        List<String> matchingTimes = oneTimeSchedules.stream()
+                .filter(schedule -> schedule.getDate().equalsIgnoreCase(keyword))
+                .map(schedule -> String.format("%s-%s", schedule.getStartTime(),
+                        schedule.getEndTime()))
+                .toList();
+        return matchingTimes;
     }
 
     @Override

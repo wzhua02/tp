@@ -31,6 +31,9 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
         default -> keyword;
         };
     }
+    public String getKeyword() {
+        return keyword;
+    }
 
     @Override
     public boolean test(Person person) {
