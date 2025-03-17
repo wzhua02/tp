@@ -134,8 +134,6 @@ Format: `view schedule [DAY] [DAY_SHORT_FORM] [DATE (DD/MM/YY)] [DATE (DD/MM)]`
 Examples:
 * `view schedule Monday` returns the list of clients with sessions on Monday.
 * `view schedule 25/02/2025` returns the list of clients with sessions on 25/02/2025.<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 
 ### Editing a client : `edit`
 
