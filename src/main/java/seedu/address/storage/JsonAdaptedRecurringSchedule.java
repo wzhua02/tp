@@ -25,7 +25,7 @@ class JsonAdaptedRecurringSchedule {
      * Converts a given {@code RecurringSchedule} into this class for Jackson use.
      */
     public JsonAdaptedRecurringSchedule(RecurringSchedule source) {
-        recurringSchedule = source.day + " " + source.startTime + " " + source.endTime;
+        recurringSchedule = source.getDay() + " " + source.getStartTime() + " " + source.getEndTime();
     }
 
     @JsonValue

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * Represents a RecurringSchedule in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidSchedule(String)}
  */
-public class RecurringSchedule {
+public class RecurringSchedule extends Schedule {
 
     public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:"
             + " [day HHmm HHmm].";
@@ -29,27 +29,33 @@ public class RecurringSchedule {
     private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
 
     public final String day;
-    public final String startTime;
-    public final String endTime;
 
     /**
      * Constructs a {@code RecurringSchedule}.
      *
-     * @param schedule A valid recurring schedule.
+     * @param schedule A valid recurring schedule string.
      */
     public RecurringSchedule(String schedule) {
+        super(extractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
         requireNonNull(schedule);
         checkArgument(isValidSchedule(schedule), MESSAGE_CONSTRAINTS);
+        this.day = extractDay(schedule);
+    }
 
-        String[] parts = schedule.split("\\s+");
-        String day = parts[0];
-        String startTime = parts[1];
-        String endTime = parts[2];
+    private static String extractDay(String schedule) {
+        return schedule.split(" ")[0];
+    }
 
-        String formattedDay = formatDay(day);
-        this.day = formattedDay;
-        this.startTime = startTime;
-        this.endTime = endTime;
+    private static String extractStartTime(String schedule) {
+        return schedule.split(" ")[1];
+    }
+
+    private static String extractEndTime(String schedule) {
+        return schedule.split(" ")[2];
+    }
+
+    public String getDay() {
+        return day;
     }
 
     /**

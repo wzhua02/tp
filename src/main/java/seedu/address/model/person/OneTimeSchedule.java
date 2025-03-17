@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's training date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidOneTimeSchedule(String)}
  */
-public class OneTimeSchedule {
+public class OneTimeSchedule extends Schedule {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Dates must be in the format: date start end, either [d/m HHmm HHmm] or [d/m/yy HHmm HHmm].\n"
@@ -31,21 +31,32 @@ public class OneTimeSchedule {
         + "([01][0-9]|2[0-3])[0-5][0-9]"; // End time
 
     public final String date;
-    public final String startTime;
-    public final String endTime;
-
     /**
-     * Constructs a {@code OneTimeDate}.
+     * Constructs a {@code OneTimeSchedule}.
      *
-     * @param date A valid one time date.
+     * @param schedule A valid one-time schedule string.
      */
-    public OneTimeSchedule(String date) {
-        requireNonNull(date);
-        checkArgument(isValidOneTimeSchedule(date), MESSAGE_CONSTRAINTS);
-        String[] oneTimeScheduleArgs = date.split(" ");
-        this.date = oneTimeScheduleArgs[0];
-        this.startTime = oneTimeScheduleArgs[1];
-        this.endTime = oneTimeScheduleArgs[2];
+    public OneTimeSchedule(String schedule) {
+        super(extractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
+        requireNonNull(schedule);
+        checkArgument(isValidOneTimeSchedule(schedule), MESSAGE_CONSTRAINTS);
+        this.date = extractDate(schedule);
+    }
+
+    private static String extractDate(String schedule) {
+        return schedule.split(" ")[0];
+    }
+
+    private static String extractStartTime(String schedule) {
+        return schedule.split(" ")[1];
+    }
+
+    private static String extractEndTime(String schedule) {
+        return schedule.split(" ")[2];
+    }
+
+    public String getDate() {
+        return date;
     }
 
     /**
