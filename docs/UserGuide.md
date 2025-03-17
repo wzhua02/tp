@@ -112,7 +112,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only the name is searched.
 * Only the name and contact number of the client will be displayed
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -146,12 +146,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [g/G
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing recurring schedules, one time schedules or tags, the existing parameters of the person will be removed i.e it is not cumulative.
+* When editing recurring schedules, one time schedules or tags, the existing parameters of the client will be removed i.e it is not cumulative.
 * You can remove all the client's recurring schedules, one time schedules and tags by typing `rs/`, `ots/`, and `t/` respectively without specifying any value after it.
 
 Examples:
-*  `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400` Edits the phone number, location, and one time schedule of the 1st person to be `91234567`, `Anytime Fitness`, and `4/4 1200 1400` respectively.
-*  `edit 2 n/Betsy Crower rs/ ots/ t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing recurring schedules, one time schedules and tags.
+*  `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400` Edits the phone number, location, and one time schedule of the 1st client to be `91234567`, `Anytime Fitness`, and `4/4 1200 1400` respectively.
+*  `edit 2 n/Betsy Crower rs/ ots/ t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing recurring schedules, one time schedules and tags.
 
 ### Deleting a client : `delete`
 
@@ -159,8 +159,8 @@ Deletes the specified client from FitFlow.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 ### Help : `help`
@@ -173,8 +173,8 @@ Format: `help [add] [view] [schedule] [edit] [delete] [clear] [exit]`
 * `help` can be called on its own, calling help followed by a specific command will give the specific description and formatting for that command. e.g `help add` will display the description of the add command and its formatting.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd client from FitFlow.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ### Exiting the program : `exit`
 
@@ -184,7 +184,7 @@ Format: `exit`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from FitFlow.
 
 Format: `clear`
 
@@ -211,7 +211,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FitFlow home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
