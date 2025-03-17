@@ -29,17 +29,17 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
-            .withRecurringSchedules("Mon 1400 1600", "Wed 1500 1700")
+            .withRecurringSchedules("Monday 1400 1600", "Wednesday 1500 1700")
             .withGoals("Get fitter").withMedicalHistory("Twisted right ankle")
             .withLocation("123, Jurong West Ave 6, #08-111")
             .withOneTimeSchedules("1/2 1000 1200", "2/3 1000 1200").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
-            .withRecurringSchedules("Mon 1400 1600")
+            .withRecurringSchedules("Monday 1400 1600")
             .withGoals("Lose weight").withMedicalHistory("Fractured right ankle")
             .withLocation("311, Clementi Ave 2, #02-25")
             .withOneTimeSchedules("2/2 1200 1400").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withRecurringSchedules("Mon 1400 1600")
+            .withRecurringSchedules("Monday 1400 1600")
             .withGoals("Gain muscle mass").withMedicalHistory("Fractured right hand")
             .withLocation("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")

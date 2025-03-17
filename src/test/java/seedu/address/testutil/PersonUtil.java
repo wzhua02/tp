@@ -68,7 +68,8 @@ public class PersonUtil {
                 sb.append(PREFIX_RECURRING_SCHEDULE).append(" ");;
             } else {
                 recurringSchedules.forEach(s -> sb.append(PREFIX_RECURRING_SCHEDULE)
-                        .append(s.day).append(" ").append(s.getStartTime()).append(" ").append(s.getEndTime()).append(" ")
+                        .append(s.day).append(" ").append(s.getStartTime()).append(" ")
+                        .append(s.getEndTime()).append(" ")
                 );
             }
         }
@@ -85,7 +86,8 @@ public class PersonUtil {
                 sb.append(PREFIX_ONETIMESCHEDULE).append(" ");
             } else {
                 oneTimeSchedules.forEach(s -> sb.append(PREFIX_ONETIMESCHEDULE)
-                        .append(s.date).append(" ").append(s.getStartTime()).append(" ").append(s.getEndTime()).append(" "));
+                        .append(s.date).append(" ").append(s.getStartTime()).append(" ")
+                        .append(s.getEndTime()).append(" "));
             }
         }
 

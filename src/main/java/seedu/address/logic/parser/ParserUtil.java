@@ -77,7 +77,7 @@ public class ParserUtil {
     public static RecurringSchedule parseRecurringSchedule(String recurringSchedule) throws ParseException {
         requireNonNull(recurringSchedule);
         String trimmedRecurringSchedule = recurringSchedule.trim();
-        if (!RecurringSchedule.isValidSchedule(trimmedRecurringSchedule)) {
+        if (!RecurringSchedule.isValidRecurringSchedule(trimmedRecurringSchedule)) {
             throw new ParseException(RecurringSchedule.MESSAGE_CONSTRAINTS);
         }
         if (!RecurringSchedule.isValidTime(trimmedRecurringSchedule)) {

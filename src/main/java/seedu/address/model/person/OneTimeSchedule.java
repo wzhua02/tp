@@ -37,10 +37,13 @@ public class OneTimeSchedule extends Schedule {
      * @param schedule A valid one-time schedule string.
      */
     public OneTimeSchedule(String schedule) {
-        super(extractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
+        super(validateThenExtractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
+        this.date = extractDate(schedule);
+    }
+    private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);
         checkArgument(isValidOneTimeSchedule(schedule), MESSAGE_CONSTRAINTS);
-        this.date = extractDate(schedule);
+        return extractStartTime(schedule);
     }
 
     private static String extractDate(String schedule) {

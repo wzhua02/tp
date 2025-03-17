@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 /**
  * Represents a RecurringSchedule in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidSchedule(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidRecurringSchedule(String)}
  */
 public class RecurringSchedule extends Schedule {
 
@@ -36,14 +36,17 @@ public class RecurringSchedule extends Schedule {
      * @param schedule A valid recurring schedule string.
      */
     public RecurringSchedule(String schedule) {
-        super(extractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
-        requireNonNull(schedule);
-        checkArgument(isValidSchedule(schedule), MESSAGE_CONSTRAINTS);
+        super(validateThenExtractStartTime(schedule), extractEndTime(schedule));
         this.day = extractDay(schedule);
+    }
+    private static String validateThenExtractStartTime(String schedule) {
+        requireNonNull(schedule);
+        checkArgument(isValidRecurringSchedule(schedule), MESSAGE_CONSTRAINTS);
+        return extractStartTime(schedule);
     }
 
     private static String extractDay(String schedule) {
-        return schedule.split(" ")[0];
+        return formatDay(schedule.split(" ")[0]);
     }
 
     private static String extractStartTime(String schedule) {
@@ -61,7 +64,7 @@ public class RecurringSchedule extends Schedule {
     /**
      * Returns true if a given string is a valid recurring schedule.
      */
-    public static boolean isValidSchedule(String test) {
+    public static boolean isValidRecurringSchedule(String test) {
         return pattern.matcher(test).matches();
     }
 

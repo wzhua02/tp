@@ -39,7 +39,7 @@ class JsonAdaptedRecurringSchedule {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public RecurringSchedule toModelType() throws IllegalValueException {
-        if (!RecurringSchedule.isValidSchedule(recurringSchedule)) {
+        if (!RecurringSchedule.isValidRecurringSchedule(recurringSchedule)) {
             throw new IllegalValueException(RecurringSchedule.MESSAGE_CONSTRAINTS);
         }
         return new RecurringSchedule(recurringSchedule);

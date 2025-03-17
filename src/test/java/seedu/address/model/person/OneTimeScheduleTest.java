@@ -15,7 +15,7 @@ public class OneTimeScheduleTest {
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidOneTimeSchedule = "";
+        String invalidOneTimeSchedule = "invalid schedule";
         assertThrows(IllegalArgumentException.class, () -> new OneTimeSchedule(invalidOneTimeSchedule));
     }
 
