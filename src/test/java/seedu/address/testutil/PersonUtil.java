@@ -38,15 +38,15 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         person.getRecurringSchedules().stream().forEach(
-                s -> sb.append(PREFIX_RECURRING_SCHEDULE + s.day + " " + s.startTime + " "
-                        + s.endTime + " ")
+                s -> sb.append(PREFIX_RECURRING_SCHEDULE + s.getDay() + " " + s.getStartTime() + " "
+                        + s.getEndTime() + " ")
         );
         sb.append(PREFIX_GOALS + person.getGoals().value + " ");
         sb.append(PREFIX_MEDICAL_HISTORY + person.getMedicalHistory().value + " ");
         sb.append(PREFIX_LOCATION + person.getLocation().value + " ");
         person.getOneTimeSchedules().stream().forEach(
-                s -> sb.append(PREFIX_ONETIMESCHEDULE + s.date + " " + s.startTime + " "
-                        + s.endTime + " ")
+                s -> sb.append(PREFIX_ONETIMESCHEDULE + s.getDate() + " " + s.getStartTime() + " "
+                        + s.getEndTime() + " ")
         );
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -68,7 +68,7 @@ public class PersonUtil {
                 sb.append(PREFIX_RECURRING_SCHEDULE).append(" ");;
             } else {
                 recurringSchedules.forEach(s -> sb.append(PREFIX_RECURRING_SCHEDULE)
-                        .append(s.day).append(" ").append(s.startTime).append(" ").append(s.endTime).append(" ")
+                        .append(s.day).append(" ").append(s.getStartTime()).append(" ").append(s.getEndTime()).append(" ")
                 );
             }
         }
@@ -85,7 +85,7 @@ public class PersonUtil {
                 sb.append(PREFIX_ONETIMESCHEDULE).append(" ");
             } else {
                 oneTimeSchedules.forEach(s -> sb.append(PREFIX_ONETIMESCHEDULE)
-                        .append(s.date).append(" ").append(s.startTime).append(" ").append(s.endTime).append(" "));
+                        .append(s.date).append(" ").append(s.getStartTime()).append(" ").append(s.getEndTime()).append(" "));
             }
         }
 
