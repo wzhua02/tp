@@ -11,9 +11,9 @@ import seedu.address.model.person.ScheduleContainsKeywordPredicate;
  * Finds and lists all persons in address book who has sessions that matches any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class ScheduleCommand extends Command {
+public class ViewCommand extends Command {
 
-    public static final String COMMAND_WORD = "schedule";
+    public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose sessions contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -23,7 +23,7 @@ public class ScheduleCommand extends Command {
 
     private final ScheduleContainsKeywordPredicate predicate;
 
-    public ScheduleCommand(ScheduleContainsKeywordPredicate predicate) {
+    public ViewCommand(ScheduleContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -42,12 +42,12 @@ public class ScheduleCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ScheduleCommand)) {
+        if (!(other instanceof ViewCommand)) {
             return false;
         }
 
-        ScheduleCommand otherScheduleCommand = (ScheduleCommand) other;
-        return predicate.equals(otherScheduleCommand.predicate);
+        ViewCommand otherViewCommand = (ViewCommand) other;
+        return predicate.equals(otherViewCommand.predicate);
     }
 
     @Override

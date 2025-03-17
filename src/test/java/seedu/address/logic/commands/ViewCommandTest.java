@@ -21,9 +21,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ScheduleContainsKeywordPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code ScheduleCommand}.
+ * Contains integration tests (interaction with the Model) for {@code ViewCommand}.
  */
-public class ScheduleCommandTest {
+public class ViewCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -34,14 +34,14 @@ public class ScheduleCommandTest {
         ScheduleContainsKeywordPredicate secondPredicate =
                 new ScheduleContainsKeywordPredicate("second");
 
-        ScheduleCommand findFirstCommand = new ScheduleCommand(firstPredicate);
-        ScheduleCommand findSecondCommand = new ScheduleCommand(secondPredicate);
+        ViewCommand findFirstCommand = new ViewCommand(firstPredicate);
+        ViewCommand findSecondCommand = new ViewCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        ScheduleCommand findFirstCommandCopy = new ScheduleCommand(firstPredicate);
+        ViewCommand findFirstCommandCopy = new ViewCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -58,7 +58,7 @@ public class ScheduleCommandTest {
     public void execute_dayKeyword_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         ScheduleContainsKeywordPredicate predicate = preparePredicate("Monday");
-        ScheduleCommand command = new ScheduleCommand(predicate);
+        ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getFilteredPersonList());
@@ -68,7 +68,7 @@ public class ScheduleCommandTest {
     public void execute_dayTruncatedKeyword_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         ScheduleContainsKeywordPredicate predicate = preparePredicate("mon");
-        ScheduleCommand command = new ScheduleCommand(predicate);
+        ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getFilteredPersonList());
@@ -78,7 +78,7 @@ public class ScheduleCommandTest {
     public void execute_dateKeyword_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         ScheduleContainsKeywordPredicate predicate = preparePredicate("2/2");
-        ScheduleCommand command = new ScheduleCommand(predicate);
+        ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
@@ -87,9 +87,9 @@ public class ScheduleCommandTest {
     @Test
     public void toStringMethod() {
         ScheduleContainsKeywordPredicate predicate = new ScheduleContainsKeywordPredicate("keyword");
-        ScheduleCommand scheduleCommand = new ScheduleCommand(predicate);
-        String expected = ScheduleCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, scheduleCommand.toString());
+        ViewCommand viewCommand = new ViewCommand(predicate);
+        String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, viewCommand.toString());
     }
 
     /**

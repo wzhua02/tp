@@ -6,25 +6,25 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.model.person.ScheduleContainsKeywordPredicate;
 
-public class ScheduleCommandParserTest {
+public class ViewCommandParserTest {
 
-    private ScheduleCommandParser parser = new ScheduleCommandParser();
+    private ViewCommandParser parser = new ViewCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ScheduleCommand.MESSAGE_USAGE));
+                ViewCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsScheduleCommand() {
         // no leading and trailing whitespaces
-        ScheduleCommand expectedScheduleCommand =
-                new ScheduleCommand(new ScheduleContainsKeywordPredicate("Monday"));
-        assertParseSuccess(parser, "Monday", expectedScheduleCommand);
+        ViewCommand expectedViewCommand =
+                new ViewCommand(new ScheduleContainsKeywordPredicate("Monday"));
+        assertParseSuccess(parser, "Monday", expectedViewCommand);
     }
 
 }
