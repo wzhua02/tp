@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -56,6 +57,28 @@ public class OneTimeScheduleTest {
                 .OneTimeSchedule.isValidOneTimeSchedule("2/2/25 1000 1200")); // d/m/yy HHmm HHmm
         assertTrue(seedu.address.model.person
                 .OneTimeSchedule.isValidOneTimeSchedule("02/02/25 1000 1200")); // dd/mm/yy HHmm HHmm
+    }
+
+    @Test
+    void formatDate_validInputs_shouldReturnNormalizedDate() {
+        // Test without year
+        assertEquals("01/01", OneTimeSchedule.formatDate("1/1"));
+        assertEquals("09/12", OneTimeSchedule.formatDate("9/12"));
+        assertEquals("31/10", OneTimeSchedule.formatDate("31/10"));
+
+        // Test with year
+        assertEquals("01/01/23", OneTimeSchedule.formatDate("1/1/23"));
+        assertEquals("09/12/99", OneTimeSchedule.formatDate("9/12/99"));
+        assertEquals("31/10/20", OneTimeSchedule.formatDate("31/10/20"));
+
+        // Test with already normalized input
+        assertEquals("01/01", OneTimeSchedule.formatDate("01/01"));
+        assertEquals("31/12/23", OneTimeSchedule.formatDate("31/12/23"));
+    }
+
+    @Test
+    void formatDate_nullInput_shouldThrowNullPointerException() {
+        assertThrows(NullPointerException.class, () -> OneTimeSchedule.formatDate(null));
     }
 
     @Test

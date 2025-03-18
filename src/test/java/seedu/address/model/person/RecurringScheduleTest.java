@@ -55,6 +55,50 @@ public class RecurringScheduleTest {
     }
 
     @Test
+    void testValidAbbreviations() {
+        assertEquals("Monday", RecurringSchedule.formatDay("mon"));
+        assertEquals("Tuesday", RecurringSchedule.formatDay("tue"));
+        assertEquals("Wednesday", RecurringSchedule.formatDay("wed"));
+        assertEquals("Thursday", RecurringSchedule.formatDay("thu"));
+        assertEquals("Friday", RecurringSchedule.formatDay("fri"));
+        assertEquals("Saturday", RecurringSchedule.formatDay("sat"));
+        assertEquals("Sunday", RecurringSchedule.formatDay("sun"));
+    }
+
+    @Test
+    void testValidFullNames() {
+        assertEquals("Monday", RecurringSchedule.formatDay("monday"));
+        assertEquals("Tuesday", RecurringSchedule.formatDay("tuesday"));
+        assertEquals("Wednesday", RecurringSchedule.formatDay("wednesday"));
+        assertEquals("Thursday", RecurringSchedule.formatDay("thursday"));
+        assertEquals("Friday", RecurringSchedule.formatDay("friday"));
+        assertEquals("Saturday", RecurringSchedule.formatDay("saturday"));
+        assertEquals("Sunday", RecurringSchedule.formatDay("sunday"));
+    }
+
+    @Test
+    void testCaseInsensitiveInput() {
+        assertEquals("Monday", RecurringSchedule.formatDay("Mon"));
+        assertEquals("Tuesday", RecurringSchedule.formatDay("TUE"));
+        assertEquals("Wednesday", RecurringSchedule.formatDay("WeD"));
+        assertEquals("Thursday", RecurringSchedule.formatDay("thuRSDay"));
+        assertEquals("Friday", RecurringSchedule.formatDay("FRIDAY"));
+    }
+
+    @Test
+    void testInvalidDayThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> RecurringSchedule.formatDay("funday"));
+        assertThrows(IllegalArgumentException.class, () -> RecurringSchedule.formatDay("mnday"));
+        assertThrows(IllegalArgumentException.class, () -> RecurringSchedule.formatDay("xyz"));
+        assertThrows(IllegalArgumentException.class, () -> RecurringSchedule.formatDay(""));
+    }
+
+    @Test
+    void testNullInputThrowsException() {
+        assertThrows(NullPointerException.class, () -> RecurringSchedule.formatDay(null));
+    }
+
+    @Test
     public void equals() {
         RecurringSchedule schedule = new RecurringSchedule("Monday 0900 1700");
         // Same values -> returns true
