@@ -97,7 +97,13 @@ public class OneTimeScheduleTest {
         // different types -> returns false
         assertFalse(oneTimeSchedule.equals(5.0f));
 
-        // different values -> returns false
-        assertFalse(oneTimeSchedule.equals(new OneTimeSchedule("30/2 1000 1200")));
+        // different date -> returns false
+        assertFalse(oneTimeSchedule.equals(new OneTimeSchedule("3/2 1000 1200"))); // Date differs
+
+        // different start time -> returns false
+        assertFalse(oneTimeSchedule.equals(new OneTimeSchedule("2/2 0900 1200"))); // Start time differs
+
+        // different end time -> returns false
+        assertFalse(oneTimeSchedule.equals(new OneTimeSchedule("2/2 1000 1300"))); // End time differs
     }
 }

@@ -201,7 +201,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseOneTimeSchedule_invalidTimeOrder_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(INVALID_ONETIMESCHEDULE_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedule(INVALID_ONETIMESCHEDULE_2));
     }
 
 
