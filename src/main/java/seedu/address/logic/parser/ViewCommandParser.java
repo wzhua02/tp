@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.model.util.DayOfWeek.isDayOfWeek;
 
@@ -38,9 +39,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      * @return {@code true} if the date follows the expected format, otherwise {@code false}.
      */
     private static boolean isValidDate(String date) {
-        if (date == null) {
-            return false;
-        }
+        requireNonNull(date);
 
         // Regular expression to match "DD/MM" or "DD/MM/YY" format
         String regex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])(\\/\\d{2})?$";
