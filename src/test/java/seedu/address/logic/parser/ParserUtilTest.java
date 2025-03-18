@@ -25,6 +25,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "Réchel";
     private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_RECURRINGSCHEDULE_1 = "invalid schedule";
+    private static final String INVALID_RECURRINGSCHEDULE_2 = "Monday 1400 1200"; //invalid time
     private static final String INVALID_GOALS = " ";
     private static final String INVALID_LOCATION = " ";
     private static final String INVALID_ONETIMESCHEDULE_1 = "33/1 1000 1200"; //invalid date
@@ -33,6 +35,8 @@ public class ParserUtilTest {
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "88888888";
+    private static final String VALID_RECURRINGSCHEDULE_1 = "Tuesday 0900 1700";
+    private static final String VALID_RECURRINGSCHEDULE_2 = "fri 0800 1200";
     private static final String VALID_GOALS = "Get fitter";
     private static final String VALID_LOCATION = "123 Main Street #0505";
     private static final String VALID_ONETIMESCHEDULE_1 = "01/12 1000 1200";
@@ -115,31 +119,27 @@ public class ParserUtilTest {
 
     @Test
     public void parseRecurringSchedule_invalidFormat_throwsParseException() {
-        String invalidRecurringSchedule = "invalid schedule";
-        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(invalidRecurringSchedule));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(INVALID_RECURRINGSCHEDULE_1));
     }
 
     @Test
     public void parseRecurringSchedule_invalidTimeOrder_throwsParseException() {
-        // Although the format is valid, the end time is before the start time.
-        String invalidRecurringSchedule = "Monday 1400 1200";
-        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(invalidRecurringSchedule));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(INVALID_RECURRINGSCHEDULE_2));
     }
 
     @Test
     public void parseRecurringSchedule_validValueWithoutWhitespace_returnsRecurringSchedule() throws Exception {
-        String validRecurringSchedule = "Tuesday 0900 1700";
-        RecurringSchedule expected = new RecurringSchedule(validRecurringSchedule);
-        assertEquals(expected, ParserUtil.parseRecurringSchedule(validRecurringSchedule));
+        RecurringSchedule expected = new RecurringSchedule(VALID_RECURRINGSCHEDULE_1);
+        assertEquals(expected, ParserUtil.parseRecurringSchedule(VALID_RECURRINGSCHEDULE_1));
     }
 
     @Test
     public void parseRecurringSchedule_validValueWithWhitespaceAndAbbreviatedDay_returnsRecurringSchedule() throws
             Exception {
-        String input = "   fri 0800 1200   ";
+        String abbrevDayWithWhiteppace = WHITESPACE + VALID_RECURRINGSCHEDULE_2 + WHITESPACE;
         // The constructor converts "fri" to "Friday", so the expected schedule should be "Friday 0800 1200"
         RecurringSchedule expected = new RecurringSchedule("fri 0800 1200");
-        assertEquals(expected, ParserUtil.parseRecurringSchedule(input));
+        assertEquals(expected, ParserUtil.parseRecurringSchedule(abbrevDayWithWhiteppace));
     }
 
 
