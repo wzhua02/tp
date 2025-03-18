@@ -30,7 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_GOALS = " ";
     private static final String INVALID_LOCATION = " ";
     private static final String INVALID_ONETIMESCHEDULE_1 = "33/1 1000 1200"; //invalid date
-    private static final String INVALID_ONETIMESCHEDULE_2 = "Friday 1400 1200"; //invalid time
+    private static final String INVALID_ONETIMESCHEDULE_2 = "2/3 1400 1200"; //invalid time
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -204,7 +204,6 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedule(INVALID_ONETIMESCHEDULE_2));
     }
 
-
     @Test
     public void parseOneTimeSchedules_validValueWithoutWhitespace_returnsOneTimeSchedule() throws Exception {
         OneTimeSchedule expectedOneTimeSchedule = new OneTimeSchedule(VALID_ONETIMESCHEDULE_1);
@@ -219,7 +218,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseOneTimeSchedules_collectionWithInvalidTags_throwsParseException() {
+    public void parseOneTimeSchedules_collectionWithInvalidOneTimeSchedules_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedules(
                 Arrays.asList(VALID_ONETIMESCHEDULE_1, INVALID_ONETIMESCHEDULE_1)));
     }
@@ -230,7 +229,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseOneTimeSchedules_collectionWithValidTags_returnsOneTimeScheduleSetSet() throws Exception {
+    public void parseOneTimeSchedules_collectionWithValidOneTimeSchedules_returnsOneTimeScheduleSetSet() throws Exception {
         Set<OneTimeSchedule> actualOneTimeScheduleSet = ParserUtil.parseOneTimeSchedules(
                 Arrays.asList(VALID_ONETIMESCHEDULE_1, VALID_ONETIMESCHEDULE_2));
         Set<OneTimeSchedule> expectedOneTimeScheduleSet = new HashSet<OneTimeSchedule>(
