@@ -37,7 +37,7 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("\nPhone: ")
+                .append("\n\nPhone: ")
                 .append(person.getPhone())
                 .append("\nRecurringSchedule: ");
 
