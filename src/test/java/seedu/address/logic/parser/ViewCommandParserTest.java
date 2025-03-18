@@ -21,9 +21,9 @@ public class ViewCommandParserTest {
 
     private static final String INVALID_DATE_1 = "32/01"; // Day out of range
     private static final String INVALID_DATE_2 = "12/13"; // Month out of range
-    private static final String INVALID_DATE_3 = "1-2";   // Wrong delimiter
+    private static final String INVALID_DATE_3 = "1-2"; // Wrong delimiter
     private static final String INVALID_DATE_4 = "2024/01/01"; // Full year format not allowed
-    private static final String INVALID_DATE_5 = "abcd";  // Random string
+    private static final String INVALID_DATE_5 = "abcd"; // Random string
 
     private ViewCommandParser parser = new ViewCommandParser();
 
