@@ -73,7 +73,8 @@ public class ViewCommandTest {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "Monday")).append("\n\n");
         sb.append("Alice Pauline: 1400-1600\n").append("Benson Meier: 1400-1600\n").append("Carl Kurz: 1400-1600\n");
-        String expectedMessage = sb.toString().trim();        ScheduleContainsKeywordPredicate predicate = preparePredicate("mon");
+        String expectedMessage = sb.toString().trim();
+        ScheduleContainsKeywordPredicate predicate = preparePredicate("mon");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
