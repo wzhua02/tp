@@ -28,7 +28,7 @@ public class RecurringSchedule extends Schedule {
 
     private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
 
-    public final String day;
+    public final DayOfWeek day;
 
     /**
      * Constructs a {@code RecurringSchedule}.
@@ -45,8 +45,8 @@ public class RecurringSchedule extends Schedule {
         return extractStartTime(schedule);
     }
 
-    private static String extractDay(String schedule) {
-        return String.valueOf(DayOfWeek.fromString(schedule.split(" ")[0]));
+    private static DayOfWeek extractDay(String schedule) {
+        return DayOfWeek.fromString(schedule.split(" ")[0]);
     }
 
     private static String extractStartTime(String schedule) {
@@ -57,7 +57,7 @@ public class RecurringSchedule extends Schedule {
         return schedule.split(" ")[2];
     }
 
-    public String getDay() {
+    public DayOfWeek getDay() {
         return day;
     }
 
