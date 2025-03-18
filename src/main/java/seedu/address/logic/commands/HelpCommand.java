@@ -23,6 +23,7 @@ public class HelpCommand extends Command {
             + "\nhelp " + PREFIX_COMMAND + ListCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + EditCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + FindCommand.COMMAND_WORD
+            + "\nhelp " + PREFIX_COMMAND + DisplayCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + DeleteCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ClearCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ExitCommand.COMMAND_WORD;
@@ -49,6 +50,9 @@ public class HelpCommand extends Command {
             break;
         case DeleteCommand.COMMAND_WORD:
             helpMessage = DeleteCommand.MESSAGE_USAGE;
+            break;
+        case DisplayCommand.COMMAND_WORD:
+            helpMessage = DisplayCommand.MESSAGE_USAGE;
             break;
         case EditCommand.COMMAND_WORD:
             helpMessage = EditCommand.MESSAGE_USAGE;
