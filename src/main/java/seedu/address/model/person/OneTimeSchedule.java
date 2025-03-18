@@ -47,7 +47,22 @@ public class OneTimeSchedule extends Schedule {
     }
 
     private static String extractDate(String schedule) {
-        return schedule.split(" ")[0];
+        String datePart = schedule.split(" ")[0];
+        String[] dateComponents = datePart.split("/");
+
+        // Pad with leading zeros if necessary
+        String day = dateComponents[0].length() == 1 ? "0" + dateComponents[0] : dateComponents[0];
+        String month = dateComponents[1].length() == 1 ? "0" + dateComponents[1] : dateComponents[1];
+
+        // Handle optional year part (if it's there)
+        String normalizedDate;
+        if (dateComponents.length == 3) {
+            String year = dateComponents[2];
+            normalizedDate = day + "/" + month + "/" + year;
+        } else {
+            normalizedDate = day + "/" + month;
+        }
+        return normalizedDate;
     }
 
     private static String extractStartTime(String schedule) {
