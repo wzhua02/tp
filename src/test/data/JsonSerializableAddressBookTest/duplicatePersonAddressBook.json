@@ -5,6 +5,7 @@
     "recurringSchedule": ["Mon 1400 1600", "Wed 1500 1700"],
     "goals" : "Calisthenics improvement",
     "medicalHistory" : "Left shoulder injury",
+    "oneTimeSchedule" : [ "02/02 1000 1200" ],
     "location": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ]
   }, {
@@ -13,6 +14,7 @@
     "recurringSchedule": ["Mon 1400 1600", "Wed 1500 1700"],
     "goals" : "Calisthenics improvement",
     "medicalHistory" : "Right shoulder injury",
+    "oneTimeSchedule" : [ "02/02 1000 1200" ],
     "location": "4th street"
   } ]
 }

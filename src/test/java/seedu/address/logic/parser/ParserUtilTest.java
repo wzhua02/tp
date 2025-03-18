@@ -205,13 +205,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseOneTimeSchedules_validValueWithoutWhitespace_returnsOneTimeSchedule() throws Exception {
+    public void parseOneTimeSchedule_validValueWithoutWhitespace_returnsOneTimeSchedule() throws Exception {
         OneTimeSchedule expectedOneTimeSchedule = new OneTimeSchedule(VALID_ONETIMESCHEDULE_1);
         assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedule(VALID_ONETIMESCHEDULE_1));
     }
 
     @Test
-    public void parseOneTimeSchedules_validValueWithWhitespace_returnsTrimmedOneTimeSchedule() throws Exception {
+    public void parseOneTimeSchedule_validValueWithWhitespace_returnsTrimmedOneTimeSchedule() throws Exception {
         String oneTimeScheduleWithWhitespace = WHITESPACE + VALID_ONETIMESCHEDULE_1 + WHITESPACE;
         OneTimeSchedule expectedOneTimeSchedule = new OneTimeSchedule(VALID_ONETIMESCHEDULE_1);
         assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedule(oneTimeScheduleWithWhitespace));
