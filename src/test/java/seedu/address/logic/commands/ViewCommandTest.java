@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,6 +53,19 @@ public class ViewCommandTest {
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+    }
+
+    @Test
+    public void execute_dayKeyword_noPersonsFound() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "Sunday")).append("\n\n");
+        sb.append("No clients found!");
+        String expectedMessage = sb.toString().trim();
+        ScheduleContainsKeywordPredicate predicate = preparePredicate("Sunday");
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
