@@ -27,7 +27,8 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_GOALS = " ";
     private static final String INVALID_LOCATION = " ";
-    private static final String INVALID_ONETIMESCHEDULE = "33/1 1000 1200";
+    private static final String INVALID_ONETIMESCHEDULE_1 = "33/1 1000 1200"; //invalid date
+    private static final String INVALID_ONETIMESCHEDULE_2 = "Friday 1400 1200"; //invalid time
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -190,31 +191,37 @@ public class ParserUtilTest {
 
     @Test
     public void parseOneTimeSchedules_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseOneTimeSchedules((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseOneTimeSchedule((String) null));
     }
 
     @Test
-    public void parseOneTimeSchedule_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_ONETIMESCHEDULE));
+    public void parseOneTimeSchedule_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedule(INVALID_ONETIMESCHEDULE_1));
     }
+
+    @Test
+    public void parseOneTimeSchedule_invalidTimeOrder_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(INVALID_ONETIMESCHEDULE_2));
+    }
+
 
     @Test
     public void parseOneTimeSchedules_validValueWithoutWhitespace_returnsOneTimeSchedule() throws Exception {
         OneTimeSchedule expectedOneTimeSchedule = new OneTimeSchedule(VALID_ONETIMESCHEDULE_1);
-        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedules(VALID_ONETIMESCHEDULE_1));
+        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedule(VALID_ONETIMESCHEDULE_1));
     }
 
     @Test
     public void parseOneTimeSchedules_validValueWithWhitespace_returnsTrimmedOneTimeSchedule() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_ONETIMESCHEDULE_1 + WHITESPACE;
+        String oneTimeScheduleWithWhitespace = WHITESPACE + VALID_ONETIMESCHEDULE_1 + WHITESPACE;
         OneTimeSchedule expectedOneTimeSchedule = new OneTimeSchedule(VALID_ONETIMESCHEDULE_1);
-        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedules(tagWithWhitespace));
+        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedule(oneTimeScheduleWithWhitespace));
     }
 
     @Test
     public void parseOneTimeSchedules_collectionWithInvalidTags_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedules(
-                Arrays.asList(VALID_ONETIMESCHEDULE_1, INVALID_ONETIMESCHEDULE)));
+                Arrays.asList(VALID_ONETIMESCHEDULE_1, INVALID_ONETIMESCHEDULE_1)));
     }
 
     @Test

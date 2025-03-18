@@ -135,7 +135,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code oneTimeSchedule} is invalid.
      */
-    public static OneTimeSchedule parseOneTimeSchedules(String oneTimeSchedule) throws ParseException {
+    public static OneTimeSchedule parseOneTimeSchedule(String oneTimeSchedule) throws ParseException {
         requireNonNull(oneTimeSchedule);
         String trimmedOneTimeSchedule = oneTimeSchedule.trim();
         if (!OneTimeSchedule.isValidOneTimeSchedule(trimmedOneTimeSchedule)) {
@@ -155,7 +155,7 @@ public class ParserUtil {
         requireNonNull(oneTimeSchedules);
         final Set<OneTimeSchedule> oneTimeScheduleSet = new HashSet<>();
         for (String oneTimeScheduleDate : oneTimeSchedules) {
-            oneTimeScheduleSet.add(parseOneTimeSchedules(oneTimeScheduleDate));
+            oneTimeScheduleSet.add(parseOneTimeSchedule(oneTimeScheduleDate));
         }
         return oneTimeScheduleSet;
     }
