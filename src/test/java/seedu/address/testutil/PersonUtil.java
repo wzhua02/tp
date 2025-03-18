@@ -38,8 +38,8 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         person.getRecurringSchedules().stream().forEach(
-                s -> sb.append(PREFIX_RECURRING_SCHEDULE + s.getDay() + " " + s.getStartTime() + " "
-                        + s.getEndTime() + " ")
+                s -> sb.append(PREFIX_RECURRING_SCHEDULE + String.valueOf(s.getDay())
+                        + " " + s.getStartTime() + " " + s.getEndTime() + " ")
         );
         sb.append(PREFIX_GOALS + person.getGoals().value + " ");
         sb.append(PREFIX_MEDICAL_HISTORY + person.getMedicalHistory().value + " ");

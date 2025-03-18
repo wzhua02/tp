@@ -5,6 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.regex.Pattern;
 
+import seedu.address.model.util.DayOfWeek;
+
 /**
  * Represents a RecurringSchedule in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidRecurringSchedule(String)}
@@ -13,16 +15,16 @@ public class RecurringSchedule extends Schedule {
 
     public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:"
             + " [day HHmm HHmm].";
+    private static final String DAY_OF_WEEK_REGEX = DayOfWeek.generateDayOfWeekRegex();
     /*
      * A valid schedule format:
      * - Must start with a valid day of the week (full or abbreviated).
      * - Followed by two sets of four-digit times (HHmm format, 00:00 to 23:59).
      */
     public static final String VALIDATION_REGEX =
-            "^(?i)(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|"
-                    + "Mon|Tue|Wed|Thu|Fri|Sat|Sun)\\s"
-                    + "(?:[01]\\d|2[0-3])[0-5]\\d\\s" // First HHmm (0000 - 2359)
-                    + "(?:[01]\\d|2[0-3])[0-5]\\d$"; // Second HHmm (0000 - 2359)
+            "^(?i)(" + DAY_OF_WEEK_REGEX + ")\\s"
+                    + VALIDATION_REGEX_TIME + "\\s" // First HHmm (0000 - 2359)
+                    + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
 
     private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
 
@@ -44,7 +46,7 @@ public class RecurringSchedule extends Schedule {
     }
 
     private static String extractDay(String schedule) {
-        return formatDay(schedule.split(" ")[0]);
+        return String.valueOf(DayOfWeek.fromString(schedule.split(" ")[0]));
     }
 
     private static String extractStartTime(String schedule) {
@@ -64,40 +66,6 @@ public class RecurringSchedule extends Schedule {
      */
     public static boolean isValidRecurringSchedule(String test) {
         return pattern.matcher(test).matches();
-    }
-    /**
-     * Formats the given day to its full form with the first letter capitalized.
-     *
-     * @param day The day input string.
-     * @return The formatted day string.
-     */
-    public static String formatDay(String day) {
-        String lowerDay = day.toLowerCase();
-        switch (lowerDay) {
-        case "mon":
-        case "monday":
-            return "Monday";
-        case "tue":
-        case "tuesday":
-            return "Tuesday";
-        case "wed":
-        case "wednesday":
-            return "Wednesday";
-        case "thu":
-        case "thursday":
-            return "Thursday";
-        case "fri":
-        case "friday":
-            return "Friday";
-        case "sat":
-        case "saturday":
-            return "Saturday";
-        case "sun":
-        case "sunday":
-            return "Sunday";
-        default:
-            throw new IllegalArgumentException("Invalid day: " + day);
-        }
     }
 
     @Override
@@ -128,7 +96,7 @@ public class RecurringSchedule extends Schedule {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + day + " " + startTime + " " + endTime + ']';
+        return '[' + String.valueOf(day) + " " + startTime + " " + endTime + ']';
     }
 
 }

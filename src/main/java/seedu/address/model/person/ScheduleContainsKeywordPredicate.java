@@ -1,12 +1,12 @@
 package seedu.address.model.person;
 
 import static seedu.address.model.person.OneTimeSchedule.formatDate;
-import static seedu.address.model.person.RecurringSchedule.formatDay;
 
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.util.DayOfWeek;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -23,20 +23,11 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
      * @param keyword The keyword to match against a person's schedules.
      */
     public ScheduleContainsKeywordPredicate(String keyword) {
-        if (isDay(keyword)) {
-            this.keyword = formatDay(keyword);
+        if (DayOfWeek.isDayOfWeek(keyword)) {
+            this.keyword = String.valueOf(DayOfWeek.fromString(keyword));
         } else {
             this.keyword = formatDate(keyword);
         }
-    }
-    private boolean isDay(String input) {
-        String lowerDay = input.toLowerCase();
-        return switch (lowerDay) {
-        case "mon", "monday", "tue", "tuesday", "wed", "wednesday",
-             "thu", "thursday", "fri", "friday", "sat", "saturday",
-             "sun", "sunday" -> true;
-        default -> false;
-        };
     }
 
     public String getKeyword() {
@@ -48,7 +39,8 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
         boolean oneTimeScheduleMatches = person.getOneTimeSchedules().stream()
                 .anyMatch(schedule -> StringUtil.containsWordIgnoreCase(schedule.getDate(), keyword));
         boolean recurringScheduleMatches = person.getRecurringSchedules().stream()
-                .anyMatch(schedule -> StringUtil.containsWordIgnoreCase(schedule.getDay(), keyword));
+                .anyMatch(schedule -> StringUtil.containsWordIgnoreCase(
+                        String.valueOf(schedule.getDay()), keyword));
         return oneTimeScheduleMatches || recurringScheduleMatches;
     }
 

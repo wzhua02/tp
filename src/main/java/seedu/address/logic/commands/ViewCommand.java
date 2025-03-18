@@ -13,6 +13,7 @@ import seedu.address.model.person.OneTimeSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecurringSchedule;
 import seedu.address.model.person.ScheduleContainsKeywordPredicate;
+import seedu.address.model.util.DayOfWeek;
 
 /**
  * Finds and lists all persons in address book who has sessions that matches any of the argument keywords.
@@ -26,6 +27,7 @@ public class ViewCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: DAY/DATE \n"
             + "Example: " + COMMAND_WORD + " Monday\n"
+            + "Example: " + COMMAND_WORD + " Tue\n"
             + "Example: " + COMMAND_WORD + " 15/06";
 
     private final ScheduleContainsKeywordPredicate predicate;
@@ -41,7 +43,11 @@ public class ViewCommand extends Command {
         String keyword = predicate.getKeyword();
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, keyword)).append("\n\n");
-        if (isDay(keyword)) {
+        if (model.getFilteredPersonList().isEmpty()) {
+            sb.append("No clients found!");
+            return new CommandResult(sb.toString().trim());
+        }
+        if (DayOfWeek.isDayOfWeek(keyword)) {
             //search recurringSchedule
             model.getFilteredPersonList().forEach(person -> {
                 List<String> matchingTimes = findMatchingRecurringSchedule(person, keyword);
@@ -58,17 +64,10 @@ public class ViewCommand extends Command {
         return new CommandResult(sb.toString().trim());
     }
 
-    private boolean isDay(String str) {
-        return switch (str.toLowerCase()) {
-        case "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" -> true;
-        default -> false;
-        };
-    }
-
     private List<String> findMatchingRecurringSchedule(Person person, String keyword) {
         Set<RecurringSchedule> recurringSchedules = person.getRecurringSchedules();
         List<String> matchingTimes = recurringSchedules.stream()
-                .filter(schedule -> schedule.getDay().equalsIgnoreCase(keyword))
+                .filter(schedule -> String.valueOf(schedule.getDay()).equalsIgnoreCase(keyword))
                 .map(schedule -> String.format("%s-%s", schedule.getStartTime(),
                         schedule.getEndTime()))
                 .toList();

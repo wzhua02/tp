@@ -7,6 +7,7 @@ package seedu.address.model.person;
 public abstract class Schedule {
     public static final String MESSAGE_TIME_CONSTRAINTS = "End time (second time) must be later than start time"
             + " (first time).";
+    public static final String VALIDATION_REGEX_TIME = "(?:[01]\\d|2[0-3])[0-5]\\d"; //HHmm (0000 - 2359)
     protected final String startTime;
     protected final String endTime;
 
