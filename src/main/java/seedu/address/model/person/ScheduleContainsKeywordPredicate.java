@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import static seedu.address.model.person.OneTimeSchedule.formatDate;
+import static seedu.address.model.person.RecurringSchedule.formatDay;
+
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -20,17 +23,22 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
      * @param keyword The keyword to match against a person's schedules.
      */
     public ScheduleContainsKeywordPredicate(String keyword) {
-        this.keyword = switch (keyword.toLowerCase()) {
-        case "mon", "monday" -> "Monday";
-        case "tue", "tuesday" -> "Tuesday";
-        case "wed", "wednesday" -> "Wednesday";
-        case "thu", "thursday" -> "Thursday";
-        case "fri", "friday" -> "Friday";
-        case "sat", "saturday" -> "Saturday";
-        case "sun", "sunday" -> "Sunday";
-        default -> keyword;
+        if (isDay(keyword)) {
+            this.keyword = formatDay(keyword);
+        } else {
+            this.keyword = formatDate(keyword);
+        }
+    }
+    private boolean isDay(String input) {
+        String lowerDay = input.toLowerCase();
+        return switch (lowerDay) {
+        case "mon", "monday", "tue", "tuesday", "wed", "wednesday",
+             "thu", "thursday", "fri", "friday", "sat", "saturday",
+             "sun", "sunday" -> true;
+        default -> false;
         };
     }
+
     public String getKeyword() {
         return keyword;
     }

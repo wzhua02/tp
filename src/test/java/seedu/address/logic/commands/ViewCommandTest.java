@@ -31,9 +31,9 @@ public class ViewCommandTest {
     @Test
     public void equals() {
         ScheduleContainsKeywordPredicate firstPredicate =
-                new ScheduleContainsKeywordPredicate("first");
+                new ScheduleContainsKeywordPredicate("monday");
         ScheduleContainsKeywordPredicate secondPredicate =
-                new ScheduleContainsKeywordPredicate("second");
+                new ScheduleContainsKeywordPredicate("tuesday");
 
         ViewCommand findFirstCommand = new ViewCommand(firstPredicate);
         ViewCommand findSecondCommand = new ViewCommand(secondPredicate);
@@ -85,7 +85,7 @@ public class ViewCommandTest {
     public void execute_dateKeyword_multiplePersonsFound() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(Messages.MESSAGE_SCHEDULES_LISTED, "02/02")).append("\n\n");
-        sb.append("Alice Pauline: 1400-1600\n").append("Benson Meier: 1400-1600\n").append("Carl Kurz: 1400-1600\n");
+        sb.append("Benson Meier: 1200-1400\n").append("Daniel Meier: 1000-1200\n");
         String expectedMessage = sb.toString().trim();
         ScheduleContainsKeywordPredicate predicate = preparePredicate("2/2");
         ViewCommand command = new ViewCommand(predicate);
@@ -96,7 +96,7 @@ public class ViewCommandTest {
 
     @Test
     public void toStringMethod() {
-        ScheduleContainsKeywordPredicate predicate = new ScheduleContainsKeywordPredicate("keyword");
+        ScheduleContainsKeywordPredicate predicate = new ScheduleContainsKeywordPredicate("02/02");
         ViewCommand viewCommand = new ViewCommand(predicate);
         String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, viewCommand.toString());
