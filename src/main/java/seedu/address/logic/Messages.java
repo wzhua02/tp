@@ -48,13 +48,7 @@ public class Messages {
             builder.append(schedule);
         });
 
-        builder.append("\nGoals: ")
-                .append(person.getGoals())
-                .append("\nMedical History: ")
-                .append(person.getMedicalHistory())
-                .append("\nLocation: ")
-                .append(person.getLocation())
-                .append("\nOneTimeSchedule: ");
+        builder.append("\nOneTimeSchedule: ");
 
         person.getOneTimeSchedules().forEach(schedule -> {
             if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
@@ -62,6 +56,13 @@ public class Messages {
             }
             builder.append(schedule);
         });
+
+        builder.append("\nGoals: ")
+                .append(person.getGoals())
+                .append("\nMedical History: ")
+                .append(person.getMedicalHistory())
+                .append("\nLocation: ")
+                .append(person.getLocation());
 
         builder.append("\nTags: ");
 
