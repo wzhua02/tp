@@ -48,21 +48,7 @@ public class OneTimeSchedule extends Schedule {
 
     private static String extractDate(String schedule) {
         String datePart = schedule.split(" ")[0];
-        String[] dateComponents = datePart.split("/");
-
-        // Pad with leading zeros if necessary
-        String day = dateComponents[0].length() == 1 ? "0" + dateComponents[0] : dateComponents[0];
-        String month = dateComponents[1].length() == 1 ? "0" + dateComponents[1] : dateComponents[1];
-
-        // Handle optional year part (if it's there)
-        String normalizedDate;
-        if (dateComponents.length == 3) {
-            String year = dateComponents[2];
-            normalizedDate = day + "/" + month + "/" + year;
-        } else {
-            normalizedDate = day + "/" + month;
-        }
-        return normalizedDate;
+        return formatDate(datePart);
     }
 
     private static String extractStartTime(String schedule) {
@@ -75,6 +61,37 @@ public class OneTimeSchedule extends Schedule {
 
     public String getDate() {
         return date;
+    }
+
+    /**
+     * Formats a {@code String date} and returns a normalized date {@code String}.
+     * Single-digit days and months will be padded with a leading zero. Leading and
+     * trailing whitespaces will be trimmed if present.
+     * Expected input format: {@code "[d]d/[m]m"} or {@code "[d]d/[m]m/yy"}
+     *
+     * @param date the date {@code String} to be formatted and normalized; must not be {@code null}.
+     * @return a normalized date {@code String} in the format {@code "dd/MM"} or {@code "dd/MM/yy"}.
+     * @throws NullPointerException if the given {@code date} is {@code null}.
+     */
+    public static String formatDate(String date) {
+        requireNonNull(date);
+        String[] dateComponents = date.split("/");
+
+        String trimmedDay = dateComponents[0].trim();
+        String trimmedMonth = dateComponents[1].trim();
+        // Pad with leading zeros if necessary
+        String normalizedDay = trimmedDay.length() == 1 ? "0" + trimmedDay : trimmedDay;
+        String normalizedMonth = trimmedMonth.length() == 1 ? "0" + trimmedMonth : trimmedMonth;
+
+        // Handle optional year part (if it's there)
+        String normalizedDate;
+        if (dateComponents.length == 3) {
+            String trimmedYear = dateComponents[2].trim();
+            normalizedDate = normalizedDay + "/" + normalizedMonth + "/" + trimmedYear;
+        } else {
+            normalizedDate = normalizedDay + "/" + normalizedMonth;
+        }
+        return normalizedDate;
     }
 
     /**

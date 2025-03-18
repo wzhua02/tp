@@ -20,14 +20,14 @@ public class ScheduleContainsKeywordPredicate implements Predicate<Person> {
      * @param keyword The keyword to match against a person's schedules.
      */
     public ScheduleContainsKeywordPredicate(String keyword) {
-        this.keyword = switch (keyword) {
-        case "mon" -> "Monday";
-        case "tue" -> "Tuesday";
-        case "wed" -> "Wednesday";
-        case "thu" -> "Thursday";
-        case "fri" -> "Friday";
-        case "sat" -> "Saturday";
-        case "sun" -> "Sunday";
+        this.keyword = switch (keyword.toLowerCase()) {
+        case "mon", "monday" -> "Monday";
+        case "tue", "tuesday" -> "Tuesday";
+        case "wed", "wednesday" -> "Wednesday";
+        case "thu", "thursday" -> "Thursday";
+        case "fri", "friday" -> "Friday";
+        case "sat", "saturday" -> "Saturday";
+        case "sun", "sunday" -> "Sunday";
         default -> keyword;
         };
     }

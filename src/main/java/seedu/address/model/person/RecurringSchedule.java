@@ -13,8 +13,6 @@ public class RecurringSchedule extends Schedule {
 
     public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:"
             + " [day HHmm HHmm].";
-    public static final String MESSAGE_TIME_CONSTRAINTS = "End time (second time) must be later than start time"
-            + " (first time).";
     /*
      * A valid schedule format:
      * - Must start with a valid day of the week (full or abbreviated).
@@ -67,35 +65,13 @@ public class RecurringSchedule extends Schedule {
     public static boolean isValidRecurringSchedule(String test) {
         return pattern.matcher(test).matches();
     }
-
-    /**
-     * Returns true if the end time is later than the start time in the given schedule.
-     *
-     * @param test A valid recurring schedule.
-     * @return true if the end time is later than the start time, false otherwise.
-     */
-    public static boolean isValidTime(String test) {
-        String[] parts = test.split("\\s+");
-        String startTime = parts[1];
-        String endTime = parts[2];
-
-        int startHour = Integer.parseInt(startTime.substring(0, 2));
-        int startMinute = Integer.parseInt(startTime.substring(2));
-        int startTotal = startHour * 60 + startMinute;
-        int endHour = Integer.parseInt(endTime.substring(0, 2));
-        int endMinute = Integer.parseInt(endTime.substring(2));
-        int endTotal = endHour * 60 + endMinute;
-
-        return endTotal > startTotal;
-    }
-
     /**
      * Formats the given day to its full form with the first letter capitalized.
      *
      * @param day The day input string.
      * @return The formatted day string.
      */
-    private static String formatDay(String day) {
+    public static String formatDay(String day) {
         String lowerDay = day.toLowerCase();
         switch (lowerDay) {
         case "mon":

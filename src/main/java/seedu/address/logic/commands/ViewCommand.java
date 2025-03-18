@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.person.OneTimeSchedule.formatDate;
 
 import java.util.List;
 import java.util.Set;
@@ -48,8 +49,9 @@ public class ViewCommand extends Command {
             });
         } else {
             //search oneTimeSchedule
+            String normalizedDate = formatDate(keyword);
             model.getFilteredPersonList().forEach(person -> {
-                List<String> matchingTimes = findMatchingOneTimeSchedule(person, keyword);
+                List<String> matchingTimes = findMatchingOneTimeSchedule(person, normalizedDate);
                 sb.append(person.getName()).append(": ").append(String.join(", ", matchingTimes)).append("\n");
             });
         }
