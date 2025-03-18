@@ -109,12 +109,12 @@ public class RecurringScheduleTest {
         assertFalse(schedule.equals(null));
         // Different types -> returns false
         assertFalse(schedule.equals("Monday 0900 1700"));
-        // different date -> returns false
-        assertFalse(schedule.equals(new RecurringSchedule("3/2 1000 1200"))); // Date differs
+        // different day -> returns false
+        assertFalse(schedule.equals(new RecurringSchedule("Tuesday 0900 1200"))); // Date differs
         // different start time -> returns false
-        assertFalse(schedule.equals(new RecurringSchedule("2/2 0900 1200"))); // Start time differs
+        assertFalse(schedule.equals(new RecurringSchedule("Monday 1000 1200"))); // Start time differs
         // different end time -> returns false
-        assertFalse(schedule.equals(new RecurringSchedule("2/2 1000 1300"))); // End time differs
+        assertFalse(schedule.equals(new RecurringSchedule("Monday 0900 1300"))); // End time differs
     }
 
     @Test
