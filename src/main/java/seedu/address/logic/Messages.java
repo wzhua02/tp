@@ -37,11 +37,20 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("\nPhone: ")
+                .append("\n\nPhone: ")
                 .append(person.getPhone())
                 .append("\nRecurringSchedule: ");
 
         person.getRecurringSchedules().forEach(schedule -> {
+            if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
+                builder.append(", ");
+            }
+            builder.append(schedule);
+        });
+
+        builder.append("\nOneTimeSchedule: ");
+
+        person.getOneTimeSchedules().forEach(schedule -> {
             if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
                 builder.append(", ");
             }
@@ -53,15 +62,7 @@ public class Messages {
                 .append("\nMedical History: ")
                 .append(person.getMedicalHistory())
                 .append("\nLocation: ")
-                .append(person.getLocation())
-                .append("\nOneTimeSchedule: ");
-
-        person.getOneTimeSchedules().forEach(schedule -> {
-            if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
-                builder.append(", ");
-            }
-            builder.append(schedule);
-        });
+                .append(person.getLocation());
 
         builder.append("\nTags: ");
 
