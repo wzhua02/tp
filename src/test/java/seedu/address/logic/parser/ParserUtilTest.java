@@ -229,7 +229,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseOneTimeSchedules_collectionWithValidOneTimeSchedules_returnsOneTimeScheduleSetSet() throws Exception {
+    public void parseOneTimeSchedules_collectionWithValidOneTimeSchedules_returnsOneTimeScheduleSetSet()
+            throws Exception {
         Set<OneTimeSchedule> actualOneTimeScheduleSet = ParserUtil.parseOneTimeSchedules(
                 Arrays.asList(VALID_ONETIMESCHEDULE_1, VALID_ONETIMESCHEDULE_2));
         Set<OneTimeSchedule> expectedOneTimeScheduleSet = new HashSet<OneTimeSchedule>(
