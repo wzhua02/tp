@@ -15,7 +15,7 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-T13-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FitFlow app.
 
@@ -23,18 +23,18 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will display the list of available commands in FitFlow.<br>
    Some example commands you can try:
 
    * `add n/John Doe p/81234567` : Adds a client named `John Doe` to the FitFlow.
    
-   * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym ots/1/2 1000 1200 t/friends` : Adds a client named `Alice Pauline` with many details such as her schedule, fitness goal, medical history and location.
+   * `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends` : Adds a client named `Alice Pauline` with many details such as her schedule, fitness goal, medical history and location.
 
-   * `find John Doe` : Finds a specific client and displays their details.
+   * `find John Doe` : Finds a specific client and displays their name and phone number.
    
-   * `schedule monday` : Displays the sessions the personal trainer has with the clients on that day.
+   * `view monday` : Displays the sessions the personal trainer has with the clients on that day.
 
-   * `schedule 17/2/25` : Displays the sessions the personal trainer has with the clients on that day.
+   * `view 17/2/25` : Displays the sessions the personal trainer has with the clients on that day.
 
    * `edit 1 p/81234567 rs/Tues 1600 1800 g/Do 10 pull ups` : Edits the details of the 1st client shown in the current list.
 
@@ -78,28 +78,44 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+### Help : `help`
 
-![help message](images/helpMessage.png)
+Displays the description and formatting of commands in FitFlow.
 
-Format: `help`
+Format: `help [COMMAND_NAME]`
+
+* Display all the available commands in FitFlow.
+* Displays a specific command and will give the specific description and formatting for that command.
+
+Examples:
+* `help` will display the description of all the available commands in FitFlow.
+* `help add` will display the command description and formatting for the add command in FitFlow.
 
 
 ### Adding a client: `add`
 
 Adds a client to FitFlow.
 
-Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [ots/ONE_TIME_SCHEDULE]…​ [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of recurring schedule, one time schedule, or tags (including 0)
 </div>
 
 Examples:
-* `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym ots/1/2 1000 1200 t/friends`
+* `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
 * `add n/Betsy Crowe t/friend g/Lose weight l/Jurong GymBox p/1234567 mh/Lower back injury rs/Wed 1500 1700`
+
+
+### Listing all clients: `list`
+
+Shows a list of all the clients in FitFlow.
+
+Format: `list`
+
+Examples:
+* `list` displays and indexes all the clients in FitFlow.
 
 ### Locating clients by name: `find`
 
@@ -116,8 +132,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find John` returns `john` and `John Doe`.
+* `find alex david` returns `Alex Yeoh`, `David Li`.<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 
@@ -125,24 +141,28 @@ Examples:
 
 Displays the sessions the personal trainer has with clients on that day.
 
-Format: `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM)]`
+Format: `view DAY/DATE`
+DAY Format: `Monday` or `Mon`
+DATE Format: `DD/MM[/YY]`
 
-* The search is case-insensitive. e.g `Monday` will match `monday`
-* At least one of the optional fields must be provided.
-* For Days, it will refer to the earliest upcoming day, for example if today is Tuesday, `view schedule Monday` will view the schedules on the Monday 6 days later.
-* For Days, short-forms are allowed, `Monday` will match with `Mon` and for Dates, the format has to be (DD/MM) and single digit days or months have to be preceded by a 0. e.g `25/02`, or `05/02`.
+* The search is case-insensitive. e.g. `Monday` will match `monday`.
+* A day or date field must be provided.
+* For DAY, short-form is allowed, i.e. `Monday` will match with `mon`.
+* For DATE, the format has to be (DD/MM[/YY]) but the year can be omitted, the day and month must have a leading 0 if it is a single digit. e.g. `14/02` or `07/01/25`.
 
 Examples:
 * `view Tue` returns the list of clients with sessions on Tuesday.
-* `view 25/02` returns the list of clients with sessions on 25/02/2025.
+* `view 25/02/25` returns the list of clients with sessions on 25/02/25.
+* `view 21/04` returns the list of clients with sessions on 21/04 regardless of year.
 * `view Monday` returns the list of clients with sessions on Monday. <br>
     ![result for 'view Monday'](images/viewMonday.png)
+
 
 ### Editing a client : `edit`
 
 Edits an existing client in FitFlow.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [ots/ONE_TIME_SCHEDULE]…​ [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -154,6 +174,7 @@ Examples:
 *  `edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400` Edits the phone number, location, and one time schedule of the 1st client to be `91234567`, `Anytime Fitness`, and `4/4 1200 1400` respectively.
 *  `edit 2 n/Betsy Crower rs/ ots/ t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing recurring schedules, one time schedules and tags.
 
+
 ### Deleting a client : `delete`
 
 Deletes the specified client from FitFlow.
@@ -162,26 +183,19 @@ Format: `delete INDEX`
 
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-### Help : `help`
-
-Displays the description and formatting of commands in FitFlow.
-
-Format: `help [add] [view] [schedule] [edit] [delete] [clear] [exit]`
-
-* `help` will display all the available commands in FitFlow.
-* `help` can be called on its own, calling help followed by a specific command will give the specific description and formatting for that command. e.g `help add` will display the description of the add command and its formatting.
+* The index **must be a positive integer** 1, 2, 3, …​.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd client from FitFlow.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
 
 ### Clearing all entries : `clear`
 
@@ -194,14 +208,16 @@ Format: `clear`
 
 FitFlow data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+
 ### Editing the data file
 
 FitFlow data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, FitFlow will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause FitFlow to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+[//]: # (<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**)
+
+[//]: # ()
+[//]: # (</div>)
+
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -227,12 +243,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [ots/ONE_TIME_SCHEDULE]…​ [t/TAG]…​` <br> e.g., `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym ots/1/2 1000 1200 t/friends`
-**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John`
-**View Schedule** | `view schedule [DAY] [DAY_SHORT_FORM] [DATE (DD/MM/YY)] [DATE (DD/MM)]` <br> e.g., `view schedule Monday`
-**Edit** | `edit edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [ots/ONE_TIME_SCHEDULE]…​ [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Help** | `help [add] [view] [schedule] [edit] [delete] [clear] [exit]` <br> e.g., `help add`
-**Clear** | `clear`
+**Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g., `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
+**List** | `list` <br> e.g., `list`
+**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John`
+**View** | `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM[/YY])]` <br> e.g., `view schedule Monday`
+**Edit** | `edit edit INDEX [n/NAME] [p/PHONE_NUMBER] [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ [g/GOALS] [mh/MEDICAL_HISTORY] [l/LOCATION] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 l/Anytime Fitness ots/4/4 1200 1400`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Exit** | `exit`
+**Clear** | `clear`
+
 
