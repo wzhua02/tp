@@ -6,24 +6,27 @@ import static java.util.Objects.requireNonNull;
  * Represents the days of the week.
  */
 public enum DayOfWeek {
-    MONDAY("Mon"),
-    TUESDAY("Tue"),
-    WEDNESDAY("Wed"),
-    THURSDAY("Thu"),
-    FRIDAY("Fri"),
-    SATURDAY("Sat"),
-    SUNDAY("Sun");
+    MONDAY("Mon", "Monday"),
+    TUESDAY("Tue", "Tuesday"),
+    WEDNESDAY("Wed", "Wednesday"),
+    THURSDAY("Thu", "Thursday"),
+    FRIDAY("Fri", "Friday"),
+    SATURDAY("Sat", "Saturday"),
+    SUNDAY("Sun", "Sunday");
 
     public static final String DAY_OF_WEEK_REGEX = generateDayOfWeekRegex();
 
     private final String abbreviation;
+    private final String pascalCaseName;
     /**
      * Constructs a {@code DayOfWeek} with the given abbreviation.
      *
      * @param abbreviation The short form of the day (e.g., "Mon" for Monday).
+     * @param pascalCaseName The PascalCase form of the day (e.g., "Monday").
      */
-    DayOfWeek(String abbreviation) {
+    DayOfWeek(String abbreviation, String pascalCaseName) {
         this.abbreviation = abbreviation;
+        this.pascalCaseName = pascalCaseName;
     }
 
     /**
@@ -33,6 +36,15 @@ public enum DayOfWeek {
      */
     public String getAbbreviation() {
         return abbreviation;
+    }
+
+    /**
+     * Gets the PascalCase name of the day.
+     *
+     * @return The PascalCase name of the day (e.g., "Monday").
+     */
+    public String getPascalCaseName() {
+        return pascalCaseName;
     }
 
     /**
@@ -75,14 +87,18 @@ public enum DayOfWeek {
             if (regex.length() > 0) {
                 regex.append("|");
             }
-            regex.append(day.name()); // Full name (e.g., "Monday")
+            regex.append(day.getPascalCaseName()); // Full name (e.g., "Monday")
             regex.append("|").append(day.getAbbreviation()); // Short name (e.g., "Mon")
         }
+        System.out.println(regex.toString());
         return regex.toString();
     }
 
+    /**
+     * Returns the DayOfWeek as a String in PascalCase (e.g. "Monday")
+     */
     @Override
     public String toString() {
-        return name().charAt(0) + name().substring(1).toLowerCase();
+        return pascalCaseName;
     }
 }
