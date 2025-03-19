@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 
+import javax.swing.text.View;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 
@@ -24,6 +26,7 @@ public class HelpCommand extends Command {
             + "\nhelp " + PREFIX_COMMAND + EditCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + FindCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + DisplayCommand.COMMAND_WORD
+            + "\nhelp " + PREFIX_COMMAND + ViewCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + DeleteCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ClearCommand.COMMAND_WORD
             + "\nhelp " + PREFIX_COMMAND + ExitCommand.COMMAND_WORD;
@@ -65,6 +68,9 @@ public class HelpCommand extends Command {
             break;
         case ListCommand.COMMAND_WORD:
             helpMessage = ListCommand.MESSAGE_USAGE;
+            break;
+        case ViewCommand.COMMAND_WORD:
+            helpMessage = ViewCommand.MESSAGE_USAGE;
             break;
         default:
             helpMessage = GENERIC_HELP_MESSAGE;

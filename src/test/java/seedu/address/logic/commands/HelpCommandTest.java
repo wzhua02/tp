@@ -78,6 +78,13 @@ public class HelpCommandTest {
     }
 
     @Test
+    public void execute_helpView_success() {
+        CommandResult expectedCommandResult = new CommandResult(ViewCommand.MESSAGE_USAGE);
+        assertCommandSuccess(
+                new HelpCommand("view"), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
     public void execute_helpUnrecognisedString_success() {
         CommandResult expectedCommandResult = new CommandResult(GENERIC_HELP_MESSAGE);
         assertCommandSuccess(
