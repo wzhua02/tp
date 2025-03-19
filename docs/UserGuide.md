@@ -121,20 +121,22 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 
-### View schedule: `view schedule`
+### View: `view`
 
 Displays the sessions the personal trainer has with clients on that day.
 
-Format: `view schedule [DAY] [DAY_SHORT_FORM] [DATE (DD/MM/YY)] [DATE (DD/MM)]`
+Format: `view [DAY] [DAY_SHORT_FORM] [DATE (DD/MM)]`
 
 * The search is case-insensitive. e.g `Monday` will match `monday`
 * At least one of the optional fields must be provided.
 * For Days, it will refer to the earliest upcoming day, for example if today is Tuesday, `view schedule Monday` will view the schedules on the Monday 6 days later.
-* For Days, short-forms are allowed, `Monday` will match with `mon` and for Dates, the format has to be (DD/MM/YY) but the year can be omitted and the day and month can have a leading 0. e.g `25/2/2025`, `25/02/2025`, `25/2`, and `25/02` will all match.
+* For Days, short-forms are allowed, `Monday` will match with `Mon` and for Dates, the format has to be (DD/MM) and single digit days or months have to be preceded by a 0. e.g `25/02`, or `05/02`.
 
 Examples:
-* `view schedule Monday` returns the list of clients with sessions on Monday.
-* `view schedule 25/02/2025` returns the list of clients with sessions on 25/02/2025.<br>
+* `view Tue` returns the list of clients with sessions on Tuesday.
+* `view 25/02` returns the list of clients with sessions on 25/02/2025.
+* `view Monday` returns the list of clients with sessions on Monday. <br>
+    ![result for 'view Monday'](images/viewMonday.png)
 
 ### Editing a client : `edit`
 
