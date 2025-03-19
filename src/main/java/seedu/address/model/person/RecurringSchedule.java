@@ -3,14 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Objects;
 import java.util.regex.Pattern;
+
+import seedu.address.model.util.DayOfWeek;
 
 /**
  * Represents a RecurringSchedule in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidSchedule(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidRecurringSchedule(String)}
  */
-public class RecurringSchedule {
+public class RecurringSchedule extends Schedule {
 
     public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:"
             + " [day HHmm HHmm].";
@@ -20,30 +21,49 @@ public class RecurringSchedule {
      * - Followed by two sets of four-digit times (HHmm format, 00:00 to 23:59).
      */
     public static final String VALIDATION_REGEX =
-            "^(?i)(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|"
-                    + "Mon|Tue|Wed|Thu|Fri|Sat|Sun)\\s"
-                    + "(?:[01]\\d|2[0-3])[0-5]\\d\\s" // First HHmm (0000 - 2359)
-                    + "(?:[01]\\d|2[0-3])[0-5]\\d$"; // Second HHmm (0000 - 2359)
+            "^(?i)(" + DayOfWeek.DAY_OF_WEEK_REGEX + ")\\s"
+                    + VALIDATION_REGEX_TIME + "\\s" // First HHmm (0000 - 2359)
+                    + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
 
     private static final Pattern pattern = Pattern.compile(VALIDATION_REGEX, Pattern.CASE_INSENSITIVE);
 
-    public final String schedule;
+    public final DayOfWeek day;
 
     /**
      * Constructs a {@code RecurringSchedule}.
      *
-     * @param schedule A valid recurring schedule.
+     * @param schedule A valid recurring schedule string.
      */
     public RecurringSchedule(String schedule) {
+        super(validateThenExtractStartTime(schedule), extractEndTime(schedule));
+        this.day = extractDay(schedule);
+    }
+    private static String validateThenExtractStartTime(String schedule) {
         requireNonNull(schedule);
-        checkArgument(isValidSchedule(schedule), MESSAGE_CONSTRAINTS);
-        this.schedule = schedule;
+        checkArgument(isValidRecurringSchedule(schedule), MESSAGE_CONSTRAINTS);
+        return extractStartTime(schedule);
+    }
+
+    private static DayOfWeek extractDay(String schedule) {
+        return DayOfWeek.fromString(schedule.split(" ")[0]);
+    }
+
+    private static String extractStartTime(String schedule) {
+        return schedule.split(" ")[1];
+    }
+
+    private static String extractEndTime(String schedule) {
+        return schedule.split(" ")[2];
+    }
+
+    public DayOfWeek getDay() {
+        return day;
     }
 
     /**
      * Returns true if a given string is a valid recurring schedule.
      */
-    public static boolean isValidSchedule(String test) {
+    public static boolean isValidRecurringSchedule(String test) {
         return pattern.matcher(test).matches();
     }
 
@@ -59,19 +79,23 @@ public class RecurringSchedule {
         }
 
         RecurringSchedule otherRecurringSchedule = (RecurringSchedule) other;
-        return Objects.equals(schedule, otherRecurringSchedule.schedule);
+        Boolean isDayEquals = day.equals(otherRecurringSchedule.day);
+        Boolean isStartTimeEquals = startTime.equals(otherRecurringSchedule.startTime);
+        Boolean isEndTimeEquals = endTime.equals(otherRecurringSchedule.endTime);
+        return isDayEquals && isStartTimeEquals && isEndTimeEquals;
     }
 
     @Override
     public int hashCode() {
-        return schedule.hashCode();
+        String toHash = day + " " + startTime + " " + endTime;
+        return toHash.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + schedule + ']';
+        return '[' + String.valueOf(day) + " " + startTime + " " + endTime + ']';
     }
 
 }

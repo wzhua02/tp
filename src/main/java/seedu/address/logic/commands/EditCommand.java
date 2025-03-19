@@ -41,18 +41,21 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update the details of a client in the client list, "
+            + "by the index number used in the displayed client list. "
+            + "Existing values will be overwritten by the input values.\n\n"
+            + "Format: "
+            + COMMAND_WORD + " INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_RECURRING_SCHEDULE + "RECURRING SCHEDULE] "
+            + "[" + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE] "
             + "[" + PREFIX_GOALS + "GOALS]"
             + "[" + PREFIX_MEDICAL_HISTORY + "MEDICAL_HISTORY] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
-            + "[" + PREFIX_ONETIMESCHEDULE + "ONE TIME SCHEDULE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
+            + "RECURRING SCHEDULE Format: DAY HHmm HHmm\n"
+            + "ONE TIME SCHEDULE Format: DD/MM[/YY] HHmm HHmm\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 ";
 

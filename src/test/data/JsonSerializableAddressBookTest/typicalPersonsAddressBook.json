@@ -7,7 +7,7 @@
     "goals" : "Get fitter",
     "medicalHistory" : "Twisted right ankle",
     "location" : "123, Jurong West Ave 6, #08-111",
-    "oneTimeSchedule" : [ "1/2 1000 1200", "2/3 1000 1200" ],
+    "oneTimeSchedule" : [ "01/02 1000 1200", "02/03 1000 1200" ],
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -16,7 +16,7 @@
     "goals" : "Lose weight",
     "medicalHistory" : "Fractured right ankle",
     "location" : "311, Clementi Ave 2, #02-25",
-    "oneTimeSchedule" : [ "2/3 1200 1400" ],
+    "oneTimeSchedule" : [ "02/02 1200 1400" ],
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -34,7 +34,7 @@
     "goals" : "Get stronger",
     "medicalHistory" : "Dislocated left shoulder",
     "location" : "10th street",
-    "oneTimeSchedule" : [ "2/2 1000 1200" ],
+    "oneTimeSchedule" : [ "02/02 1000 1200" ],
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",

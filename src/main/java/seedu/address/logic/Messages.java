@@ -18,6 +18,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_SCHEDULES_LISTED = "Here are the schedules for [%1$s]:";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -37,9 +38,9 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
+                .append("\n\nPhone: ")
                 .append(person.getPhone())
-                .append("; RecurringSchedule: ");
+                .append("\nRecurringSchedule: ");
 
         person.getRecurringSchedules().forEach(schedule -> {
             if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
@@ -48,13 +49,7 @@ public class Messages {
             builder.append(schedule);
         });
 
-        builder.append("; Goals: ")
-                .append(person.getGoals())
-                .append("; Medical History: ")
-                .append(person.getMedicalHistory())
-                .append("; Location: ")
-                .append(person.getLocation())
-                .append("; OneTimeSchedule: ");
+        builder.append("\nOneTimeSchedule: ");
 
         person.getOneTimeSchedules().forEach(schedule -> {
             if (!builder.isEmpty() && builder.charAt(builder.length() - 1) != ' ') {
@@ -63,7 +58,14 @@ public class Messages {
             builder.append(schedule);
         });
 
-        builder.append("; Tags: ");
+        builder.append("\nGoals: ")
+                .append(person.getGoals())
+                .append("\nMedical History: ")
+                .append(person.getMedicalHistory())
+                .append("\nLocation: ")
+                .append(person.getLocation());
+
+        builder.append("\nTags: ");
 
         person.getTags().forEach(builder::append);
         return builder.toString();
