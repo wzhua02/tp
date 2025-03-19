@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 
-import javax.swing.text.View;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 
