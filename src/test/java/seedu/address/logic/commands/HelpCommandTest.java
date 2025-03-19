@@ -43,6 +43,13 @@ public class HelpCommandTest {
     }
 
     @Test
+    public void execute_helpDisplay_success() {
+        CommandResult expectedCommandResult = new CommandResult(DisplayCommand.MESSAGE_USAGE);
+        assertCommandSuccess(
+                new HelpCommand("display"), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
     public void execute_helpEdit_success() {
         CommandResult expectedCommandResult = new CommandResult(EditCommand.MESSAGE_USAGE);
         assertCommandSuccess(
@@ -68,6 +75,13 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult = new CommandResult(ListCommand.MESSAGE_USAGE);
         assertCommandSuccess(
                 new HelpCommand("list"), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_helpView_success() {
+        CommandResult expectedCommandResult = new CommandResult(ViewCommand.MESSAGE_USAGE);
+        assertCommandSuccess(
+                new HelpCommand("view"), model, expectedCommandResult, expectedModel);
     }
 
     @Test
