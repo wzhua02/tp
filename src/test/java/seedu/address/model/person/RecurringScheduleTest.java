@@ -21,30 +21,37 @@ public class RecurringScheduleTest {
     }
 
     @Test
-    public void isValidSchedule_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> RecurringSchedule.isValidSchedule(null));
+    public void isValidRecurringSchedule_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> RecurringSchedule.isValidRecurringSchedule(null));
     }
 
     @Test
-    public void isValidSchedule_validSchedules_returnsTrue() {
+    public void isValidSchedule_validRecurringSchedules_returnsTrue() {
         // Valid schedule examples:
-        assertTrue(RecurringSchedule.isValidSchedule("Monday 0900 1700"));
-        assertTrue(RecurringSchedule.isValidSchedule("Mon 0000 2359"));
-        assertTrue(RecurringSchedule.isValidSchedule("Tuesday 1230 1330"));
+        assertTrue(RecurringSchedule.isValidRecurringSchedule("Monday 0900 1700"));
+        assertTrue(RecurringSchedule.isValidRecurringSchedule("Mon 0000 2359"));
+        assertTrue(RecurringSchedule.isValidRecurringSchedule("Tuesday 1230 1330"));
         // Test case-insensitivity
-        assertTrue(RecurringSchedule.isValidSchedule("fri 0800 1200"));
+        assertTrue(RecurringSchedule.isValidRecurringSchedule("fri 0800 1200"));
     }
 
     @Test
-    public void isValidSchedule_invalidSchedules_returnsFalse() {
+    public void isValidRecurringSchedule_invalidSchedules_returnsFalse() {
         // Invalid schedule examples:
-        assertFalse(RecurringSchedule.isValidSchedule("")); // empty string
-        assertFalse(RecurringSchedule.isValidSchedule("Monday")); // missing times
-        assertFalse(RecurringSchedule.isValidSchedule("Monday 0900")); // missing second time
-        assertFalse(RecurringSchedule.isValidSchedule("Monday09001700")); // no spaces between parts
-        assertFalse(RecurringSchedule.isValidSchedule("Funday 0900 1700")); // invalid day
-        assertFalse(RecurringSchedule.isValidSchedule("Monday 900 1700")); // time not in four-digit format
-        assertFalse(RecurringSchedule.isValidSchedule("Monday 2400 0100")); // invalid time: 2400 is not allowed
+        // empty string
+        assertFalse(RecurringSchedule.isValidRecurringSchedule(""));
+        // missing times
+        assertFalse(RecurringSchedule.isValidRecurringSchedule("Monday"));
+        // missing second time
+        assertFalse(RecurringSchedule.isValidRecurringSchedule("Monday 0900"));
+        // no spaces between parts
+        assertFalse(RecurringSchedule.isValidRecurringSchedule("Monday09001700"));
+        // invalid day
+        assertFalse(RecurringSchedule.isValidRecurringSchedule("Funday 0900 1700"));
+        // time not in four-digit format
+        assertFalse(RecurringSchedule.isValidRecurringSchedule("Monday 900 1700"));
+        // invalid time: 2400 not allowed
+        assertFalse(RecurringSchedule.isValidRecurringSchedule("Monday 2400 0100"));
     }
 
     @Test
@@ -58,8 +65,12 @@ public class RecurringScheduleTest {
         assertFalse(schedule.equals(null));
         // Different types -> returns false
         assertFalse(schedule.equals("Monday 0900 1700"));
-        // Different schedule -> returns false
-        assertFalse(schedule.equals(new RecurringSchedule("Tuesday 0900 1700")));
+        // different day -> returns false
+        assertFalse(schedule.equals(new RecurringSchedule("Tuesday 0900 1200"))); // Date differs
+        // different start time -> returns false
+        assertFalse(schedule.equals(new RecurringSchedule("Monday 1000 1200"))); // Start time differs
+        // different end time -> returns false
+        assertFalse(schedule.equals(new RecurringSchedule("Monday 0900 1300"))); // End time differs
     }
 
     @Test

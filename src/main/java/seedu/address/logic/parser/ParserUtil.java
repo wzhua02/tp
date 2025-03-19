@@ -77,7 +77,7 @@ public class ParserUtil {
     public static RecurringSchedule parseRecurringSchedule(String recurringSchedule) throws ParseException {
         requireNonNull(recurringSchedule);
         String trimmedRecurringSchedule = recurringSchedule.trim();
-        if (!RecurringSchedule.isValidSchedule(trimmedRecurringSchedule)) {
+        if (!RecurringSchedule.isValidRecurringSchedule(trimmedRecurringSchedule)) {
             throw new ParseException(RecurringSchedule.MESSAGE_CONSTRAINTS);
         }
         if (!RecurringSchedule.isValidTime(trimmedRecurringSchedule)) {
@@ -135,11 +135,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code oneTimeSchedule} is invalid.
      */
-    public static OneTimeSchedule parseOneTimeSchedules(String oneTimeSchedule) throws ParseException {
+    public static OneTimeSchedule parseOneTimeSchedule(String oneTimeSchedule) throws ParseException {
         requireNonNull(oneTimeSchedule);
         String trimmedOneTimeSchedule = oneTimeSchedule.trim();
         if (!OneTimeSchedule.isValidOneTimeSchedule(trimmedOneTimeSchedule)) {
             throw new ParseException(OneTimeSchedule.MESSAGE_CONSTRAINTS);
+        }
+        if (!OneTimeSchedule.isValidTime(trimmedOneTimeSchedule)) {
+            throw new ParseException(OneTimeSchedule.MESSAGE_TIME_CONSTRAINTS);
         }
         return new OneTimeSchedule(trimmedOneTimeSchedule);
     }
@@ -152,7 +155,7 @@ public class ParserUtil {
         requireNonNull(oneTimeSchedules);
         final Set<OneTimeSchedule> oneTimeScheduleSet = new HashSet<>();
         for (String oneTimeScheduleDate : oneTimeSchedules) {
-            oneTimeScheduleSet.add(parseOneTimeSchedules(oneTimeScheduleDate));
+            oneTimeScheduleSet.add(parseOneTimeSchedule(oneTimeScheduleDate));
         }
         return oneTimeScheduleSet;
     }

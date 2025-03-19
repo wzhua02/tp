@@ -29,23 +29,23 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
-            .withRecurringSchedules("Mon 1400 1600", "Wed 1500 1700")
+            .withRecurringSchedules("Monday 1400 1600", "Wednesday 1500 1700")
             .withGoals("Get fitter").withMedicalHistory("Twisted right ankle")
             .withLocation("123, Jurong West Ave 6, #08-111")
-            .withOneTimeSchedules("1/2 1000 1200", "2/3 1000 1200").withTags("friends").build();
+            .withOneTimeSchedules("01/02 1000 1200", "02/03 1000 1200").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
-            .withRecurringSchedules("Mon 1400 1600")
+            .withRecurringSchedules("Monday 1400 1600")
             .withGoals("Lose weight").withMedicalHistory("Fractured right ankle")
             .withLocation("311, Clementi Ave 2, #02-25")
-            .withOneTimeSchedules("2/3 1200 1400").withTags("owesMoney", "friends").build();
+            .withOneTimeSchedules("02/02 1200 1400").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withRecurringSchedules("Mon 1400 1600")
+            .withRecurringSchedules("Monday 1400 1600")
             .withGoals("Gain muscle mass").withMedicalHistory("Fractured right hand")
             .withLocation("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withGoals("Get stronger").withMedicalHistory("Dislocated left shoulder")
             .withLocation("10th street")
-            .withOneTimeSchedules("2/2 1000 1200").withTags("friends").build();
+            .withOneTimeSchedules("02/02 1000 1200").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822241")
             .withGoals("Work on stamina").withMedicalHistory("High blood pressure")
             .withLocation("michegan ave").build();

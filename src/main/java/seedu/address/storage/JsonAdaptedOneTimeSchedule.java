@@ -25,7 +25,7 @@ class JsonAdaptedOneTimeSchedule {
      * Converts a given {@code OneTimeSchedule} into this class for Jackson use.
      */
     public JsonAdaptedOneTimeSchedule(OneTimeSchedule source) {
-        oneTimeScheduleDate = source.value;
+        oneTimeScheduleDate = source.getDate() + " " + source.getStartTime() + " " + source.getEndTime();
     }
 
     @JsonValue
