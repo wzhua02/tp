@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's training date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidOneTimeSchedule(String)}
  */
-public class OneTimeSchedule {
+public class OneTimeSchedule extends Schedule {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Dates must be in the format: date start end, either [d/m HHmm HHmm] or [d/m/yy HHmm HHmm].\n"
@@ -30,17 +30,68 @@ public class OneTimeSchedule {
         + "([01][0-9]|2[0-3])[0-5][0-9]\\s" // Start time
         + "([01][0-9]|2[0-3])[0-5][0-9]"; // End time
 
-    public final String value;
+    public final String date;
+    /**
+     * Constructs a {@code OneTimeSchedule}.
+     *
+     * @param schedule A valid one-time schedule string.
+     */
+    public OneTimeSchedule(String schedule) {
+        super(validateThenExtractStartTime(schedule), extractEndTime(schedule)); // Call Schedule constructor
+        this.date = extractDate(schedule);
+    }
+    private static String validateThenExtractStartTime(String schedule) {
+        requireNonNull(schedule);
+        checkArgument(isValidOneTimeSchedule(schedule), MESSAGE_CONSTRAINTS);
+        return extractStartTime(schedule);
+    }
+
+    private static String extractDate(String schedule) {
+        String datePart = schedule.split(" ")[0];
+        return formatDate(datePart);
+    }
+
+    private static String extractStartTime(String schedule) {
+        return schedule.split(" ")[1];
+    }
+
+    private static String extractEndTime(String schedule) {
+        return schedule.split(" ")[2];
+    }
+
+    public String getDate() {
+        return date;
+    }
 
     /**
-     * Constructs a {@code OneTimeDate}.
+     * Formats a {@code String date} and returns a normalized date {@code String}.
+     * Single-digit days and months will be padded with a leading zero. Leading and
+     * trailing whitespaces will be trimmed if present.
+     * Expected input format: {@code "[d]d/[m]m"} or {@code "[d]d/[m]m/yy"}
      *
-     * @param date A valid one time date.
+     * @param date the date {@code String} to be formatted and normalized; must not be {@code null}.
+     * @return a normalized date {@code String} in the format {@code "dd/MM"} or {@code "dd/MM/yy"}.
+     * @throws NullPointerException if the given {@code date} is {@code null}.
      */
-    public OneTimeSchedule(String date) {
+    public static String formatDate(String date) {
         requireNonNull(date);
-        checkArgument(isValidOneTimeSchedule(date), MESSAGE_CONSTRAINTS);
-        this.value = date;
+        String[] dateComponents = date.split("/");
+
+        String trimmedDay = dateComponents[0].trim();
+        String trimmedMonth = dateComponents[1].trim();
+        // Pad with leading zeros if necessary
+        String normalizedDay = trimmedDay.length() == 1 ? "0" + trimmedDay : trimmedDay;
+        String normalizedMonth = trimmedMonth.length() == 1 ? "0" + trimmedMonth : trimmedMonth;
+
+        // Handle optional year part (if it's there)
+        String normalizedDate;
+        if (dateComponents.length == 3) {
+            String trimmedYear = dateComponents[2].trim();
+            normalizedDate = normalizedDay + "/" + normalizedMonth + "/" + trimmedYear;
+        } else {
+            normalizedDate = normalizedDay + "/" + normalizedMonth;
+        }
+        return normalizedDate;
     }
 
     /**
@@ -53,7 +104,7 @@ public class OneTimeSchedule {
 
     @Override
     public String toString() {
-        return '[' + value + ']';
+        return "[" + date + " " + startTime + " " + endTime + "]";
     }
 
     @Override
@@ -68,12 +119,16 @@ public class OneTimeSchedule {
         }
 
         OneTimeSchedule otherOneTimeSchedule = (OneTimeSchedule) other;
-        return value.equals(otherOneTimeSchedule.value);
+        Boolean isDateEquals = date.equals(otherOneTimeSchedule.date);
+        Boolean isStartTimeEquals = startTime.equals(otherOneTimeSchedule.startTime);
+        Boolean isEndTimeEquals = endTime.equals(otherOneTimeSchedule.endTime);
+        return isDateEquals && isStartTimeEquals && isEndTimeEquals;
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        String toHash = date + " " + startTime + " " + endTime;
+        return toHash.hashCode();
     }
 
 

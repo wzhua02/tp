@@ -25,13 +25,18 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "Réchel";
     private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_RECURRINGSCHEDULE_1 = "invalid schedule";
+    private static final String INVALID_RECURRINGSCHEDULE_2 = "Monday 1400 1200"; //invalid time
     private static final String INVALID_GOALS = " ";
     private static final String INVALID_LOCATION = " ";
-    private static final String INVALID_ONETIMESCHEDULE = "33/1 1000 1200";
+    private static final String INVALID_ONETIMESCHEDULE_1 = "33/1 1000 1200"; //invalid date
+    private static final String INVALID_ONETIMESCHEDULE_2 = "2/3 1400 1200"; //invalid time
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "88888888";
+    private static final String VALID_RECURRINGSCHEDULE_1 = "Tuesday 0900 1700";
+    private static final String VALID_RECURRINGSCHEDULE_2 = "fri 0800 1200";
     private static final String VALID_GOALS = "Get fitter";
     private static final String VALID_LOCATION = "123 Main Street #0505";
     private static final String VALID_ONETIMESCHEDULE_1 = "01/12 1000 1200";
@@ -114,31 +119,27 @@ public class ParserUtilTest {
 
     @Test
     public void parseRecurringSchedule_invalidFormat_throwsParseException() {
-        String invalidRecurringSchedule = "invalid schedule";
-        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(invalidRecurringSchedule));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(INVALID_RECURRINGSCHEDULE_1));
     }
 
     @Test
     public void parseRecurringSchedule_invalidTimeOrder_throwsParseException() {
-        // Although the format is valid, the end time is before the start time.
-        String invalidRecurringSchedule = "Monday 1400 1200";
-        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(invalidRecurringSchedule));
+        assertThrows(ParseException.class, () -> ParserUtil.parseRecurringSchedule(INVALID_RECURRINGSCHEDULE_2));
     }
 
     @Test
     public void parseRecurringSchedule_validValueWithoutWhitespace_returnsRecurringSchedule() throws Exception {
-        String validRecurringSchedule = "Tuesday 0900 1700";
-        RecurringSchedule expected = new RecurringSchedule(validRecurringSchedule);
-        assertEquals(expected, ParserUtil.parseRecurringSchedule(validRecurringSchedule));
+        RecurringSchedule expected = new RecurringSchedule(VALID_RECURRINGSCHEDULE_1);
+        assertEquals(expected, ParserUtil.parseRecurringSchedule(VALID_RECURRINGSCHEDULE_1));
     }
 
     @Test
     public void parseRecurringSchedule_validValueWithWhitespaceAndAbbreviatedDay_returnsRecurringSchedule() throws
             Exception {
-        String input = "   fri 0800 1200   ";
+        String abbrevDayWithWhiteppace = WHITESPACE + VALID_RECURRINGSCHEDULE_2 + WHITESPACE;
         // The constructor converts "fri" to "Friday", so the expected schedule should be "Friday 0800 1200"
         RecurringSchedule expected = new RecurringSchedule("fri 0800 1200");
-        assertEquals(expected, ParserUtil.parseRecurringSchedule(input));
+        assertEquals(expected, ParserUtil.parseRecurringSchedule(abbrevDayWithWhiteppace));
     }
 
 
@@ -176,45 +177,50 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsLocation() throws Exception {
+    public void parseLocation_validValueWithoutWhitespace_returnsLocation() throws Exception {
         Location expectedLocation = new Location(VALID_LOCATION);
         assertEquals(expectedLocation, ParserUtil.parseLocation(VALID_LOCATION));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_LOCATION + WHITESPACE;
+    public void parseLocation_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
+        String locationWithWhitespace = WHITESPACE + VALID_LOCATION + WHITESPACE;
         Location expectedLocation = new Location(VALID_LOCATION);
-        assertEquals(expectedLocation, ParserUtil.parseLocation(addressWithWhitespace));
+        assertEquals(expectedLocation, ParserUtil.parseLocation(locationWithWhitespace));
     }
 
     @Test
     public void parseOneTimeSchedules_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseOneTimeSchedules((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseOneTimeSchedule((String) null));
     }
 
     @Test
-    public void parseOneTimeSchedule_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_ONETIMESCHEDULE));
+    public void parseOneTimeSchedule_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedule(INVALID_ONETIMESCHEDULE_1));
     }
 
     @Test
-    public void parseOneTimeSchedules_validValueWithoutWhitespace_returnsOneTimeSchedule() throws Exception {
+    public void parseOneTimeSchedule_invalidTimeOrder_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedule(INVALID_ONETIMESCHEDULE_2));
+    }
+
+    @Test
+    public void parseOneTimeSchedule_validValueWithoutWhitespace_returnsOneTimeSchedule() throws Exception {
         OneTimeSchedule expectedOneTimeSchedule = new OneTimeSchedule(VALID_ONETIMESCHEDULE_1);
-        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedules(VALID_ONETIMESCHEDULE_1));
+        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedule(VALID_ONETIMESCHEDULE_1));
     }
 
     @Test
-    public void parseOneTimeSchedules_validValueWithWhitespace_returnsTrimmedOneTimeSchedule() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_ONETIMESCHEDULE_1 + WHITESPACE;
+    public void parseOneTimeSchedule_validValueWithWhitespace_returnsTrimmedOneTimeSchedule() throws Exception {
+        String oneTimeScheduleWithWhitespace = WHITESPACE + VALID_ONETIMESCHEDULE_1 + WHITESPACE;
         OneTimeSchedule expectedOneTimeSchedule = new OneTimeSchedule(VALID_ONETIMESCHEDULE_1);
-        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedules(tagWithWhitespace));
+        assertEquals(expectedOneTimeSchedule, ParserUtil.parseOneTimeSchedule(oneTimeScheduleWithWhitespace));
     }
 
     @Test
-    public void parseOneTimeSchedules_collectionWithInvalidTags_throwsParseException() {
+    public void parseOneTimeSchedules_collectionWithInvalidOneTimeSchedules_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseOneTimeSchedules(
-                Arrays.asList(VALID_ONETIMESCHEDULE_1, INVALID_ONETIMESCHEDULE)));
+                Arrays.asList(VALID_ONETIMESCHEDULE_1, INVALID_ONETIMESCHEDULE_1)));
     }
 
     @Test
@@ -223,7 +229,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseOneTimeSchedules_collectionWithValidTags_returnsOneTimeScheduleSetSet() throws Exception {
+    public void parseOneTimeSchedules_collectionWithValidOneTimeSchedules_returnsOneTimeScheduleSetSet()
+            throws Exception {
         Set<OneTimeSchedule> actualOneTimeScheduleSet = ParserUtil.parseOneTimeSchedules(
                 Arrays.asList(VALID_ONETIMESCHEDULE_1, VALID_ONETIMESCHEDULE_2));
         Set<OneTimeSchedule> expectedOneTimeScheduleSet = new HashSet<OneTimeSchedule>(
