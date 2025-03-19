@@ -15,14 +15,13 @@ public class RecurringSchedule extends Schedule {
 
     public static final String MESSAGE_CONSTRAINTS = "Recurring schedules should be in the following format:"
             + " [day HHmm HHmm].";
-    private static final String DAY_OF_WEEK_REGEX = DayOfWeek.generateDayOfWeekRegex();
     /*
      * A valid schedule format:
      * - Must start with a valid day of the week (full or abbreviated).
      * - Followed by two sets of four-digit times (HHmm format, 00:00 to 23:59).
      */
     public static final String VALIDATION_REGEX =
-            "^(?i)(" + DAY_OF_WEEK_REGEX + ")\\s"
+            "^(?i)(" + DayOfWeek.DAY_OF_WEEK_REGEX + ")\\s"
                     + VALIDATION_REGEX_TIME + "\\s" // First HHmm (0000 - 2359)
                     + VALIDATION_REGEX_TIME + "$"; // Second HHmm (0000 - 2359)
 

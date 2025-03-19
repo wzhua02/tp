@@ -82,17 +82,6 @@ public class DayOfWeekTest {
     }
 
     @Test
-    void testGenerateDayOfWeekRegex() {
-        String regex = "(?i)(" + DayOfWeek.generateDayOfWeekRegex() + ")";
-        assertTrue("Monday".matches(regex));
-        assertTrue("Tue".matches(regex));
-        assertTrue("WEDNESDAY".matches(regex));
-        assertTrue("fri".matches(regex));
-        assertFalse("Funday".matches(regex));
-        assertFalse("Monx".matches(regex));
-    }
-
-    @Test
     void testToString() {
         assertEquals("Monday", DayOfWeek.MONDAY.toString());
         assertEquals("Tuesday", DayOfWeek.TUESDAY.toString());

@@ -14,8 +14,9 @@ public enum DayOfWeek {
     SATURDAY("Sat"),
     SUNDAY("Sun");
 
-    private final String abbreviation;
+    public static final String DAY_OF_WEEK_REGEX = generateDayOfWeekRegex();
 
+    private final String abbreviation;
     /**
      * Constructs a {@code DayOfWeek} with the given abbreviation.
      *
@@ -60,7 +61,7 @@ public enum DayOfWeek {
      */
     public static boolean isDayOfWeek(String day) {
         requireNonNull(day);
-        return day.matches("(?i)(" + generateDayOfWeekRegex() + ")");
+        return day.matches("(?i)(" + DAY_OF_WEEK_REGEX + ")");
     }
     /**
      * Generates a regex pattern that matches all day names and abbreviations from the DayOfWeek enum.
@@ -68,7 +69,7 @@ public enum DayOfWeek {
      *
      * @return A regex pattern string matching all valid day names.
      */
-    public static String generateDayOfWeekRegex() {
+    private static String generateDayOfWeekRegex() {
         StringBuilder regex = new StringBuilder();
         for (DayOfWeek day : DayOfWeek.values()) {
             if (regex.length() > 0) {
