@@ -42,7 +42,7 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
 
    * `help` : Displays the list of available commands the user can use in FitFlow.
 
-   * `help add` : Displays the format for the specific command in FitFlow.
+   * `help /add` : Displays the format for the specific command in FitFlow.
 
    * `list` : Lists all clients.
 
@@ -72,8 +72,8 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -83,14 +83,14 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
 
 Displays the description and formatting of commands in FitFlow.
 
-Format: `help [COMMAND_NAME]`
+Format: `help [/COMMAND_NAME]`
 
 * Display all the available commands in FitFlow.
 * Displays a specific command and will give the specific description and formatting for that command.
 
 Examples:
 * `help` will display the description of all the available commands in FitFlow.
-* `help add` will display the command description and formatting for the add command in FitFlow.
+* `help /add` will display the command description and formatting for the add command in FitFlow.
 
 
 ### Adding a client: `add`
@@ -243,7 +243,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Help** | `help [add] [view] [schedule] [edit] [delete] [clear] [exit]` <br> e.g., `help add`
+**Help** | `help [/add] [/view] [/schedule] [/edit] [/delete] [/clear] [/exit]` <br> e.g., `help /add`
 **Add** | `add n/NAME p/PHONE_NUMBER [rs/RECURRING_SCHEDULE]…​ [ots/ONE_TIME_SCHEDULE]…​ g/GOALS mh/MEDICAL_HISTORY l/LOCATION [t/TAG]…​` <br> e.g., `add n/Alice Pauline p/94351253 rs/Mon 1400 1600 ots/1/2 1000 1200 g/Get fitter mh/Twisted right ankle l/Bishan ActiveSG Gym t/friends`
 **List** | `list` <br> e.g., `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John`
