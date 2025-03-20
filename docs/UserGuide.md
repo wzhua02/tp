@@ -36,7 +36,7 @@ FitFlow is a **desktop app for personal trainers in Singapore to manage their cl
 
    * `view 17/2/25` : Displays the sessions the personal trainer has with the clients on that day.
 
-   * `edit 1 p/81234567 rs/Tues 1600 1800 g/Do 10 pull ups` : Edits the details of the 1st client shown in the current list.
+   * `edit 1 p/81234567 rs/Tue 1600 1800 g/Do 10 pull ups` : Edits the details of the 1st client shown in the current list.
 
    * `delete 3` : Deletes the 3rd client shown in the current list.
 
